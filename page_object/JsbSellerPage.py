@@ -341,7 +341,7 @@ class JsbSellerPage(WebPage):
             sleep(0.2)
             add_num += 1
             add_number += 1
-            log.info('当前添加次数 : ' + str(add_num) + '  目标添加次数  : ' + str(limit))
+            log.info('当前添加次数 : ' + str(add_num) + '  预计添加次数  : ' + str(limit))
             log.info('------------------------------------------------------------------------------------------------')
 
     def seller_product_info(self, title, subtitle, keywords, code, material, brand, need_sign_type):
@@ -446,7 +446,7 @@ class JsbSellerPage(WebPage):
             self.seller_product_detail(serve, img_path, video_path, profiles, detail)
             self.seller_goods_click_online(2)
             add_num += 1
-            log.info('当前添加次数 : ' + str(add_num) + '  目标添加次数  : ' + str(limit))
+            log.info('当前添加次数 : ' + str(add_num) + '  预计添加次数  : ' + str(limit))
 
     def seller_goods_classification_detail(self, type_name, classification_type, state, father_type):
         #  old_classification = self.find_elements(seller['分类tr'])
@@ -604,4 +604,4 @@ class JsbSellerPage(WebPage):
                 self.seller_supply_purchase(title, content, video_path, img_path)
             self.seller_supply_submit()
             add_num += 1
-            log.info('当前添加次数 : ' + str(add_num) + '  目标添加次数  : ' + str(limit))
+            log.info('当前添加次数 : ' + str(add_num) + '  预计添加次数  : ' + str(limit))

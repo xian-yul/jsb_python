@@ -71,7 +71,7 @@ class JsbOperationPage(WebPage):
                     self.driver.find_element(By.XPATH,
                                              "// button[@class='ant-btn ant-btn-primary']").click()
                     examine += 1
-                    log.info('当前审核次数 : ' + str(examine) + '  目标审核次数  : ' + str(limit))
+                    log.info('当前审核次数 : ' + str(examine) + '  预计审核次数  : ' + str(limit))
             else:
                 log.info('暂无可审核原料')
         except:

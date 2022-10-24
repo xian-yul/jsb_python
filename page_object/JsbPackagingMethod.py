@@ -115,7 +115,7 @@ class JsbPackagingMethod(WebPage):
             self.is_click(seller_yaml['点击创建优惠劵'])
             seller.seller_coupon_detail(coupon_name, suit_type, target_range_type, content, quota)
             seller.seller_coupon_submit(serve)
-            log.info('当前添加次数 : ' + str(add_num) + '  目标添加次数  : ' + str(limit))
+            log.info('当前添加次数 : ' + str(add_num) + '  预计添加次数  : ' + str(limit))
             add_num += 1
 
     def seller_storehouse(self, serve, seller_phone, storehouse_name, storehouse_address, storehouse_contact,
@@ -128,7 +128,7 @@ class JsbPackagingMethod(WebPage):
         while add_num < limit:
             seller.seller_storehouse_detail(storehouse_name, storehouse_address, storehouse_contact,
                                             storehouse_phone, default)
-            log.info('当前添加次数 : ' + str(add_num) + '  目标添加次数  : ' + str(limit))
+            log.info('当前添加次数 : ' + str(add_num) + '  预计添加次数  : ' + str(limit))
             add_num += 1
 
     def seller_goods_classification_add(self, serve, seller_phone, type_name, classification_type, state, father_type,
@@ -139,7 +139,7 @@ class JsbPackagingMethod(WebPage):
         add_num = 0
         while add_num < limit:
             seller.seller_goods_classification_detail(type_name, classification_type, state, father_type)
-            log.info('当前添加次数 : ' + str(add_num) + '  目标添加次数  : ' + str(limit))
+            log.info('当前添加次数 : ' + str(add_num) + '  预计添加次数  : ' + str(limit))
             add_num += 1
 
     def seller_supply_demand(self, serve, seller_phone, supply_type, limit, title, content, video_path, img_path):

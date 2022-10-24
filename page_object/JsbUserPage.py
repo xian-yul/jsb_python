@@ -186,7 +186,7 @@ class JsbUserPage(WebPage):
                     self.buyers_and_sellers_sign(serve, seller_phone, limit)
                     self.is_click(user['我的订单界面首页'])
                     place_order_num += 1
-                    log.info('当前下单次数 : ' + str(place_order_num) + '/ 目标下单次数: ' + str(limit))
+                    log.info('当前下单次数 : ' + str(place_order_num) + '/ 预计下单次数: ' + str(limit))
                 else:
                     log.info("下单判断出现异常")
                     self.base_get_img()
@@ -278,7 +278,7 @@ class JsbUserPage(WebPage):
             self.refresh()
             self.click_login_exit()
             register_num += 1
-            log.info('当前添加次数 : ' + str(register_num) + '  目标添加次数  : ' + str(limit))
+            log.info('当前添加次数 : ' + str(register_num) + '  预计添加次数  : ' + str(limit))
 
     def user_address_add(self, serve, user_phone, recipient_name, address_name, contact_phone, post_code,
                          fixed_telephone, default_type,
@@ -293,7 +293,7 @@ class JsbUserPage(WebPage):
                                      default_type
                                      )
             address_num += 1
-            log.info('当前添加次数 : ' + str(address_num) + '  目标添加次数  : ' + str(limit))
+            log.info('当前添加次数 : ' + str(address_num) + '  预计添加次数  : ' + str(limit))
 
     def user_menu_skip(self, click_menu):
         self.is_click(user['用户中心点击'])
@@ -405,7 +405,7 @@ class JsbUserPage(WebPage):
             elif industry_type == 3:
                 self.user_legal_service(title, profiles, phone, detail, contacts)
             add_num += 1
-            log.info('当前添加次数 : ' + str(add_num) + '  目标添加次数  : ' + str(limit))
+            log.info('当前添加次数 : ' + str(add_num) + '  预计添加次数  : ' + str(limit))
 
     def user_supply_skip(self, serve, user_phone):
         log.info('登录并进入用户中心 _ 供需资讯 点击发布')
@@ -494,4 +494,4 @@ class JsbUserPage(WebPage):
                 self.user_procurement(title, content, img_path, seller_num, price, order_num, video_path)
             self.refresh()
             add_num += 1
-            log.info('当前添加次数 : ' + str(add_num) + '  目标添加次数  : ' + str(limit))
+            log.info('当前添加次数 : ' + str(add_num) + '  预计添加次数  : ' + str(limit))
