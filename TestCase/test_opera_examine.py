@@ -22,8 +22,9 @@ class TestOperaExamine:
         opera_phone = '17346709425' # 24
         opera = JsbOperationPage(drivers)
         limit = 10
+        code = 1
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')
-        opera.opera_goods_examine(serve,opera_phone,limit)
+        opera.opera_goods_examine(serve,opera_phone,code,limit)
         log.info("开始时间: " + current_time)
         now_time = time.strftime('%Y-%m-%d %H:%M:%S')
         log.info("结束时间: " + now_time)

@@ -47,12 +47,14 @@ class JsbOperationPage(WebPage):
         except:
             self.fial_info()
 
-    def opera_goods_examine(self, serve, opera_phone, limit):
+    def opera_goods_examine(self, serve, opera_phone,code,limit):
         self.opera_login(serve, opera_phone)
         self.driver.find_element(By.XPATH, "//span[text()='运营审核']").click()
         sleep(0.5)
         self.driver.find_elements(By.CLASS_NAME, "ant-menu-item")[1].click()
         log.info('进入商品审核界面')
+        if code == 1:
+            self.is_click(opera['制成品审核类型'])
         sleep(0.2)
         examine = 0
         try:

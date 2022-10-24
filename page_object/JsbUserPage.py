@@ -23,8 +23,8 @@ user_url = {'24_home': 'http://192.168.101.24:8090/shop/home', '20_home': 'https
             '供需资讯列表url': 'http://192.168.101.24:8090/user-center/purchase-info/purchase-list',
             '采购需求发布url': 'http://192.168.101.24:8090/user-center/purchase-info/purchase-form',
             '市场信息发布url': 'http://192.168.101.24:8090/user-center/purchase-info/purchase-form',
-            '24_order_url': 'http://192.168.101.24:8090/userCenter/purchaseOrder',
-            '20_order_url': 'https://demo.jinsubao.cn/userCenter/purchaseOrder'}
+            '24_order_url': 'http://192.168.101.24:8090/user-center/purchase-order',
+            '20_order_url': 'https://demo.jinsubao.cn/user-center/purchase-order'}
 seller_url = {'24': 'http://192.168.101.24:8070/user/login', '20': 'https://slrdm.jinsubao.cn/'}
 user_menu = {'地址管理': '点击地址管理', '产学融合': '买家用户中心产学融合', '供需资讯': '买家供需资讯'}
 
@@ -120,20 +120,25 @@ class JsbUserPage(WebPage):
             self.is_click(user['个人签署'])
             self.is_click(user['个人签署弹窗'])
             log.info('进行 个人签署')
-        else:
-            self.is_click(user['企业签署'])
-            log.info('进行 企业签署')
+        # else:
+        #     self.is_click(user['企业签署'])
+        #     log.info('进行 企业签署')
 
     def billing_judgment(self, billing_type):
         if billing_type == 1:
             self.is_click(user['订单开票'])
             log.info('选择订单开票')
 
-    def order_amount_judgment(self):
+    def order_amount_judgment(self,code):
         flag = 'true'
-        shop_goods_num = self.element_text(user['下单界面商品数量'])
-        shop_goods_price = self.element_text(user['下单界面商品单价'])
-        goods_total_price = self.element_text(user['下单界面商品总金额'])
+        if code == 1:
+            shop_goods_num = self.element_text(user['配送下单界面商品数量'])
+            shop_goods_price = self.element_text(user['配送下单界面商品单价'])
+            goods_total_price = self.element_text(user['配送下单界面商品总金额'])
+        else:
+            shop_goods_num = self.element_text(user['自提下单界面商品数量'])
+            shop_goods_price = self.element_text(user['自提下单界面商品单价'])
+            goods_total_price = self.element_text(user['自提下单界面商品总金额'])
         shop_goods_price = shop_goods_price[1:]
         goods_total_price = goods_total_price[1:]
         try:
@@ -149,11 +154,10 @@ class JsbUserPage(WebPage):
         return flag
 
     def place_order_submit(self):
-        sleep()
         sub_btn = self.find_element(user['提交订单按钮'])
-        if sub_btn.is_enabled():
-            sub_btn.click()
-            log.info('订单提交')
+        sleep(2)
+        sub_btn.click()
+        log.info('订单提交')
 
     def place_order(self, user_phone, org_name, shop_num, delivery_type, pickup_type, address_name, sign_type,
                     billing_type, seller_phone, serve, limit):
@@ -162,7 +166,7 @@ class JsbUserPage(WebPage):
         while place_order_num < limit:
             self.click_market(org_name)
             self.delivery_method(delivery_type, pickup_type, shop_num)
-            flag = self.order_amount_judgment()
+            flag = self.order_amount_judgment(delivery_type)
             try:
                 if flag == 'true':
                     if delivery_type == 2:
@@ -211,7 +215,7 @@ class JsbUserPage(WebPage):
         sleep(0.1)
         self.is_click(user['点击支付按钮'])
         sleep(0.2)
-        self.input_text(user['支付密码输入'], 666666)
+        self.input_clear_text(user['支付密码输入'], 666666)
         self.is_click(user['支付按钮'])
         sleep(0.3)
         log.info('支付成功')

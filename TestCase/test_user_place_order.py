@@ -21,7 +21,7 @@ class TestUserPlaceOrder:
         user_phone = "13700000000"
         org_name = "兴得铭"
         shop_num = 1
-        delivery_type = 1
+        delivery_type = 2
         pickup_type = 1
         address_name = ""
         sign_type = 2
