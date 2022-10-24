@@ -1,0 +1,14 @@
+{
+  "place_order_001": {
+    "user_phone": "13500135000",
+    "org_name": "丹山",
+    "shop_num": 1,
+    "delivery_type": 1,
+    "pickup_type": 1,
+    "address_name": "",
+    "sign_type": 1,
+    "billing_type": 1,
+    "limit": 3,
+    "seller_phone": "13400134555"
+  }
+}
