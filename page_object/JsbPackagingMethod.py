@@ -74,7 +74,7 @@ class JsbPackagingMethod(WebPage):
                                billing_type, limit, seller_phone, serve):
         user = page_object.JsbUserPage.JsbUserPage(self.driver)
 
-        user.place_order(user_phone, org_name, shop_num, delivery_type, pickup_type, address_name, sign_type,
+        user.place_raw_order(user_phone, org_name, shop_num, delivery_type, pickup_type, address_name, sign_type,
                          billing_type, seller_phone, serve, limit)
 
     def seller_goods_add_product_repeatedly(self, serve, seller_phone, goods_type, title, subtitle, keywords, code,

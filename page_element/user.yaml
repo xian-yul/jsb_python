@@ -6,7 +6,7 @@
 登录按钮: "xpath==//*[@id='formLogin']/button"
 登录后的手机号: "xpath==//*[@id='app']/section/header/div[1]/div/div[1]/div/a[1]"
 登录后用户名: 'xpath==//*[@id="app"]/section/main/div/div[1]/div/div[3]/div/div/div/div/div/div[1]/div/div/h2'
-退出登录按钮: "xpath==//*[@id='app']/section/header/div[1]/div/div[1]/div/a[2]"
+退出登录按钮: "link_text==退出"
 
 原料市场: "xpath==//*[@id='app']/section/header/div[3]/div/div/div[2]/ul/li[4]"
 原料市场_企业搜索框: "xpath==//*[@id='app']/section/main/div/div[2]/div[1]/div/div[2]/form/div/div[2]/div/div[2]/div/span/input"
@@ -166,3 +166,32 @@
 供需资讯视频上传: "xpath==//*[@id='rawDemAndImgList']/div[1]/div[2]/div/span/div/span/div[2]/span/input"
 市场信息智能搜索: "xpath==//*[@id='app']/div[1]/main/div/div/div[2]/div/div/div/div[1]/div/div[2]/div/div/div/form/div[3]/div/div[1]/div[1]/button"
 市场信息点击提交: "xpath==//*[@id='app']/div[1]/main/div/div/div[2]/div/div/div/div[1]/div/div[2]/div/div/div/form/div[6]/div/div/div[2]/div/span/div/div[2]/span/button"
+
+
+
+
+
+
+买家导航栏: "xpath==// li[@class='to-menu-menu-list-item ant-menu-item']"
+选择配送方式: "xpath== // label[@class='ant-radio-button-wrapper']"
+配送_类型: "xpath==// label[@class='ant-radio-wrapper']"
+原料市场_搜索确定: "xpath== // button[@class='ant-btn ant-btn-primary']"
+原料市场_搜索文本框: "xpath== // input[@class='ant-input']"
+原料市场_相关产品: "xpath== // div[@class='shop-line-flex shop-line-flexs ant-col ant-col-xs-0 ant-col-sm-0 ant-col-md-12 ant-col-lg-5 ant-col-xl-5 ant-col-xxl-5']"
+原料库存: "xpath== // span[@class='font-size-16']"
+原料市场_原料加入货单: "xpath== // button[@class='ant-btn ant-btn-primary ant-btn-lg ant-btn-block']"
+原料市场_原料单价: "xpath== // div[@class='shop-detail-col ant-col']"
+
+制成品商城_搜索栏: "xpath== // input[@class='ant-input']"
+制成品商城_搜索查询: "xpath== // button[@class='ant-btn ant-btn-primary']"
+制成品商城_商品: "xpath==// div[@class='ant-space-item']"
+制成品商城_制成品数量选择: "xpath== // input[@class='ant-input-number-input']"
+制成品商城_制成品单价: "xpath== // div[@class='shop-detail-col ant-col']"
+制成品商城_制成品一键采购: "xpath== // button[@class='ant-btn ant-btn-danger ant-btn-lg ant-btn-block']"
+制成品商城_制成品加入货单: "xpath== // button[@class='ant-btn ant-btn-primary ant-btn-lg ant-btn-block']"
+制成品订单_是否开票: "xpath== // button[@class='ant-switch ant-switch-checked']"
+制成品订单_提交订单: "xpath== // button[@class='place-order-btn ant-btn ant-btn-danger ant-btn-lg']"
+
+订单_总计信息: "xpath== // span[@class='primary-color']"
+提交订单_新增收货地址: "xpath== // div[@class='ant-col ant-col-xs-9 ant-col-sm-8 ant-col-md-6 ant-col-lg-5 ant-col-xl-4 ant-col-xxl-3']"
+加入货单_点击确定: "xpath== // button[@class='ant-btn ant-btn-primary']"

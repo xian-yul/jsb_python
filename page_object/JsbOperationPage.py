@@ -47,16 +47,25 @@ class JsbOperationPage(WebPage):
         except:
             self.fial_info()
 
-    def opera_goods_examine(self, serve, opera_phone,code,limit):
+    def opera_skip_menu(self, menu, submenu):
+        skip_menu = "//span[text()='" + menu + "']"
+        self.driver.find_element(By.XPATH, skip_menu).click()
+        sleep(0.2)
+        self.driver.find_elements(By.CLASS_NAME, "ant-menu-item")[submenu].click()
+        log.info("当前跳转菜单 __" + menu + "  子菜单下标为 __" + str(submenu))
+
+    def opera_goods_examine(self, serve, opera_phone, code, limit):
         self.opera_login(serve, opera_phone)
-        self.driver.find_element(By.XPATH, "//span[text()='运营审核']").click()
-        sleep(0.5)
-        self.driver.find_elements(By.CLASS_NAME, "ant-menu-item")[1].click()
+        self.opera_skip_menu('运营审核', 1)
+        # self.driver.find_element(By.XPATH, "//span[text()='运营审核']").click()
+        # sleep(0.5)
+        # self.driver.find_elements(By.CLASS_NAME, "ant-menu-item")[1].click()
         log.info('进入商品审核界面')
         if code == 1:
             self.is_click(opera['制成品审核类型'])
         sleep(0.2)
         examine = 0
+        log.info("当前进入的审核类型为 : "+self.driver.find_element(By.XPATH," // li[@class='ant-menu-item ant-menu-item-selected']").text())
         try:
             btn_examine = self.find_elements(opera['审核按钮判断存在'])
             if len(btn_examine) > 0:

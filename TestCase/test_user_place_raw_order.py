@@ -8,15 +8,14 @@ from page_object.JsbPackagingMethod import JsbPackagingMethod
 from utils.log import Log
 from utils.tool_util import time_lag
 
-user_url = {'24': 'http://192.168.101.24:8090/shop/home', '20': 'https://demo.jinsubao.cn/'}
-seller_url = {'24': 'http://192.168.101.24:8070/user/login', '20': 'https://slrdm.jinsubao.cn/'}
+
 log = Log()
 
 
-class TestUserPlaceOrder:
+class TestUserPlaceRawOrder:
 
-    def test_place_order(self, drivers):
-        log.info('当前执行   买家下单    ')
+    def test_place_raw_order(self, drivers):
+        log.info('当前执行   买家原料下单    ')
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')
         user_phone = "13700000000"
         org_name = "兴得铭"
@@ -41,4 +40,4 @@ class TestUserPlaceOrder:
 
 
 if __name__ == '__main__':
-    pytest.main(['TestCase/test_user_place_order.py'])
+    pytest.main(['TestCase/test_user_place_raw_order.py'])

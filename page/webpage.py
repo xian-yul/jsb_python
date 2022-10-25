@@ -168,5 +168,17 @@ class WebPage(object):
             loc_object.send_keys(keys.Keys.BACKSPACE)
         loc_object.send_keys(text)
 
+    def inputs_clear_text(self, loc, index, text):
+        loc_object = self.find_elements(loc)[index]
+        loc_object.clear()
+        loc_object.send_keys(keys.Keys.CONTROL, "a")
+        for i in range(10):
+            loc_object.send_keys(keys.Keys.BACKSPACE)
+        loc_object.send_keys(text)
+
     def script_top(self, element):
         self.driver.execute_script("arguments[0].scrollIntoView();", element)  # 拖动到可见的元素去
+
+    def implicitly_wait(self,time):
+        self.driver.implicitly_wait(time)
+

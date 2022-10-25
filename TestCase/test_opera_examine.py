@@ -18,13 +18,13 @@ class TestOperaExamine:
     def test_opera_examine(self, drivers):
         log.info('当前执行   运营原料审核    ')
         serve = '24'
-       # opera_phone = '13600136001' # 20
-        opera_phone = '17346709425' # 24
+        # opera_phone = '13600136001' # 20
+        opera_phone = '17346709425'  # 24
         opera = JsbOperationPage(drivers)
         limit = 10
         code = 1
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')
-        opera.opera_goods_examine(serve,opera_phone,code,limit)
+        opera.opera_goods_examine(serve, opera_phone, code, limit)
         log.info("开始时间: " + current_time)
         now_time = time.strftime('%Y-%m-%d %H:%M:%S')
         log.info("结束时间: " + now_time)

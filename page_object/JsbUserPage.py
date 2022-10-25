@@ -20,6 +20,7 @@ user_url = {'24_home': 'http://192.168.101.24:8090/shop/home', '20_home': 'https
             '产学融合研究成果列表': 'http://192.168.101.24:8090/user-center/integration-production/research-resultList',
             '产学融合法律服务列表': 'http://192.168.101.24:8090/user-center/integration-production/legal-service-list',
             '24注册后': 'http://192.168.101.24:8090/home/index',
+            '20注册后': 'https://demo.jinsubao.cn/home/index',
             '供需资讯列表url': 'http://192.168.101.24:8090/user-center/purchase-info/purchase-list',
             '采购需求发布url': 'http://192.168.101.24:8090/user-center/purchase-info/purchase-form',
             '市场信息发布url': 'http://192.168.101.24:8090/user-center/purchase-info/purchase-form',
@@ -31,23 +32,15 @@ user_menu = {'地址管理': '点击地址管理', '产学融合': '买家用户
 
 class JsbUserPage(WebPage):
 
-    def click_user_login(self):
+    def click_user_login(self, phone):
         self.is_click(user['登录'])
         log.info('在买家首页点击登录按钮')
-
-    def input_user_phone(self, phone):
-        self.input_text(user['登录手机号'], txt=phone)
+        self.input_text(user['登录手机号'], phone)
         log.info('输入登录手机号: ' + phone)
-
-    def click_user_code(self):
         self.is_click(user['登录验证码按钮'])
         log.info('点击验证码按钮')
-
-    def click_login_btn(self):
         self.is_click(user['登录按钮'])
         log.info('点击登录')
-
-    def compare_user_phone(self, phone):
         try:
             login_phone = self.element_text(user['登录后的手机号'])
             login_name = self.element_text(user['登录后用户名'])
@@ -64,11 +57,7 @@ class JsbUserPage(WebPage):
         log.info('退出登录成功')
 
     def user_login_exit(self, phone):
-        self.click_user_login()
-        self.input_user_phone(phone)
-        self.click_user_code()
-        self.click_login_btn()
-        self.compare_user_phone(phone)
+        self.click_user_login(phone)
         self.click_login_exit()
 
     def user_login(self, serve, phone):
@@ -76,15 +65,11 @@ class JsbUserPage(WebPage):
             self.driver.get(user_url['24_home'])
         else:
             self.driver.get(user_url['20_home'])
-        self.click_user_login()
-        self.input_user_phone(phone)
-        self.click_user_code()
-        self.click_login_btn()
-        self.compare_user_phone(phone)
+        self.click_user_login(phone)
 
     def click_market(self, org_name):
         log.info('进行原料市场点击')
-        self.is_click(user['原料市场'])
+        self.find_elements(user['买家导航栏'])[0].click()
         self.script('10000')
         self.input_text(user['原料市场_企业搜索框'], org_name)
         self.is_click(user['原料市场_点击搜索'])
@@ -93,20 +78,28 @@ class JsbUserPage(WebPage):
 
     def delivery_method(self, delivery_type, pickup_type, shop_num):
         self.input_clear_text(user['商品详情数量框'], shop_num)
+        raw_price = 0
         if delivery_type == 1 and pickup_type == 1:
-            self.driver.find_elements(By.XPATH, "// label[@class='ant-radio-button-wrapper']")[1].click()
-            self.driver.find_elements(By.XPATH, "// label[@class='ant-radio-wrapper']")[0].click()
+            self.find_elements(user['选择配送方式'])[1].click()
+            self.find_elements(user['配送_类型'])[0].click()
+            raw_price = self.element_text(user['原料市场_原料单价'])
+            raw_price = raw_price[5:]
             self.is_click(user['订单采购按钮'])
             log.info('进行配送方式_款到发货')
         elif delivery_type == 1 and pickup_type == 2:
-            self.is_click(user['配送按钮'])
-            self.driver.find_elements(By.XPATH, "// label[@class='ant-radio-wrapper']")[1].click()
+            self.find_elements(user['选择配送方式'])[1].click()
+            self.find_elements(user['配送_类型'])[1].click()
+            raw_price = self.element_text(user['原料市场_原料单价'])
+            raw_price = raw_price[5:]
             self.is_click(user['订单采购按钮'])
             log.info('进行配送方式_定金+货到付款')
         elif delivery_type == 2:
-            self.driver.find_elements(By.XPATH, "// label[@class='ant-radio-button-wrapper']")[0].click()
+            self.find_elements(user['选择配送方式'])[0].click()
+            raw_price = self.element_text(user['原料市场_原料单价'])
+            raw_price = raw_price[5:]
             self.is_click(user['订单采购按钮'])
             log.info('进行自提方式_款到发货')
+        return raw_price
 
     def shipping_address(self, address_name):
         if address_name != '':
@@ -129,28 +122,42 @@ class JsbUserPage(WebPage):
             self.is_click(user['订单开票'])
             log.info('选择订单开票')
 
-    def order_amount_judgment(self,code):
+    def order_amount_judgment(self, code, price):
         flag = 'true'
         if code == 1:
-            shop_goods_num = self.element_text(user['配送下单界面商品数量'])
-            shop_goods_price = self.element_text(user['配送下单界面商品单价'])
-            goods_total_price = self.element_text(user['配送下单界面商品总金额'])
-        else:
-            shop_goods_num = self.element_text(user['自提下单界面商品数量'])
-            shop_goods_price = self.element_text(user['自提下单界面商品单价'])
-            goods_total_price = self.element_text(user['自提下单界面商品总金额'])
-        shop_goods_price = shop_goods_price[1:]
-        goods_total_price = goods_total_price[1:]
-        try:
-            if Decimal(goods_total_price) == Decimal(shop_goods_price) * Decimal(shop_goods_num):
+            product_detail = self.find_elements(user['订单_总计信息'])
+            product_num = product_detail[1].text
+            product_total_price = product_detail[2].text
+            product_freight = product_detail[3].text
+            product_freight = product_freight[1:]
+            product_actual = product_detail[4].text
+            product_actual = product_actual[1:]
+            try:
+                if Decimal(product_actual) == Decimal(price) * Decimal(product_num) + Decimal(
+                        product_freight):
+                    log.info(
+                        "金额判断一致  _________ 实付款  " + product_actual + " == 单价  " + price + " * 数量  " + product_num + " + 运费  " + product_freight)
+            except Exception as e:
+                log.info('异常信息: ' + e)
                 log.info(
-                    "金额判断一致  _________ 总价  " + goods_total_price + " == 单价  " + shop_goods_price + " * 数量  " + shop_goods_num)
-        except Exception as e:
-            log.info('异常信息: ' + e)
-            log.info(
-                "金额判断不一致  _________ 总价  " + goods_total_price + " == 单价  " + shop_goods_price + " * 数量  " + shop_goods_num)
-            flag = 'false'
-            self.base_get_img()
+                    "金额判断不一致  _________ 实付款  " + product_actual + " == 单价  " + price + " * 数量  " + product_num + " + 运费  " + product_freight)
+                flag = 'false'
+                self.base_get_img()
+        else:
+            raw_detail = self.find_elements(user['订单_总计信息'])
+            raw_num = raw_detail[1].text
+            raw_actual = raw_detail[3].text
+            raw_actual = raw_actual[1:]
+            try:
+                if Decimal(raw_actual) == Decimal(price) * Decimal(raw_num):
+                    log.info(
+                        "金额判断一致  _________ 实付款  " + raw_actual + " == 单价  " + price + " * 数量  " + raw_num)
+            except Exception as e:
+                log.info('异常信息: ' + e)
+                log.info(
+                    "金额判断不一致  _________ 实付款  " + raw_actual + " == 单价  " + price + " * 数量  " + raw_num)
+                flag = 'false'
+                self.base_get_img()
         return flag
 
     def place_order_submit(self):
@@ -159,14 +166,14 @@ class JsbUserPage(WebPage):
         sub_btn.click()
         log.info('订单提交')
 
-    def place_order(self, user_phone, org_name, shop_num, delivery_type, pickup_type, address_name, sign_type,
-                    billing_type, seller_phone, serve, limit):
+    def place_raw_order(self, user_phone, org_name, shop_num, delivery_type, pickup_type, address_name, sign_type,
+                        billing_type, seller_phone, serve, limit):
         self.user_login(serve, user_phone)
         place_order_num = 0
         while place_order_num < limit:
             self.click_market(org_name)
-            self.delivery_method(delivery_type, pickup_type, shop_num)
-            flag = self.order_amount_judgment(delivery_type)
+            raw_price = self.delivery_method(delivery_type, pickup_type, shop_num)
+            flag = self.order_amount_judgment(2, raw_price)
             try:
                 if flag == 'true':
                     if delivery_type == 2:
@@ -250,12 +257,16 @@ class JsbUserPage(WebPage):
             self.base_get_img()
 
     def user_register(self, serve, limit):
-        self.driver.get(user_url[serve])
+        if serve == '24':
+            self.driver.get(user_url['24_home'])
+        else:
+            self.driver.get(user_url['20_home'])
+        sleep(0.2)
         register_num = 0
         while register_num < limit:
             sleep(0.2)
             phone = '189' + tool_util.random_number(8)
-            name = tool_util.gbk2312_name() + tool_util.unicode_name()
+            name = "测试注册___" + tool_util.gbk2312_name() + tool_util.unicode_name()
             self.is_click(user['注册按钮'])
             self.win_handles('-1')
             log.info('进入注册界面')
@@ -268,17 +279,19 @@ class JsbUserPage(WebPage):
             self.is_click(user['注册提交按钮'])
             self.win_handles('-1')
             try:
-                assert self.return_current_url() == user_url['24注册后']
-                assert self.element_text(user['登录后的手机号']) == phone and self.element_text(
-                    user['登录后用户名']) == name
-            except AssertionError:
-                log.info('注册断言出现异常')
-                self.fail('注册失败')
-            log.info('注册成功')
-            self.refresh()
-            self.click_login_exit()
-            register_num += 1
-            log.info('当前添加次数 : ' + str(register_num) + '  预计添加次数  : ' + str(limit))
+                if serve == '24':
+                    assert self.return_current_url() == user_url['24注册后']
+                else:
+                    assert self.return_current_url() == user_url['20注册后']
+                # assert self.element_text(user['登录后的手机号']) == phone and self.element_text(
+                #     user['登录后用户名']) == name
+                log.info('注册成功')
+                self.refresh()
+                self.click_login_exit()
+                register_num += 1
+                log.info('当前添加次数 : ' + str(register_num) + '  预计添加次数  : ' + str(limit))
+            except:
+                self.fial_info()
 
     def user_address_add(self, serve, user_phone, recipient_name, address_name, contact_phone, post_code,
                          fixed_telephone, default_type,
@@ -495,3 +508,39 @@ class JsbUserPage(WebPage):
             self.refresh()
             add_num += 1
             log.info('当前添加次数 : ' + str(add_num) + '  预计添加次数  : ' + str(limit))
+
+    def place_product_order(self, serve, user_phone, product_name, shop_num, cart_type, limit):
+        self.user_login(serve, user_phone)
+        place_order_num = 0
+        while place_order_num < limit:
+            self.find_elements(user['买家导航栏'])[1].click()
+            self.script('3000')
+            self.find_element(user['制成品商城_搜索栏']).send_keys(product_name)
+            self.find_elements(user['制成品商城_搜索查询'])[0].click()
+            sleep(0.2)
+            self.find_elements(user['制成品商城_商品'])[0].click()
+            self.win_handles('-1')
+            self.inputs_clear_text(user['制成品商城_制成品数量选择'], 0, shop_num)
+            if cart_type == 1:
+                self.find_elements(user['制成品商城_制成品加入货单'])[0].click()
+                sleep(0.2)
+                self.find_elements(user['加入货单_点击确定'])[0].click()
+                sleep(10)
+            else:
+                product_price = self.element_text(user['制成品商城_制成品单价'])
+                product_price = product_price[5:]
+                self.find_element(user['制成品商城_制成品一键采购']).click()
+                sleep(0.5)
+                self.script('10000')
+                try:
+                    if self.order_amount_judgment(1, product_price):
+                        while not self.find_element(user['制成品订单_提交订单']).is_enabled():
+                            sleep(1)
+                            if self.find_element(user['制成品订单_提交订单']).is_enabled():
+                                self.find_element(user['制成品订单_提交订单']).click()
+                                log.info('制成品订单下单成功')
+                except:
+                    log.info('订单金额比较不一致 异常退出')
+                    self.fial_info()
+            place_order_num += 1
+            log.info('当前下单次数 : ' + str(place_order_num) + '  预计下单次数  : ' + str(limit))
