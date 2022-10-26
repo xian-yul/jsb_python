@@ -25,10 +25,11 @@ class TestUserPlaceProductOrder:
         cart_type = 0
         limit = 5
         serve = '24'
+        sign_type = 0
         seller_phone = "17346709428"
         address = '制成品下单测试地址'
         user = JsbUserProductOrder(drivers)
-        user.place_product_order(serve,user_phone,seller_phone,product_name, shop_num, cart_type,address,limit)
+        user.place_product_order(serve,user_phone,seller_phone,product_name, shop_num, cart_type,address,sign_type,limit)
         now_time = time.strftime('%Y-%m-%d %H:%M:%S')
         log.info("开始时间: " + current_time)
         log.info("结束时间: " + now_time)

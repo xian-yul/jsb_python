@@ -26,6 +26,8 @@
 制成品商城_制成品一键采购: "xpath== // button[@class='ant-btn ant-btn-danger ant-btn-lg ant-btn-block']"
 制成品商城_制成品加入货单: "xpath== // button[@class='ant-btn ant-btn-primary ant-btn-lg ant-btn-block']"
 制成品订单_是否开票: "xpath== // button[@class='ant-switch ant-switch-checked']"
+个人签署: "xpath== //label[@class='ant-radio-button-wrapper']"
+个人签署弹窗: "xpath== // button[@class='ant-btn ant-btn-danger']"
 提交订单: "xpath== // button[@class='place-order-btn ant-btn ant-btn-danger ant-btn-lg']"
 
 订单_总计信息: "xpath== // span[@class='primary-color']"

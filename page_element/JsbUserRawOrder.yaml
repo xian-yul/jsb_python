@@ -29,6 +29,8 @@
 支付界面_支付按钮: "xpath== // button[@class='ant-btn ant-btn-primary ant-btn-lg']"
 订单列表_状态: "xpath== // div[@class='text-align-center ant-col ant-col-24']"
 订单开票: "xpath== //span[@class='ant-switch-inner']"
+个人签署: "xpath== //label[@class='ant-radio-button-wrapper']"
+个人签署弹窗: "xpath== // button[@class='ant-btn ant-btn-danger']"
 
 签署窗口: "id==fddContractSigning"
 签署按钮: "xpath== // div[@class='sign-btn-box-con']"

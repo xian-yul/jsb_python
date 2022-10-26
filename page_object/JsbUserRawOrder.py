@@ -157,10 +157,10 @@ class JsbUserRawOrder(WebPage):
             self.is_click(user['订单开票'])
             log.info('选择订单开票')
 
-    def buyers_and_sellers_sign(self, serve, seller_phone, limit):
+    def buyers_and_sellers_sign(self, serve, seller_phone,place_order_num):
         log.info('进行买卖家签署支付发货收货')
         try:
-            self.seller_goods_sign(serve, seller_phone)
+            self.seller_goods_sign(serve, seller_phone,place_order_num)
             sleep(0.2)
             self.user_goods_sign_pay(serve)
             sleep(0.2)
@@ -229,9 +229,15 @@ class JsbUserRawOrder(WebPage):
         except AssertionError:
             self.fial_info()
 
-    def seller_goods_sign(self, serve, seller_phone):
-        self.seller_phone_login(serve, seller_phone)
-        self.seller_skip_goods('订单合同', '订单列表')
+    def seller_goods_sign(self, serve, seller_phone,place_order_num):
+        if place_order_num == 0:
+            self.seller_phone_login(serve, seller_phone)
+            self.seller_skip_goods('订单合同', '订单列表')
+        else:
+            if serve == '24':
+                self.driver.get(seller_url['24_order_list'])
+            else:
+                self.driver.get(seller_url['20_order_list'])
         self.find_elements(user['卖家订单列表_按钮'])[0].click()
         sleep()
         self.find_elements(user['卖家订单详情_按钮'])[1].click()
@@ -282,7 +288,7 @@ class JsbUserRawOrder(WebPage):
                         sign_type, billing_type, seller_phone, limit):
         self.user_login(serve, user_phone)
         place_order_num = 0
-        if limit > 1:
+        if place_order_num > 0:
             self.find_elements(user['买家导航栏'])[1].click()
         else:
             self.find_elements(user['买家导航栏'])[0].click()
@@ -308,7 +314,7 @@ class JsbUserRawOrder(WebPage):
                 else:
                     assert self.driver.current_url == user_url['20_order_url']
                 log.info('下单完毕')
-                self.buyers_and_sellers_sign(serve, seller_phone, limit)
+                self.buyers_and_sellers_sign(serve, seller_phone, place_order_num)
                 place_order_num += 1
                 log.info('当前下单次数 : ' + str(place_order_num) + '/ 预计下单次数: ' + str(limit))
             else:

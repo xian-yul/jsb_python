@@ -145,13 +145,13 @@ class WebPage(object):
         ActionChains(self.driver).release(ele).perform()
 
     def click_area(self):
-        city = self.find_element(seller['点击市'])
-        city.click()
-        province = self.find_element(seller['点击省'])
-        province.click()
-        area = self.find_element(seller['点击区'])
-        area.click()
-        # log.info('选择的市 : ' + city.text + ',  所选择的省 : ' + province.text + ',   所选择的区 : ' + area.text)
+        self.is_click(seller['点击市'])
+        sleep(0.1)
+        self.is_click(seller['点击省'])
+        sleep(0.1)
+        self.is_click(seller['点击区'])
+        sleep(0.1)
+        #log.info('选择的市 : ' + city.text + ',  所选择的省 : ' + province.text + ',   所选择的区 : ' + area.text)
 
     def fial_info(self):
         log.info('出现异常 或者 断言失败')

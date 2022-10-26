@@ -65,11 +65,11 @@ class JsbUserProductOrder(WebPage):
         except AssertionError:
             self.fial_info()
 
-    def place_product_order(self, serve, user_phone, seller_phone, product_name, shop_num, cart_type, address, limit):
+    def place_product_order(self, serve, user_phone, seller_phone, product_name, shop_num, cart_type, address,sign_type,limit):
         self.user_login(serve, user_phone)
         place_order_num = 0
         while place_order_num < limit:
-            if place_order_num > 1:
+            if place_order_num > 0:
                 self.find_elements(user['买家导航栏'])[2].click()
             else:
                 self.find_elements(user['买家导航栏'])[1].click()
@@ -90,6 +90,10 @@ class JsbUserProductOrder(WebPage):
                 product_price = product_price[5:]
                 self.find_element(user['制成品商城_制成品一键采购']).click()
                 sleep(0.5)
+                if sign_type == 1:
+                    self.is_click(user['个人签署'])
+                    self.is_click(user['个人签署弹窗'])
+                    log.info('进行 个人签署')
                 try:
                     if self.order_amount_judgment(1, product_price):
                         self.script('10000')
@@ -99,12 +103,12 @@ class JsbUserProductOrder(WebPage):
                         signature = '不需要签署' in signature_detail[1].text
                         if signature:
                             self.product_order_pay(serve, signature)
-                            self.seller_order_deliver(serve, signature, seller_phone, address)
+                            self.seller_order_deliver(serve, signature, seller_phone, address, place_order_num)
                             self.product_order_receipt(serve)
                         else:
-                            self.seller_product_order(serve, seller_phone)
+                            self.seller_product_order(serve, seller_phone, place_order_num)
                             self.product_order_pay(serve, signature)
-                            self.seller_order_deliver(serve, signature, seller_phone, address)
+                            self.seller_order_deliver(serve, signature, seller_phone, address, place_order_num)
                             self.product_order_receipt(serve)
                 except:
                     self.fial_info()
@@ -146,14 +150,21 @@ class JsbUserProductOrder(WebPage):
         self.find_elements(user['买家弹窗_确定'])[1].click()
         sleep(1)
         signature_detail = self.find_elements(user['买家订单列表_状态'])
+        sleep(0.2)
         signature = '完成' in signature_detail[1].text
         if not signature:
             self.fial_info()
         log.info('买家制成品订单收货成功')
 
-    def seller_product_order(self, serve, seller_phone):
-        self.seller_phone_login(serve, seller_phone)
-        self.seller_skip_goods('订单合同', '订单列表')
+    def seller_product_order(self, serve, seller_phone, place_order_num):
+        if place_order_num == 0:
+            self.seller_phone_login(serve, seller_phone)
+            self.seller_skip_goods('订单合同', '订单列表')
+        else:
+            if serve == '24':
+                self.driver.get(seller_url['24_order_list'])
+            else:
+                self.driver.get(seller_url['20_order_list'])
         self.find_elements(user['卖家订单列表_按钮'])[0].click()
         sleep()
         self.find_elements(user['卖家订单详情_按钮'])[1].click()
@@ -162,14 +173,15 @@ class JsbUserProductOrder(WebPage):
         self.signing_contract()
         sleep()
 
-    def seller_order_deliver(self, serve, signature, seller_phone, address):
+    def seller_order_deliver(self, serve, signature, seller_phone, address, place_order_num):
         if not signature:
             if serve == '24':
                 self.driver.get(seller_url['24_order_list'])
             else:
                 self.driver.get(seller_url['20_order_list'])
         else:
-            self.seller_phone_login(serve, seller_phone)
+            if place_order_num == 0:
+                self.seller_phone_login(serve, seller_phone)
             self.seller_skip_goods('卖家订单合同', '卖家订单列表')
         self.find_elements(user['卖家订单列表_按钮'])[0].click()
         self.script('5000')
@@ -213,7 +225,7 @@ class JsbUserProductOrder(WebPage):
         sleep(0.2)
         self.input_clear_text(user['卖家登录手机号'], seller_phone)
         self.is_click(user['卖家验证码按钮'])
-        self.input_clear_text(user['卖家验证码文本框'],666666)
+        self.input_clear_text(user['卖家验证码文本框'], 666666)
         self.is_click(user['卖家登录按钮'])
         sleep()
         try:

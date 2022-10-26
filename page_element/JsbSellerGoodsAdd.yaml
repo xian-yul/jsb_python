@@ -1,0 +1,5 @@
+产品管理: "xpath==//*[contains(text(),'产品管理')]"
+产品列表: "link_text==产品列表"
+添加商品: "xpath== // button[@class='ant-btn ant-btn-primary']"
+添加商品类型: "xpath== // button[@class='ant-btn ant-btn-primary ant-btn-background-ghost']"
+
