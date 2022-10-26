@@ -23,7 +23,7 @@ class TestUserPlaceProductOrder:
         product_name = "QQQQQ"
         shop_num = 10
         cart_type = 0
-        limit = 1
+        limit = 5
         serve = '24'
         seller_phone = "17346709428"
         address = '制成品下单测试地址'

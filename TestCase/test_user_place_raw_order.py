@@ -5,6 +5,7 @@ import time
 import pytest
 
 from page_object.JsbPackagingMethod import JsbPackagingMethod
+from page_object.JsbUserRawOrder import JsbUserRawOrder
 from utils.log import Log
 from utils.tool_util import time_lag
 
@@ -28,10 +29,9 @@ class TestUserPlaceRawOrder:
         limit = 3
         serve = '20'
         seller_phone = "18965691361"
-        user = JsbPackagingMethod(drivers)
-        user.place_order_repeatedly(user_phone, org_name, shop_num, delivery_type, pickup_type, address_name,
-                                    sign_type,
-                                    billing_type, limit, seller_phone, serve)
+        user = JsbUserRawOrder(drivers)
+        user.place_raw_order(serve, user_phone, org_name, delivery_type, pickup_type, shop_num, address_name,
+                    sign_type, billing_type, seller_phone, limit)
         now_time = time.strftime('%Y-%m-%d %H:%M:%S')
         log.info("开始时间: " + current_time)
         log.info("结束时间: " + now_time)

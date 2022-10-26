@@ -131,8 +131,8 @@ class WebPage(object):
         self.driver.switch_to.default_content()
         sleep()
         self.is_click(user['关闭签署窗口'])
-        log.info("退出签署")
-        sleep(0.5)
+        log.info("退出签署中")
+        sleep(1)
         log.info('签署成功')
 
     def click_action(self, loc, num):
@@ -151,7 +151,7 @@ class WebPage(object):
         province.click()
         area = self.find_element(seller['点击区'])
         area.click()
-        log.info('选择的市 : ' + city.text + ',  所选择的省 : ' + province.text + ',   所选择的区 : ' + area.text)
+        # log.info('选择的市 : ' + city.text + ',  所选择的省 : ' + province.text + ',   所选择的区 : ' + area.text)
 
     def fial_info(self):
         log.info('出现异常 或者 断言失败')

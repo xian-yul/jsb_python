@@ -18,6 +18,7 @@
 原料市场_原料加入货单: "xpath== // button[@class='ant-btn ant-btn-primary ant-btn-lg ant-btn-block']"
 原料市场_原料单价: "xpath== // div[@class='shop-detail-col ant-col']"
 提交订单: "xpath== // button[@class='place-order-btn ant-btn ant-btn-danger ant-btn-lg']"
+原料市场_商品: "xpath== // tr[@class='ant-table-row ant-table-row-level-0']"
 
 订单_总计信息: "xpath== // span[@class='primary-color']"
 提交订单_新增收货地址: "xpath== // div[@class='ant-col ant-col-xs-9 ant-col-sm-8 ant-col-md-6 ant-col-lg-5 ant-col-xl-4 ant-col-xxl-3']"
@@ -26,8 +27,8 @@
 弹窗_确定: "xpath== // button[@class='ant-btn ant-btn-primary']"
 支付界面_支付文本框: "xpath== // input[@id='password']"
 支付界面_支付按钮: "xpath== // button[@class='ant-btn ant-btn-primary ant-btn-lg']"
-
 订单列表_状态: "xpath== // div[@class='text-align-center ant-col ant-col-24']"
+订单开票: "xpath== //span[@class='ant-switch-inner']"
 
 签署窗口: "id==fddContractSigning"
 签署按钮: "xpath== // div[@class='sign-btn-box-con']"
@@ -46,8 +47,10 @@
 卖家订单列表: "link_text==订单列表"
 
 卖家登录标题: "xpath== // span[@class='title']"
-卖家登录手机号: "xpath== // input[@class='phone']"
+卖家登录手机号: "xpath== // input[@id='phone']"
 卖家验证码按钮: "xpath== // button[@class='getCaptcha ant-btn']"
-卖家验证码文本框: "xpath== // input[@class='verifyCode']"
+卖家验证码文本框: "xpath== // input[@id='verifyCode']"
 卖家登录按钮: "xpath== // button[@class='login-button ant-btn ant-btn-primary ant-btn-lg']"
 卖家登录信息: "xpath== // div[@class='user_name']"
+订单合同: "xpath==//*[contains(text(),'订单合同')]"
+订单列表: "link_text==订单列表"
