@@ -21,8 +21,7 @@ seller_url = {'24': 'http://192.168.101.24:8070/user/login', '20': 'https://slrd
               '20_raw_add': 'https://slrdm.jinsubao.cn/product-manage/raw-provide-form',
               '24_product_list': 'http://192.168.101.24:8070/product-manage/products-list/2',
               '20_product_list': 'https://slrdm.jinsubao.cn/product-manage/products-list/2',
-              'skip_分类': '产品分类', 'skip_订单': '订单合同', 'skip_产品': '产品列表', 'skip_供需': '供需管理',
-              'skip_仓库': '仓库地址', '原料类型': '添加商品原料类型', '制成品类型': '添加商品制成品类型',
+              '原料类型': '添加商品原料类型', '制成品类型': '添加商品制成品类型',
               '船货类型': '添加商品船货类型',
               '24_coupon_list': 'http://192.168.101.24:8070/marketing-manage/coupon-list',
               '24_coupon_add': 'http://192.168.101.24:8070/marketing-manage/creat-coupon/&1',
@@ -146,9 +145,9 @@ class JsbSellerPage(WebPage):
         else:
             self.seller_phone_login(serve, seller_phone)
         self.is_click(seller['订单合同'])
-        self.is_click(seller['卖家订单列表'])
+        self.is_click(seller['订单列表'])
         log.info('进入卖家订单进行签署合同')
-        self.is_click(seller['卖家订单列表详情'])
+        self.is_click(seller['订单列表详情'])
         sleep(0.2)
         self.is_click(seller['点击生成合同'])
         self.is_click(seller['点击生成并签署'])
@@ -171,10 +170,10 @@ class JsbSellerPage(WebPage):
         self.signing_contract()
         log.info('卖家发货成功')
 
-    def seller_skip_goods(self, skip_name):
-        self.is_click(seller['点击产品管理'])
-        self.is_click(seller[seller_url[skip_name]])
-        log.info('进入卖家' + skip_name)
+    def seller_skip_goods(self, menu, submenu):
+        self.is_click(seller[menu])
+        self.is_click(seller[submenu])
+        log.info('进入卖家   ____' + menu + "________子菜单_____" + submenu)
         sleep(0.1)
 
     def seller_goods_choose(self, goods_type):
@@ -324,7 +323,7 @@ class JsbSellerPage(WebPage):
                              upload_img, upload_video, unit_price_type, profiles, detail, limit):
         self.seller_phone_login(serve, seller_phone)
         sleep(0.2)
-        self.seller_skip_goods('skip_产品')
+        self.seller_skip_goods('点击产品管理', '产品列表')
         add_num = 0
         add_number = grade_number
         while add_num < limit:
@@ -402,7 +401,7 @@ class JsbSellerPage(WebPage):
             else:
                 assert self.return_current_url() == seller_url['20_product_list']
             log.info('制成品添加成功')
-        except:
+        except AssertionError:
             log.info('测试出错 或 断言失败 ')
             self.fial_info()
 
@@ -432,7 +431,7 @@ class JsbSellerPage(WebPage):
                                  need_sign_type, address, sku_img, sku_name, sku_price, sku_min_purchase, sku_stock,
                                  sku_weight, sku_remark, img_path, video_path, profiles, detail, limit):
         self.seller_phone_login(serve, seller_phone)
-        self.seller_skip_goods('skip_产品')
+        self.seller_skip_goods('点击产品管理', '产品列表')
         add_num = 0
         while add_num < limit:
             sleep(0.2)
@@ -491,12 +490,12 @@ class JsbSellerPage(WebPage):
             self.script('2000')
         self.is_click(seller[coupon_url[target_range_type]])
         num = self.find_element(seller['发放数量'])
-        self.click_action(seller['金额卷元增加'], 1)
-        self.click_action(seller['发放数量点击增加'], 10)
+        self.input_clear_text(seller['金额卷元'], 1)
+        self.input_clear_text(seller['发放数量'], 10)
         log.info(num.get_attribute())
         self.input_text(seller['金额卷满元'], 10)
         self.is_click(seller['领取后生效'])
-        self.click_action(seller['有效天数点击增加'], 1)
+        self.input_clear_text(seller['有效天数'], 1)
         self.input_text(seller['使用说明'], content)
         log.info('进入优惠劵信息填写完毕')
         self.script('2000')
@@ -524,7 +523,7 @@ class JsbSellerPage(WebPage):
             log.info(len(new_add_storehouse))
             assert len(new_add_storehouse) > len(old_add_storehouse)
             log.info('新增仓库地址成功')
-        except:
+        except AssertionError:
             log.info('新增仓库地址失败')
             self.fial_info()
 
@@ -541,8 +540,8 @@ class JsbSellerPage(WebPage):
         self.script('2000')
         self.is_click(seller['市场信息智能搜索'])
         self.is_click(seller['市场信息牌号选择'])
-        self.click_action(seller['市场信息单吨价格增加'], 1)
-        self.click_action(seller['市场信息发布数量增加'], 1)
+        self.input_clear_text(seller['市场信息单吨价格增加'], 1)
+        self.input_clear_text(seller['市场信息发布数量增加'], 1)
         self.driver.find_element(By.XPATH,
                                  '//*[@id="rawDemAndImgList"]/div[1]/div[2]/div/span/div/span/div[2]/span/input').send_keys(
             video_path)
@@ -560,9 +559,9 @@ class JsbSellerPage(WebPage):
                                  '//*[@id="rawDemAndImgList"]/div[2]/div[2]/div/span/div/div[1]/span/div[2]/span/input').send_keys(
             img_path)
         self.script('2000')
-        self.click_action(seller['采购需求卖主数量增加'], 1)
-        self.click_action(seller['采购需求单吨价格增加'], 1)
-        self.click_action(seller['采购需求订购数量增加'], 1)
+        self.input_clear_text(seller['采购需求卖主数量增加'], 1)
+        self.input_clear_text(seller['采购需求单吨价格增加'], 1)
+        self.input_clear_text(seller['采购需求订购数量增加'], 1)
         self.driver.find_element(By.XPATH,
                                  '//*[@id="rawDemAndImgList"]/div[1]/div[2]/div/span/div/span/div[2]/span/input').send_keys(
             video_path)
@@ -576,7 +575,7 @@ class JsbSellerPage(WebPage):
         try:
             assert self.return_current_url() == seller_url['供需列表']
             log.info('新增供需成功')
-        except:
+        except AssertionError:
             log.info('新增供需失败')
             self.fial_info()
 
@@ -588,13 +587,13 @@ class JsbSellerPage(WebPage):
             else:
                 assert self.return_current_url() == coupon_url['20_coupon_list']
             log.info('添加优惠劵成功')
-        except:
+        except AssertionError:
             log.info('优惠劵添加失败 ')
             self.fial_info()
 
     def seller_supply_demand(self, serve, seller_phone, supply_type, limit, title, content, video_path, img_path):
         self.seller_phone_login(serve, seller_phone)
-        self.seller_skip_goods('skip_供需')
+        self.seller_skip_goods('点击产品管理', '供需管理')
         add_num = 0
         while add_num < limit:
             self.is_click(seller['供需点击发布'])
@@ -605,3 +604,40 @@ class JsbSellerPage(WebPage):
             self.seller_supply_submit()
             add_num += 1
             log.info('当前添加次数 : ' + str(add_num) + '  预计添加次数  : ' + str(limit))
+
+    def seller_product_order(self, serve, seller_phone):
+        self.seller_phone_login(serve, seller_phone)
+        self.seller_skip_goods('订单合同', '订单列表')
+        self.find_elements(seller['订单列表_按钮'])[0].click()
+        sleep()
+        self.find_elements(seller['订单详情_按钮'])[1].click()
+        sleep(0.5)
+        self.find_elements(seller['订单详情_按钮'])[3].click()
+        self.signing_contract()
+
+    def seller_order_deliver(self, serve, signature, seller_phone, address):
+        if not signature:
+            if serve == '24':
+                self.driver.get(seller_url['24_order_list'])
+            else:
+                self.driver.get(seller_url['20_order_list'])
+        else:
+            self.seller_phone_login(serve, seller_phone)
+            self.seller_skip_goods('订单合同', '订单列表')
+        self.find_elements(seller['订单列表_按钮'])[0].click()
+        self.script('5000')
+        self.find_elements(seller['订单详情_发货地点'])[0].click()
+        sleep(0.2)
+        self.click_area()
+        self.input_clear_text(seller['订单详情_详细地址'], address)
+        self.find_element(seller['订单详情_发货']).click()
+        sleep(1)
+        try:
+            if serve == '24':
+                assert self.return_current_url() == seller_url['24_order_list']
+            else:
+                assert self.return_current_url() == seller_url['20_order_list']
+            log.info('卖家制成品发货成功')
+            sleep(1)
+        except AssertionError:
+            self.fial_info()

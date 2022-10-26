@@ -10,6 +10,7 @@ from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver import ActionChains
 from selenium.webdriver.common import keys
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -117,20 +118,21 @@ class WebPage(object):
 
     def signing_contract(self):
         log.info('进入签署')
-        sleep(1)
+        sleep(2)
         iframe = self.find_element(user['签署窗口'])
         self.driver.switch_to.frame(iframe)
-        sleep(1.5)
+        sleep(2)
         self.is_click(user['签署按钮'])
-        sleep(1)
-        self.input_text(user['签署文本框'], 999999)
+        sleep(2)
+        self.input_clear_text(user['签署文本框'], 999999)
         sleep(0.2)
         self.is_click(user['签署点击确定'])
-        sleep(1)
+        sleep()
         self.driver.switch_to.default_content()
-        sleep(1)
+        sleep()
         self.is_click(user['关闭签署窗口'])
         log.info("退出签署")
+        sleep(0.5)
         log.info('签署成功')
 
     def click_action(self, loc, num):

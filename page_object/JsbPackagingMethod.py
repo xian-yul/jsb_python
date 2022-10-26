@@ -75,7 +75,7 @@ class JsbPackagingMethod(WebPage):
         user = page_object.JsbUserPage.JsbUserPage(self.driver)
 
         user.place_raw_order(user_phone, org_name, shop_num, delivery_type, pickup_type, address_name, sign_type,
-                         billing_type, seller_phone, serve, limit)
+                             billing_type, seller_phone, serve, limit)
 
     def seller_goods_add_product_repeatedly(self, serve, seller_phone, goods_type, title, subtitle, keywords, code,
                                             material,
@@ -122,7 +122,7 @@ class JsbPackagingMethod(WebPage):
                           storehouse_phone, default, limit):
         seller = page_object.JsbSellerPage.JsbSellerPage(self.driver)
         seller.seller_phone_login(serve, seller_phone)
-        seller.seller_skip_goods('仓库')
+        seller.seller_skip_goods('点击产品管理', '仓库地址')
         add_num = 0
         log.info('进行添加仓库地址')
         while add_num < limit:
@@ -135,7 +135,7 @@ class JsbPackagingMethod(WebPage):
                                         limit):
         seller = page_object.JsbSellerPage.JsbSellerPage(self.driver)
         seller.seller_phone_login(serve, seller_phone)
-        seller.seller_skip_goods('分类')
+        seller.seller_skip_goods('点击产品管理', '产品分类')
         add_num = 0
         while add_num < limit:
             seller.seller_goods_classification_detail(type_name, classification_type, state, father_type)
