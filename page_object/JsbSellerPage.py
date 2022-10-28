@@ -216,8 +216,7 @@ class JsbSellerPage(WebPage):
             log.info('选择的牌号为 : ' + grade[grade_number].text)
             grade[grade_number].click()
         except:
-            self.base_get_img()
-            self.fail('牌号选择出错 或 无当前牌号')
+            self.fial_info()
 
     def seller_goods_stock_purchase(self, stock, min_purchase):
         self.input_clear_text(seller['原料库存'], stock)
