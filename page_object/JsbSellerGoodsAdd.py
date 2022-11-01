@@ -191,8 +191,8 @@ class JsbSellerGoodsAdd(WebPage):
             log.info(str(addNum) + '_次添加牌号为: _' + str(addGrade))
             log.info('下次牌号添加为 : ' + str(addGrade + 1))
             goodsNumber = addGrade + 1
-            addNum += 1
             log.info('当前新增次数 : ' + str(addNum) + '  预计新增次数  : ' + str(limit))
+            addNum += 1
 
     def seller_product_add(self, serve, sellerPhone, addGoods, title, subtitle, keywords, code, producingArea, needSign,
                            material, brand, address, img_path, video_path, sku_name, sku_price, sku_min_purchase,
