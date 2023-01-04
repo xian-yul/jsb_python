@@ -44,3 +44,6 @@
 签署_确定: "xpath== // div[@class='com-dialog-btn-box']"
 签署点击确定: "xpath== // a[@class='commit sign-btn fontbg-config-style en_sms_confirm']"
 关闭签署窗口: "xpath== // button[@class='ant-modal-close']"
+
+用户中心: "link_text==用户中心"
+

@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 import pytest
 from py.xml import html
+
 from selenium import webdriver
 
 driver = None

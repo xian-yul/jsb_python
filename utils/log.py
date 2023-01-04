@@ -5,8 +5,10 @@
 import logging, time
 import os, sys
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
 from config import setting
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
+
 
 # 日志存放文件夹，如不存在，则自动创建一个logs目录
 if not os.path.exists(setting.LOG_DIR): os.mkdir(setting.LOG_DIR)

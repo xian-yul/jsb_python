@@ -20,7 +20,7 @@ class TestSellerClassification:
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')
         seller = JsbPackagingMethod(drivers)
         serve = '24'
-        limit = 2
+        limit = 1
         seller_phone = '13500135000'
         type_name = '商品分类1'
         classification_type = 1

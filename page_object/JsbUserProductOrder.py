@@ -2,15 +2,12 @@
 # -*- coding:utf-8 -*-
 from decimal import Decimal
 
-from selenium.webdriver.common.by import By
-
-import page_object.JsbSellerPage
 from common.readelement import Element
-from page.webpage import WebPage, sleep
-from utils import tool_util
+from page.webpage import WebPage
 from utils.log import Log
+from utils.times import sleep
 
-user = Element('JsbUserProductOrder')
+user = Element('JsbUserOrder')
 log = Log()
 user_url = {'24_home': 'http://192.168.101.24:8090/shop/home', '20_home': 'https://demo.jinsubao.cn/',
             '24_order_url': 'http://192.168.101.24:8090/user-center/purchase-order',
@@ -49,57 +46,47 @@ class JsbUserProductOrder(WebPage):
         self.is_click(user['买家退出登录按钮'])
         log.info('退出登录成功')
 
-    def click_user_login(self, phone):
-        self.is_click(user['买家登录'])
-        log.info('在买家首页点击登录按钮')
-        self.input_text(user['买家登录手机号'], phone)
-        log.info('输入登录手机号: ' + phone)
-        self.is_click(user['买家验证码按钮'])
-        log.info('点击验证码按钮')
-        self.is_click(user['买家登录按钮'])
-        log.info('点击登录')
-        try:
-            login_phone = self.element_text(user['买家登录后手机号'])
-            assert phone in login_phone
-            log.info('比较后登录前输入手机号 :' + phone + '  与登录后一致 :' + login_phone)
-        except AssertionError:
-            self.fial_info()
-
-    def place_product_order(self, serve, user_phone, seller_phone, product_name, shop_num, cart_type, address,sign_type,limit):
+    def place_product_order(self, serve, user_phone, seller_phone, product_name, shop_num, cart_type, address,
+                            sign_type, limit):
         self.user_login(serve, user_phone)
         place_order_num = 0
         while place_order_num < limit:
             if place_order_num > 0:
-                self.find_elements(user['买家导航栏'])[2].click()
+                self.find_elements(user['navigation_bar'])[2].click()
             else:
-                self.find_elements(user['买家导航栏'])[1].click()
+                self.find_elements(user['navigation_bar'])[1].click()
             self.script('3000')
-            self.find_element(user['制成品商城_搜索栏']).send_keys(product_name)
-            self.find_elements(user['制成品商城_搜索查询'])[0].click()
+            self.find_element(user['zcp_search']).send_keys(product_name)
+            self.find_elements(user['zcp_search_btn'])[0].click()
             sleep(0.2)
-            self.find_elements(user['制成品商城_商品'])[0].click()
+            self.find_elements(user['zcp_product'])[0].click()
             self.win_handles('-1')
-            self.inputs_clear_text(user['制成品商城_制成品数量选择'], 0, shop_num)
+            min_purchase = self.element_text(user['zcp_min_purchase'])
+            min_purchase = min_purchase[1:]
+            if shop_num <= int(min_purchase):
+                self.inputs_clear_text(user['zcp_buy_num'], 0, min_purchase)
+            else:
+                self.inputs_clear_text(user['zcp_buy_num'], 0, shop_num)
             if cart_type == 1:
-                self.find_elements(user['制成品商城_制成品加入货单'])[0].click()
+                self.find_elements(user['zcp_product_cart'])[0].click()
                 sleep(0.2)
                 self.find_elements(user['加入货单_点击确定'])[0].click()
                 sleep(10)
             else:
-                product_price = self.element_text(user['制成品商城_制成品单价'])
+                product_price = self.element_text(user['zcp_product_price'])
                 product_price = product_price[5:]
-                self.find_element(user['制成品商城_制成品一键采购']).click()
+                self.find_element(user['zcp_product_purchase']).click()
                 sleep(0.5)
                 if sign_type == 1:
-                    self.is_click(user['个人签署'])
-                    self.is_click(user['个人签署弹窗'])
+                    self.is_click(user['personal_signing'])
+                    self.is_click(user['personal_signing_alert'])
                     log.info('进行 个人签署')
                 try:
                     if self.order_amount_judgment(1, product_price):
                         self.script('10000')
                         self.place_order_submit(serve)
                         sleep()
-                        signature_detail = self.find_elements(user['买家订单列表_状态'])
+                        signature_detail = self.find_elements(user['user_order_list_status'])
                         signature = '不需要签署' in signature_detail[1].text
                         if signature:
                             self.product_order_pay(serve, signature)
@@ -122,14 +109,14 @@ class JsbUserProductOrder(WebPage):
             else:
                 self.driver.get(user_url['20_order_url'])
             sleep()
-            self.find_elements(user['买家订单列表_按钮'])[0].click()
+            self.find_elements(user['user_order_list_btn'])[0].click()
             sleep(0.2)
             self.find_elements(user['买家弹窗_确定'])[1].click()
             self.signing_contract()
-        self.find_elements(user['买家订单列表_按钮'])[0].click()
+        self.find_elements(user['user_order_list_btn'])[0].click()
         sleep()
-        self.input_clear_text(user['买家支付界面_支付文本框'], '666666')
-        self.find_element(user['买家支付界面_支付按钮']).click()
+        self.input_clear_text(user['user_pay_text'], '666666')
+        self.find_element(user['user_pay_btn']).click()
         sleep(3)
         try:
             if serve == '24':
@@ -146,10 +133,11 @@ class JsbUserProductOrder(WebPage):
         else:
             self.driver.get(user_url['20_order_url'])
         sleep(0.5)
-        self.find_elements(user['买家订单列表_按钮'])[0].click()
+        self.find_elements(user['user_order_list_btn'])[0].click()
+        sleep(0.2)
         self.find_elements(user['买家弹窗_确定'])[1].click()
         sleep(1)
-        signature_detail = self.find_elements(user['买家订单列表_状态'])
+        signature_detail = self.find_elements(user['user_order_list_status'])
         sleep(0.2)
         signature = '完成' in signature_detail[1].text
         if not signature:
@@ -159,17 +147,17 @@ class JsbUserProductOrder(WebPage):
     def seller_product_order(self, serve, seller_phone, place_order_num):
         if place_order_num == 0:
             self.seller_phone_login(serve, seller_phone)
-            self.seller_skip_goods('订单合同', '订单列表')
+            self.seller_skip_goods('order_contract', 'order_list')
         else:
             if serve == '24':
                 self.driver.get(seller_url['24_order_list'])
             else:
                 self.driver.get(seller_url['20_order_list'])
-        self.find_elements(user['卖家订单列表_按钮'])[0].click()
+        self.find_elements(user['seller_order_list_btn'])[0].click()
         sleep()
-        self.find_elements(user['卖家订单详情_按钮'])[1].click()
+        self.find_elements(user['seller_order_detail_btn'])[1].click()
         sleep(0.5)
-        self.find_elements(user['卖家订单详情_按钮'])[3].click()
+        self.find_elements(user['seller_order_detail_btn'])[3].click()
         self.signing_contract()
         sleep()
 
@@ -182,15 +170,15 @@ class JsbUserProductOrder(WebPage):
         else:
             if place_order_num == 0:
                 self.seller_phone_login(serve, seller_phone)
-            self.seller_skip_goods('卖家订单合同', '卖家订单列表')
-        self.find_elements(user['卖家订单列表_按钮'])[0].click()
-        self.script('5000')
-        self.find_elements(user['卖家订单详情_发货地点'])[0].click()
+            self.seller_skip_goods('seller_order_contract', 'seller_order_list')
+        self.find_elements(user['seller_order_list_btn'])[0].click()
+        self.script('8000')
+        self.find_elements(user['seller_order_deliver_place'])[0].click()
         sleep(0.2)
         self.click_area()
         sleep(0.2)
-        self.input_clear_text(user['卖家订单详情_详细地址'], address)
-        self.find_element(user['卖家订单详情_发货']).click()
+        self.input_clear_text(user['seller_order_address'], address)
+        self.find_element(user['seller_order_deliver']).click()
         sleep(1)
         try:
             if serve == '24':
@@ -208,40 +196,10 @@ class JsbUserProductOrder(WebPage):
         log.info('进入卖家   ____' + menu + "________子菜单_____" + submenu)
         sleep(0.1)
 
-    def seller_backstage_title(self):
-        title = self.element_text(user['卖家登录标题'])
-        try:
-            assert title == '金塑宝 商家管理后台'
-            log.info('当前界面标题是否正常 断言判断一致')
-        except AssertionError:
-            self.fial_info()
-
-    def seller_phone_login(self, serve, seller_phone):
-        if serve == '24':
-            self.driver.get(seller_url['24'])
-        else:
-            self.driver.get(seller_url['20'])
-        self.seller_backstage_title()
-        sleep(0.2)
-        self.input_clear_text(user['卖家登录手机号'], seller_phone)
-        self.is_click(user['卖家验证码按钮'])
-        self.input_clear_text(user['卖家验证码文本框'], 666666)
-        self.is_click(user['卖家登录按钮'])
-        sleep()
-        try:
-            if serve == '24':
-                assert self.return_current_url() == seller_url['24_登录后']
-            else:
-                assert self.return_current_url() == seller_url['20_登录后']
-            log.info("卖家登录信息:   _____" + self.element_text(user['卖家登录信息']))
-            sleep(0.5)
-        except AssertionError:
-            self.fial_info()
-
     def order_amount_judgment(self, code, price):
         flag = 'true'
         if code == 1:
-            product_detail = self.find_elements(user['订单_总计信息'])
+            product_detail = self.find_elements(user['order_info'])
             product_num = product_detail[1].text
             product_freight = product_detail[3].text
             product_freight = product_freight[1:]
@@ -257,7 +215,7 @@ class JsbUserProductOrder(WebPage):
                 flag = 'false'
                 self.base_get_img()
         elif code == 2:
-            raw_detail = self.find_elements(user['订单_总计信息'])
+            raw_detail = self.find_elements(user['order_info'])
             raw_num = raw_detail[1].text
             raw_actual = raw_detail[3].text
             raw_actual = raw_actual[1:]
@@ -272,10 +230,10 @@ class JsbUserProductOrder(WebPage):
         return flag
 
     def place_order_submit(self, serve):
-        while not self.find_element(user['提交订单']).is_enabled():
+        while not self.find_element(user['place_order_btn']).is_enabled():
             sleep(3)
-            if self.find_element(user['提交订单']).is_enabled():
-                self.find_element(user['提交订单']).click()
+            if self.find_element(user['place_order_btn']).is_enabled():
+                self.find_element(user['place_order_btn']).click()
                 sleep(2)
                 break
             try:

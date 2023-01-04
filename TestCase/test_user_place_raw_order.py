@@ -4,11 +4,9 @@ import time
 
 import pytest
 
-from page_object.JsbPackagingMethod import JsbPackagingMethod
 from page_object.JsbUserRawOrder import JsbUserRawOrder
 from utils.log import Log
 from utils.tool_util import time_lag
-
 
 log = Log()
 
@@ -18,20 +16,23 @@ class TestUserPlaceRawOrder:
     def test_place_raw_order(self, drivers):
         log.info('当前执行   买家原料下单    ')
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')
-        user_phone = "13700000000"
-        org_name = "兴得铭"
-        shop_num = 1
-        delivery_type = 2
-        pickup_type = 1
+        user_phone = "13328798899"
+        org_name = "丹山"
+        shop_num = 3
+        pickup_type = 3  # 1自提  2款到发货 3定金
         address_name = ""
         sign_type = 2
         billing_type = 0
-        limit = 3
-        serve = '20'
-        seller_phone = "18965691361"
+        limit = 1
+        serve = '24'
+        seller_phone = "18929867679"
+        seller_address = '卖家详细地址'
+        deposit = 5
+        multiple_type = 0  # 0 多发  1 一次性
         user = JsbUserRawOrder(drivers)
-        user.place_raw_order(serve, user_phone, org_name, delivery_type, pickup_type, shop_num, address_name,
-                    sign_type, billing_type, seller_phone, limit)
+        user.place_raw_order(serve, user_phone, org_name, pickup_type, shop_num, address_name,
+                             sign_type, billing_type, seller_phone, limit, seller_address, multiple_type, deposit)
+        # user.ces(serve, seller_phone, seller_address, user_phone)
         now_time = time.strftime('%Y-%m-%d %H:%M:%S')
         log.info("开始时间: " + current_time)
         log.info("结束时间: " + now_time)

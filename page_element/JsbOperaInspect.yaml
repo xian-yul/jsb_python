@@ -1,0 +1,11 @@
+opera_list: "xpath== // li[@class='ant-menu-submenu ant-menu-submenu-inline']"
+opera_list_inspect: "xpath== // li[@class='ant-menu-item']"
+
+
+
+opera_list_inspect_btn: "xpath== // span[@class='w-button-group-item']"
+opera_goods_inspect_type: "xpath==// ul[@class='ant-menu ant-menu-horizontal ant-menu-root ant-menu-light']/li"
+opera_goods_inspect_btn: "xpath== // button[@class='ant-btn ant-btn-primary']"
+
+opera_demand_inspect_btn: "xpath== // button[@class='ant-btn ant-btn-primary']"
+opera_demand_inspect_type: "xpath==// ul[@class='ant-menu ant-menu-horizontal ant-menu-root ant-menu-light']/li"

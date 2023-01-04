@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
-import zmail
+import zmail as zmail
+
 from config.conf import cm
 
 

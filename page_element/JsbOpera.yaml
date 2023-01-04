@@ -1,0 +1,5 @@
+opera_home_title: "xpath== // span[@class='title']"
+opera_login_phone: "xpath== // input[@id='phone']"
+opera_login_code_text: "xpath== // input[@id='code']"
+opera_login_code_btn: "xpath== // button[@class='getCaptcha ant-btn']"
+opera_login_btn: "xpath== // button[@class='login-button ant-btn ant-btn-primary ant-btn-lg']"

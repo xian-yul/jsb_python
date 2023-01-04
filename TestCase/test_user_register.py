@@ -18,7 +18,7 @@ class TestUserRegister:
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')
         user = JsbUserPage(drivers)
         serve = '24'
-        limit = 5
+        limit = 1
         user.user_register(serve, limit)
         log.info("开始时间: " + current_time)
         now_time = time.strftime('%Y-%m-%d %H:%M:%S')

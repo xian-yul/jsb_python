@@ -40,6 +40,7 @@
 订单采购按钮: "xpath== // button[@class='ant-btn ant-btn-danger ant-btn-lg ant-btn-block']"
 
 签署窗口: "id==fddContractSigning"
+自提签署窗口: "xpath==/html/body/div[2]/div/div[2]/div/div[2]/div[2]/div/div/iframe"
 签署按钮: "xpath== // div[@class='sign-btn-box-con']"
 签署文本框: "xpath== // input[@id='smsval']"
 签署_确定: "xpath== // div[@class='com-dialog-btn-box']"

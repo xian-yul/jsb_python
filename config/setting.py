@@ -16,5 +16,5 @@ TEST_REPORT = os.path.join(BASE_DIR, "report")
 LOG_DIR = os.path.join(BASE_DIR, "logs")
 # 测试数据文件
 TEST_DATA_YAML = os.path.join(BASE_DIR, "testdata")
-# 元素    控件
+# 元素控件
 TEST_Element_YAML = os.path.join(BASE_DIR, "testyaml")

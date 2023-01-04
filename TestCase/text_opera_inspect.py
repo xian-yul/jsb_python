@@ -5,24 +5,26 @@ import time
 
 import pytest
 
-from page_object.JsbOperationPage import JsbOperationPage
+from page_object.JsbOperaInspectPage import JsbOperaInspect
 from utils.log import Log
 from utils.tool_util import time_lag
 
 log = Log()
 
 
-class TestOperaExamine:
+class TestOperaInspect:
 
     def test_opera_examine(self, drivers):
-        log.info('当前执行   运营原料审核    ')
+        log.info('当前执行   运营审核    ')
         serve = '24'
         opera_phone = '13600136001'
-        opera = JsbOperationPage(drivers)
-        limit = 1
+        opera = JsbOperaInspect(drivers)
+        limit = 5
         code = 0
+        inspect_type = 1  # 1原料 2制成品 3船货
+        choice_type = 2  # 123456
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')
-        opera.opera_goods_examine(serve, opera_phone, code, limit)
+        opera.opera_inspect(serve, opera_phone, inspect_type, choice_type, limit)
         log.info("开始时间: " + current_time)
         now_time = time.strftime('%Y-%m-%d %H:%M:%S')
         log.info("结束时间: " + now_time)
@@ -31,4 +33,4 @@ class TestOperaExamine:
 
 
 if __name__ == '__main__':
-    pytest.main(['TestCase/test_opera_examine.py'])
+    pytest.main(['TestCase/test_opera_inspect.py'])

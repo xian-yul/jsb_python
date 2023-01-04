@@ -4,11 +4,11 @@ from decimal import Decimal
 
 from selenium.webdriver.common.by import By
 
-import page_object.JsbSellerPage
 from common.readelement import Element
-from page.webpage import WebPage, sleep
-from utils import tool_util
+from page.webpage import WebPage
+from page_object.JsbSellerPage import JsbSeller
 from utils.log import Log
+from utils.times import sleep
 
 user = Element('user')
 log = Log()
@@ -106,7 +106,7 @@ class JsbUser(WebPage):
                 self.fial_info()
 
     def place_product_order(self, serve, user_phone, seller_phone, product_name, shop_num, cart_type, address, limit):
-        seller = page_object.JsbSellerPage.JsbSellerPage(self.driver)
+        seller = JsbSeller(self.driver)
         self.user_login(serve, user_phone)
         place_order_num = 0
         while place_order_num < limit:

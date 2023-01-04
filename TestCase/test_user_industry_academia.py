@@ -18,7 +18,7 @@ class TestUserIndustryAcademia:
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')
         user = JsbPackagingMethod(drivers)
         serve = '24'
-        limit = 10
+        limit = 1
         user_phone = '13500135000'
         industry_type = 3
         title = '产学融合标题'

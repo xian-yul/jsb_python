@@ -1,0 +1,40 @@
+user_center: "xpath== // a[@class='w-hover-none']"
+user_div_demand: "xpath== // div[@class='ant-menu-submenu-title']"
+user_demand_home: "xpath== // li[@class='ant-menu-item']"
+user_demand_release: "xpath== // button[@class='release ant-btn ant-btn-primary']"
+user_demand_release_agreement: "xpath== // input[@class='ant-checkbox-input']"
+user_demand_release_type: "xpath== // label[@class='ant-radio-button-wrapper']"
+user_demand_release_btn: "xpath== // button[@class='need-margin-btn ant-btn ant-btn-primary ant-btn-lg']"
+
+
+user_demand_title: "xpath== // textarea[@class='title ant-input']"
+user_demand_content: "xpath== // textarea[@class='content ant-input']"
+user_demand_upload: "xpath== // input[@type='file']"
+user_demand_raw_search: "xpath== // button[@class='ant-btn ant-btn-primary ant-btn-sm ant-btn-background-ghost']"
+user_demand_raw: "xpath== // div[@class='ant-card-body']"
+user_demand_seller_num: "xpath== // input[@id='sellerNum']"
+user_demand_address: "xpath== // span[@class='ant-cascader-picker-label']"
+user_demand_price: "xpath== // input[@id='price']"
+user_demand_num: "xpath== // input[@id='num']"
+user_demand_submit: "xpath== // button[@class='ant-btn ant-btn-primary']"
+
+
+
+seller_demand_home: "xpath== // li[@class='ant-menu-submenu ant-menu-submenu-inline']"
+seller_demand_list: "xpath== // li[@class='ant-menu-item']"
+seller_demand_release: "xpath== // button[@class='release ant-btn ant-btn-primary']"
+seller_demand_release_agreement: "xpath== // input[@class='ant-checkbox-input']"
+seller_demand_release_type: "xpath== // label[@class='ant-radio-button-wrapper']"
+seller_demand_release_btn: "xpath== // button[@class='need-margin-btn ant-btn ant-btn-primary ant-btn-lg']"
+
+
+seller_demand_title: "xpath== // textarea[@id='title']"
+seller_demand_content: "xpath== // textarea[@id='content']"
+seller_demand_upload: "xpath== // input[@type='file']"
+seller_raw_search: "xpath== // button[@class='ant-btn ant-btn-primary ant-btn-sm ant-btn-background-ghost']"
+seller_demand_raw: "xpath== // div[@class='ant-card-body']"
+seller_demand_seller_num: "xpath== // input[@id='sellerNum']"
+seller_demand_address: "xpath== // span[@class='ant-cascader-picker-label']"
+seller_demand_price: "xpath== // input[@id='price']"
+seller_demand_num: "xpath== // input[@id='num']"
+seller_demand_submit: "xpath== // button[@class='ant-btn ant-btn-primary']"

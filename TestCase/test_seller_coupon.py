@@ -5,8 +5,6 @@ import time
 import pytest
 
 from page_object.JsbPackagingMethod import JsbPackagingMethod
-from page_object.JsbSellerPage import JsbSellerPage
-from page_object.JsbUserPage import JsbUserPage
 from utils.log import Log
 from utils.tool_util import time_lag
 

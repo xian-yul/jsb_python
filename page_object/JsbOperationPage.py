@@ -36,6 +36,7 @@ class JsbOperationPage(WebPage):
         self.opera_end_title(serve)
         self.input_text(opera['运营端登录手机号'], opera_phone)
         self.is_click(opera['运营端发送验证码'])
+        self.input_clear_text(opera['运营端验证码'], 666666)
         self.is_click(opera['运营端点击登录'])
         try:
             if serve == '24':
@@ -65,7 +66,6 @@ class JsbOperationPage(WebPage):
             self.is_click(opera['制成品审核类型'])
         sleep(0.2)
         examine = 0
-        log.info("当前进入的审核类型为 : "+self.driver.find_element(By.XPATH," // li[@class='ant-menu-item ant-menu-item-selected']").text())
         try:
             btn_examine = self.find_elements(opera['审核按钮判断存在'])
             if len(btn_examine) > 0:

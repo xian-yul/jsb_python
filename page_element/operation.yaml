@@ -1,7 +1,7 @@
 运营端标题: "xpath==//*[@id='userLayout']/div/div[1]/div[1]/a/span"
 运营端登录手机号: "id==phone"
 运营端发送验证码: "xpath==//*[@id='formLogin']/div[2]/div[2]/button"
-运营端验证码: "id==code"
+运营端验证码: "xpath== // input[@id='code']"
 运营端点击登录: "xpath==//*[@id='formLogin']/div[3]/div/div/span/button"
 运营端登陆人姓名: "xpath==//*[@id='app']/section/section/header/div/div/span/div[1]/span/span[2]"
 
