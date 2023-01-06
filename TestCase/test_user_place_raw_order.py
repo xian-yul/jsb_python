@@ -32,7 +32,6 @@ class TestUserPlaceRawOrder:
         user = JsbUserRawOrder(drivers)
         user.place_raw_order(serve, user_phone, org_name, pickup_type, shop_num, address_name,
                              sign_type, billing_type, seller_phone, limit, seller_address, multiple_type, deposit)
-        # user.ces(serve, seller_phone, seller_address, user_phone)
         now_time = time.strftime('%Y-%m-%d %H:%M:%S')
         log.info("开始时间: " + current_time)
         log.info("结束时间: " + now_time)

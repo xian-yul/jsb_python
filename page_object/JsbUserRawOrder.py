@@ -124,7 +124,7 @@ class JsbUserRawOrder(WebPage):
                 if self.find_element(user['place_order_btn']).is_enabled():
                     self.is_click(user['place_order_btn'])
                     break
-        sleep(2)
+        sleep(3)
         try:
             if serve == '24':
                 assert self.return_current_url() == user_url['24_order_url']
@@ -167,14 +167,15 @@ class JsbUserRawOrder(WebPage):
             self.fial_info()
 
     def seller_goods_deliver(self, serve, seller_address, pickup_type, multiple_type):
+        log.info('------------------------------------------------')
         log.info('进入卖家发货')
         if serve == '24':
             self.driver.get(seller_url['24_order_list'])
         else:
             self.driver.get(seller_url['20_order_list'])
-        if pickup_type == 3:
-            self.seller_disposable(serve, pickup_type, seller_address)
-        elif multiple_type == 1:
+        # if pickup_type == 3 and multiple_type != 0:
+        #     self.seller_disposable(serve, pickup_type, seller_address)
+        if multiple_type == 1:
             self.seller_disposable(serve, pickup_type, seller_address)
         elif multiple_type == 0:
             log.info('进行一单多发')
@@ -187,6 +188,8 @@ class JsbUserRawOrder(WebPage):
         sleep(0.1)
 
     def seller_goods_sign(self, serve, seller_phone, place_order_num, pickup_type, deposit):
+        log.info('------------------------------------------------')
+        log.info('进入卖家生成签署合同')
         if place_order_num == 0:
             self.seller_phone_login(serve, seller_phone)
             self.seller_skip_goods('order_contract', 'order_list')
@@ -207,6 +210,8 @@ class JsbUserRawOrder(WebPage):
         self.signing_contract()
 
     def user_goods_receipt(self, serve, pickup_type, multiple_type):
+        log.info('------------------------------------------------')
+        log.info('进入买家收货')
         if serve == '24':
             self.driver.get(user_url['24_order_url'])
         else:
@@ -217,7 +222,7 @@ class JsbUserRawOrder(WebPage):
             self.user_receipt()
         elif multiple_type == 1 and pickup_type == 1:
             self.user_receipt()
-        elif pickup_type == 3:
+        elif multiple_type == 1 and pickup_type == 3:
             log.info('进行定金订单支付尾款')
             self.find_elements(user['user_order_list_btn'])[0].click()
             self.input_clear_text(user['user_pay_text'], '666666')
@@ -235,6 +240,8 @@ class JsbUserRawOrder(WebPage):
             self.user_over_charge(pickup_type)
 
     def user_goods_sign_pay(self, serve, pickup_type, multiple_type):
+        log.info('------------------------------------------------')
+        log.info('进入买家签署合同并支付')
         if serve == '24':
             self.driver.get(user_url['24_order_url'])
         else:
@@ -249,7 +256,7 @@ class JsbUserRawOrder(WebPage):
         sleep()
         if pickup_type == 3:
             log.info('进行买家定金订单支付')
-            self.input_clear_text(user['买家支付界面_支付文本框'], '666666')
+            self.input_clear_text(user['user_pay_text'], '666666')
             sleep(0.2)
             self.find_element(user['user_pay_btn']).click()
             sleep(3)
@@ -263,7 +270,7 @@ class JsbUserRawOrder(WebPage):
                 self.fial_info()
         else:
             log.info('进行买家订单支付')
-            self.input_clear_text(user['买家支付界面_支付文本框'], '666666')
+            self.input_clear_text(user['user_pay_text'], '666666')
             flag = self.getElementExistance(user['user_advance_pay'])
             if flag:
                 self.find_elements(user['user_advance_pay'])[1].click()
@@ -292,10 +299,10 @@ class JsbUserRawOrder(WebPage):
                 log.info('进入一次性提货')
                 self.find_elements(user['user_order_list_btn'])[0].click()
                 sleep(0.5)
-                self.input_clear_text(user['自提_司机'], '司机名称123')
-                self.input_clear_text(user['自提_身份证'], '220422199312260410')
-                self.input_clear_text(user['自提_手机号'], '18965699791')
-                self.input_clear_text(user['自提_车牌号'], '闽D16491')
+                self.input_clear_text(user['self_lifting_driverName'], '司机名称123')
+                self.input_clear_text(user['self_lifting_driverIdNumber'], '220422199312260410')
+                self.input_clear_text(user['self_lifting_phone'], '18965699791')
+                self.input_clear_text(user['self_lifting_licenseNumber'], '闽D16491')
                 self.find_elements(user['self_lifting_time'])[1].click()
                 self.is_click(user['self_lifting_time_determine'])
                 sleep(0.2)
@@ -305,7 +312,7 @@ class JsbUserRawOrder(WebPage):
     def place_raw_order(self, serve, user_phone, org_name, pickup_type, shop_num, address_name,
                         sign_type, billing_type, seller_phone, limit, seller_address, multiple_type, deposit
                         ):
-        self.user_login(serve, user_phone)
+        self.click_user_login(serve, user_phone)
         place_order_num = 0
         while place_order_num < limit:
             sleep(0.3)
@@ -356,7 +363,7 @@ class JsbUserRawOrder(WebPage):
             self.driver.get(seller_url['24_order_list'])
         else:
             self.driver.get(seller_url['20_order_list'])
-        if pickup_type == 2:
+        if pickup_type == 2 or pickup_type == 3:
             while multiple_num <= 9:
                 self.find_elements(user['seller_order_list_btn'])[0].click()
                 if multiple_num == 1:
@@ -376,8 +383,8 @@ class JsbUserRawOrder(WebPage):
                     num = num[:-1]
                     num = float(num) / 9
                     num = round(num, 3)
-                if multiple_num != 9:
-                    self.input_clear_text(user['num'], num)
+                # if multiple_num != 9:
+                self.input_clear_text(user['num'], num)
                 sleep(0.2)
                 if multiple_num == 1:
                     self.find_elements(user['seller_order_deliver'])[1].click()
@@ -415,7 +422,6 @@ class JsbUserRawOrder(WebPage):
         else:
             self.driver.get(user_url['20_order_url'])
         while more_num <= 9:
-            log.info(str(more_num))
             self.find_elements(user['user_order_list_btn'])[0].click()
             if more_num == 1:
                 self.is_click(user['more_mention'])
@@ -443,11 +449,11 @@ class JsbUserRawOrder(WebPage):
         self.inputs_clear_text(user['self_lifting_driverIdNumber'], -1, '220422199312260410')
         self.inputs_clear_text(user['self_lifting_phone'], -1, '18965699791')
         self.inputs_clear_text(user['self_lifting_licenseNumber'], -1, '闽D16491')
-        self.find_elements(user['自提_控件选择'])[1].click()
+        self.find_elements(user['self_lifting_time'])[1].click()
         sleep(0.2)
-        self.is_click(user['自提_控件确定'])
-        if more_num != 9:
-            self.inputs_clear_text(user['num'], -1, pickup_num)
+        self.is_click(user['self_lifting_time_determine'])
+        # if more_num != 9:
+        self.inputs_clear_text(user['num'], -1, pickup_num)
         sleep(0.2)
         self.find_elements(user['self_lifting_entrust'])[1].click()
         self.pickup_signing_contract()
@@ -523,7 +529,7 @@ class JsbUserRawOrder(WebPage):
             self.click_area()
             sleep(0.2)
             self.input_clear_text(user['seller_order_address'], seller_address)
-            if pickup_type == 2:
+            if pickup_type == 2 or pickup_type == 3:
                 self.find_elements(user['seller_order_deliver'])[1].click()
             else:
                 self.is_click(user['seller_order_deliver'])

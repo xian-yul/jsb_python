@@ -30,7 +30,7 @@ class JsbDemand(WebPage):
         self.find_elements(demand['user_div_demand'])[10].click()
         sleep(0.2)
         self.find_elements(demand['user_demand_home'])[5].click()
-        sleep(0.2)
+        sleep(0.5)
         try:
             self.user_demand_judge(serve, 1)
             while demand_num <= limit:
@@ -102,6 +102,7 @@ class JsbDemand(WebPage):
         self.is_click(demand['user_demand_submit'])
 
     def user_demand_judge(self, serve, number):
+        sleep(0.2)
         if number == 1:
             log.info('进入判断是否界面一致____供需列表')
             if serve == '24':
@@ -128,7 +129,7 @@ class JsbDemand(WebPage):
         self.find_elements(demand['seller_demand_home'])[0].click()
         sleep(0.2)
         self.find_elements(demand['seller_demand_list'])[4].click()
-        sleep(0.2)
+        sleep(0.5)
         try:
             self.seller_demand_judge(serve, 1)
             while demand_num <= limit:

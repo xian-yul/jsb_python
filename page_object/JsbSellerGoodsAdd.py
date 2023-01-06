@@ -63,7 +63,6 @@ class JsbSellerGoodsAdd(WebPage):
 
     def goods_put_on_shelves(self):
         sleep(0.2)
-        a = self.find_elements(goods['列表_上架按钮'])
         self.find_elements(goods['列表_上架按钮'])[0].click()
         sleep(0.2)
         self.find_elements(goods['列表_确定'])[2].click()

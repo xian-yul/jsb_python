@@ -2,7 +2,8 @@ user_center: "xpath== // a[@class='w-hover-none']"
 user_div_demand: "xpath== // div[@class='ant-menu-submenu-title']"
 user_demand_home: "xpath== // li[@class='ant-menu-item']"
 user_demand_release: "xpath== // button[@class='release ant-btn ant-btn-primary']"
-user_demand_release_agreement: "xpath== // input[@class='ant-checkbox-input']"
+user_demand_release_agreement: "xpath== // span[@class='ant-checkbox']"
+
 user_demand_release_type: "xpath== // label[@class='ant-radio-button-wrapper']"
 user_demand_release_btn: "xpath== // button[@class='need-margin-btn ant-btn ant-btn-primary ant-btn-lg']"
 

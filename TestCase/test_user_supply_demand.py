@@ -19,9 +19,9 @@ class TestUserSupplyDemand:
         log.info('当前执行   买家发布供需    ')
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')
         demand = JsbDemand(drivers)
-        serve = '24'
-        user_phone = '13400134555'
-        limit = 5
+        serve = '20'
+        user_phone = '18965691361'
+        limit = 10
         title = '测试买家供需资讯'
         seller_num = 5
         price = 5000

@@ -83,7 +83,7 @@ deliver_mention: "xpath== // div[@class='ant-col']/button"
 num: "xpath==  //input[@id='num']"
 surplus_num: "xpath== // div[@class='ant-form-item-control']/span/p"
 more_mention: "xpath== // label[@class='ant-radio-button-wrapper']"
-add_deliver: "xpath== // p[@class='addInvoice']"
+add_deliver: "xpath== // div[@class='addInvoice']"
 
 user_detail_receipt: "xpath==// button[@class='ant-btn ant-btn-primary']"
 multiple_order_single: "xpath== // div[@class='ant-tabs-nav ant-tabs-nav-animated']/div/div"
