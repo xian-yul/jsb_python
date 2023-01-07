@@ -381,10 +381,15 @@ class JsbUserRawOrder(WebPage):
                     num = self.element_text(user['surplus_num'])
                     num = num[7:]
                     num = num[:-1]
-                    num = float(num) / 9
+                    num = float(num) / 10
                     num = round(num, 3)
                 # if multiple_num != 9:
                 self.input_clear_text(user['num'], num)
+                if multiple_num == 9:
+                    num = self.element_text(user['surplus_num'])
+                    num = num[7:]
+                    num = num[:-1]
+                    self.input_clear_text(user['num'], num)
                 sleep(0.2)
                 if multiple_num == 1:
                     self.find_elements(user['seller_order_deliver'])[1].click()
@@ -452,8 +457,13 @@ class JsbUserRawOrder(WebPage):
         self.find_elements(user['self_lifting_time'])[1].click()
         sleep(0.2)
         self.is_click(user['self_lifting_time_determine'])
-        # if more_num != 9:
-        self.inputs_clear_text(user['num'], -1, pickup_num)
+        if more_num != 9:
+            self.inputs_clear_text(user['num'], -1, pickup_num)
+        else:
+            pickup_num = self.find_elements(user['self_lifting_num'])[7].text
+            pickup_num = pickup_num[14:]
+            pickup_num = pickup_num[:-1]
+            self.inputs_clear_text(user['num'], -1, pickup_num)
         sleep(0.2)
         self.find_elements(user['self_lifting_entrust'])[1].click()
         self.pickup_signing_contract()

@@ -19,7 +19,7 @@ class TestUserPlaceRawOrder:
         user_phone = "13328798899"
         org_name = "丹山"
         shop_num = 3
-        pickup_type = 3  # 1自提  2款到发货 3定金
+        pickup_type = 1  # 1自提  2款到发货 3定金
         address_name = ""
         sign_type = 2
         billing_type = 0
