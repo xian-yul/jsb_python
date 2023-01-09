@@ -22,7 +22,7 @@ class TestOperaInspect:
         limit = 5
         code = 0
         inspect_type = 1  # 1原料 2制成品 3船货
-        choice_type = 1  # 123456
+        choice_type = 2  # 123456
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')
         opera.opera_inspect(serve, opera_phone, inspect_type, choice_type, limit)
         log.info("开始时间: " + current_time)

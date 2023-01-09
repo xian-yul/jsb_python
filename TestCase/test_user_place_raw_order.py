@@ -23,7 +23,7 @@ class TestUserPlaceRawOrder:
         address_name = ""
         sign_type = 2
         billing_type = 0
-        limit = 1
+        limit = 5
         serve = '24'
         seller_phone = "18929867679"
         seller_address = '卖家详细地址'

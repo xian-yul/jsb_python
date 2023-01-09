@@ -159,10 +159,10 @@ class JsbUserRawOrder(WebPage):
             self.seller_goods_sign(serve, seller_phone, place_order_num, pickup_type, deposit)
             sleep(0.2)
             self.user_goods_sign_pay(serve, pickup_type, multiple_type)
-            sleep(0.2)
-            self.seller_goods_deliver(serve, seller_address, pickup_type, multiple_type)
-            sleep(0.2)
-            self.user_goods_receipt(serve, pickup_type, multiple_type)
+            # sleep(0.2)
+            # self.seller_goods_deliver(serve, seller_address, pickup_type, multiple_type)
+            # sleep(0.2)
+            # self.user_goods_receipt(serve, pickup_type, multiple_type)
         except:
             self.fial_info()
 

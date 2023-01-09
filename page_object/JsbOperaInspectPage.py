@@ -34,10 +34,10 @@ class JsbOperaInspect(WebPage):
                     inspect_num += 1
             else:
                 log.info('暂无可审核原料')
+            log.info('商品审核完毕')
         except:
             log.info('暂无可审核商品____退出测试')
             self.driver.quit()
-        log.info('商品审核完毕')
 
     def opera_inspect_demand(self, serve, opera_phone, inspect_type, limit):
         log.info('当前进入   运营供需审核')
@@ -55,15 +55,16 @@ class JsbOperaInspect(WebPage):
                     self.find_elements(inspect['opera_list_inspect_btn'])[0].click()
                     sleep(0.2)
                     self.script('10000')
+                    sleep(5)
                     self.find_elements(inspect['opera_demand_inspect_btn'])[1].click()
                     log.info('当前审核次数 : ' + str(inspect_num) + '  预计审核次数  : ' + str(limit))
                     inspect_num += 1
             else:
                 log.info('暂无可审核供需')
+            log.info('供需审核完毕')
         except:
             log.info('暂无可审核供需____退出测试')
             self.driver.quit()
-        log.info('供需审核完毕')
 
     def opera_inspect_shop(self, serve, opera_phone, limit):
         log.info('当前进入   运营店铺审核')
