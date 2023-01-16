@@ -35,12 +35,6 @@ user_menu = {'地址管理': '点击地址管理', '产学融合': '买家用户
 
 
 class JsbUserProductOrder(WebPage):
-    def user_login(self, serve, phone):
-        if serve == '24':
-            self.driver.get(user_url['24_home'])
-        else:
-            self.driver.get(user_url['20_home'])
-        self.click_user_login(phone)
 
     def click_login_exit(self):
         self.is_click(user['买家退出登录按钮'])
@@ -48,7 +42,7 @@ class JsbUserProductOrder(WebPage):
 
     def place_product_order(self, serve, user_phone, seller_phone, product_name, shop_num, cart_type, address,
                             sign_type, limit):
-        self.user_login(serve, user_phone)
+        self.click_user_login(serve, user_phone)
         place_order_num = 0
         while place_order_num < limit:
             if place_order_num > 0:
@@ -172,6 +166,7 @@ class JsbUserProductOrder(WebPage):
                 self.seller_phone_login(serve, seller_phone)
             self.seller_skip_goods('seller_order_contract', 'seller_order_list')
         self.find_elements(user['seller_order_list_btn'])[0].click()
+        sleep(0.2)
         self.script('8000')
         self.find_elements(user['seller_order_deliver_place'])[0].click()
         sleep(0.2)
@@ -193,7 +188,6 @@ class JsbUserProductOrder(WebPage):
     def seller_skip_goods(self, menu, submenu):
         self.is_click(user[menu])
         self.is_click(user[submenu])
-        log.info('进入卖家   ____' + menu + "________子菜单_____" + submenu)
         sleep(0.1)
 
     def order_amount_judgment(self, code, price):

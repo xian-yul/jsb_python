@@ -30,9 +30,9 @@ class ConfigManager(object):
 
     # 邮件信息
     EMAIL_INFO = {
-        'username': '2292593329@qq.com',  # 切换成你自己的地址
-        'password': 'ljx985600',
-        'smtp_host': 'smtp.qq.com',
+        'username': '',  # 切换成你自己的地址
+        'password': '',
+        'smtp_host': '',
         'smtp_port': 465
     }
 

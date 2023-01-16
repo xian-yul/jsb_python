@@ -1,0 +1,91 @@
+[2023-01-11 13:38:13,280] [log.py|__console] [line:45] INFO    : 当前执行   买家原料下单    
+[2023-01-11 13:38:23,516] [log.py|__console] [line:45] INFO    : 在买家首页点击登录按钮
+[2023-01-11 13:38:24,225] [log.py|__console] [line:45] INFO    : 输入登录手机号: 13500134845
+[2023-01-11 13:38:25,297] [log.py|__console] [line:45] INFO    : 点击验证码按钮
+[2023-01-11 13:38:26,423] [log.py|__console] [line:45] INFO    : 点击登录
+[2023-01-11 13:38:27,287] [log.py|__console] [line:45] INFO    : 金塑宝欢迎您！ 13500134845退出
+[2023-01-11 13:38:27,287] [log.py|__console] [line:45] INFO    : 比较后登录前输入手机号 :13500134845  与登录后一致 :金塑宝欢迎您！ 13500134845退出
+[2023-01-11 13:38:31,668] [log.py|__console] [line:45] INFO    : 定位新标签
+[2023-01-11 13:38:33,791] [log.py|__console] [line:45] INFO    : 进行自提方式_款到发货
+[2023-01-11 13:38:35,051] [log.py|__console] [line:45] INFO    : 金额判断一致  _________ 实付款  10000.00 == 单价  10000.00 * 数量  1
+[2023-01-11 13:38:39,610] [log.py|__console] [line:45] INFO    : 订单提交成功
+[2023-01-11 13:38:39,873] [log.py|__console] [line:45] INFO    : 下单完毕
+[2023-01-11 13:38:39,874] [log.py|__console] [line:45] INFO    : 进行买卖家签署支付发货收货
+[2023-01-11 13:38:39,876] [log.py|__console] [line:45] INFO    : ------------------------------------------------
+[2023-01-11 13:38:39,877] [log.py|__console] [line:45] INFO    : 进入卖家生成签署合同
+[2023-01-11 13:38:41,530] [log.py|__console] [line:45] INFO    : 当前界面标题是否正常 断言判断一致
+[2023-01-11 13:38:45,489] [log.py|__console] [line:45] INFO    : 卖家登录信息:   _____注册账号65180子用户
+[2023-01-11 13:38:48,183] [log.py|__console] [line:45] INFO    : 进入卖家   ____order_contract________子菜单_____order_list
+[2023-01-11 13:38:48,537] [log.py|__console] [line:45] INFO    : [<selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="47c2e191-6b16-4396-b6a0-f6f6e160f21b")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="58a50aef-ce93-40bb-8e1a-cfddfc4cafdc")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="2be8b026-f1e2-4b2c-b914-246d78ad1c3e")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="99e50b63-288c-4288-8f26-8edb9dca7dc3")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="acc36b81-a04b-4d83-aedb-9ca0e855dccc")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="0f7382ca-2eb7-41f6-8753-b820ae1ca99d")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="aecff334-905c-430f-b417-11d35ad3f43b")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="be4cd4b4-2050-454d-9974-d2a43db0d31a")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="b0519193-303f-40c5-beab-1d89d192f514")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="ddc9c618-f9d9-4336-8f88-259779bd9536")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="89d985df-c257-4b52-91f1-58d7fd9ab0c2")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="4cac8dcb-46a5-4b72-8de6-1927cc378b3f")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="3d2c87f4-7ac2-47e0-949d-7bd2f9b0b3d6")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="3d75fb38-ef96-443d-bfe0-600d12cc4acc")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="bd1b2d36-c42c-424e-b00c-0cd6fdbda863")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="183e9c04-6b9a-46e2-8f5d-ae2c229e7740")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="459da409-b34f-4489-933e-c73c5ea2475f")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="d5aefdef-6779-4907-9009-c5eefab75509")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="03652e42-f3a9-46d3-8623-a57456bf04ce")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="1fd2e16f-d803-4103-9ebf-cc79bbeb90e6")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="28787b52-c5ad-4e84-9208-ae0c4db2b0a2")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="40dcd825-6677-4867-a37f-0bd8d8e4cec5")>]
+[2023-01-11 13:38:51,024] [log.py|__console] [line:45] INFO    : 进入合同签署
+[2023-01-11 13:39:04,658] [log.py|__console] [line:45] INFO    : 退出签署中
+[2023-01-11 13:39:05,672] [log.py|__console] [line:45] INFO    : 签署成功
+[2023-01-11 13:39:05,875] [log.py|__console] [line:45] INFO    : ------------------------------------------------
+[2023-01-11 13:39:05,876] [log.py|__console] [line:45] INFO    : 进入买家签署合同并支付
+[2023-01-11 13:39:05,980] [log.py|__console] [line:45] INFO    : 进行买家合同签署
+[2023-01-11 13:39:08,429] [log.py|__console] [line:45] INFO    : 进入合同签署
+[2023-01-11 13:39:22,031] [log.py|__console] [line:45] INFO    : 退出签署中
+[2023-01-11 13:39:23,056] [log.py|__console] [line:45] INFO    : 签署成功
+[2023-01-11 13:39:24,245] [log.py|__console] [line:45] INFO    : 进行买家订单支付
+[2023-01-11 13:39:28,354] [log.py|__console] [line:45] INFO    : 进行自提信息填写
+[2023-01-11 13:39:28,356] [log.py|__console] [line:45] INFO    : 进入一次性提货
+[2023-01-11 13:39:32,789] [log.py|__console] [line:45] INFO    : 合同进入签署
+[2023-01-11 13:39:44,612] [log.py|__console] [line:45] INFO    : 退出签署中
+[2023-01-11 13:39:45,623] [log.py|__console] [line:45] INFO    : 签署成功
+[2023-01-11 13:39:45,826] [log.py|__console] [line:45] INFO    : ------------------------------------------------
+[2023-01-11 13:39:45,828] [log.py|__console] [line:45] INFO    : 进入卖家发货
+[2023-01-11 13:39:45,942] [log.py|__console] [line:45] INFO    : 进行一次性发货
+[2023-01-11 13:39:48,875] [log.py|__console] [line:45] INFO    : 进入合同签署
+[2023-01-11 13:40:02,574] [log.py|__console] [line:45] INFO    : 退出签署中
+[2023-01-11 13:40:03,586] [log.py|__console] [line:45] INFO    : 签署成功
+[2023-01-11 13:40:03,654] [log.py|__console] [line:45] INFO    : 卖家发货成功
+[2023-01-11 13:40:04,858] [log.py|__console] [line:45] INFO    : ------------------------------------------------
+[2023-01-11 13:40:04,860] [log.py|__console] [line:45] INFO    : 进入买家收货
+[2023-01-11 13:40:06,493] [log.py|__console] [line:45] INFO    : 进入合同签署
+[2023-01-11 13:40:20,135] [log.py|__console] [line:45] INFO    : 退出签署中
+[2023-01-11 13:40:21,151] [log.py|__console] [line:45] INFO    : 签署成功
+[2023-01-11 13:40:22,226] [log.py|__console] [line:45] INFO    : 买家原料订单收货成功
+[2023-01-11 13:40:22,227] [log.py|__console] [line:45] INFO    : 当前下单次数 : 1  预计下单次数: 2
+[2023-01-11 13:40:22,227] [log.py|__console] [line:45] INFO    : ------------------------------------------------
+[2023-01-11 13:40:26,580] [log.py|__console] [line:45] INFO    : 定位新标签
+[2023-01-11 13:40:28,693] [log.py|__console] [line:45] INFO    : 进行自提方式_款到发货
+[2023-01-11 13:40:30,071] [log.py|__console] [line:45] INFO    : 金额判断一致  _________ 实付款  10000.00 == 单价  10000.00 * 数量  1
+[2023-01-11 13:40:34,597] [log.py|__console] [line:45] INFO    : 订单提交成功
+[2023-01-11 13:40:34,816] [log.py|__console] [line:45] INFO    : 下单完毕
+[2023-01-11 13:40:34,818] [log.py|__console] [line:45] INFO    : 进行买卖家签署支付发货收货
+[2023-01-11 13:40:34,821] [log.py|__console] [line:45] INFO    : ------------------------------------------------
+[2023-01-11 13:40:34,823] [log.py|__console] [line:45] INFO    : 进入卖家生成签署合同
+[2023-01-11 13:40:36,407] [log.py|__console] [line:45] INFO    : [<selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="24cb9ed9-fc32-4cf2-bdf6-da109cdb7a1d")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="38b97649-b189-47c5-b8b5-b9561a8ae2c8")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="1778f890-0775-4056-ac18-b275c1ec631d")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="d0905458-78c5-46a2-93e8-fd8820a64c64")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="69c11ea3-e889-4b0f-9c44-ca6ee07df4b4")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="74981cb8-fb5c-44f3-8c29-af9717e86ade")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="8a4249d7-b81c-48ab-9c0d-8c35928a3cb5")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="825d2a84-3374-4edc-9ac0-b4d37923ed0c")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="15034ded-004b-4f05-8669-70445236a141")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="c8809da4-0934-4b7c-98ce-52178df79b57")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="23a9337b-3b01-4df0-b2f8-aab805f3a972")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="08c25941-d712-4315-8909-09f61197ae27")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="aeaf21d1-66d7-42f8-9ba8-6e8c687d0da1")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="b283728d-f973-478a-9d80-ff9d593cb623")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="a05976d8-9d18-4c0b-b751-3a370b4f0f70")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="85dea22e-40a7-4530-acd2-4c24ef010377")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="c1a1a315-2d10-497e-b7e4-de93747861b1")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="2c8d588d-0e3b-4dcb-b78e-cd4f1347fdb1")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="c538c09e-1de6-4e91-9060-09d4f386ef25")>, <selenium.webdriver.remote.webelement.WebElement (session="6203c3a2fda79c573c2ec9f58c853b8e", element="37f2f6e0-c03b-4e56-9365-2116d35a516f")>]
+[2023-01-11 13:40:38,548] [log.py|__console] [line:45] INFO    : 进入合同签署
+[2023-01-11 13:40:52,498] [log.py|__console] [line:45] INFO    : 退出签署中
+[2023-01-11 13:40:53,505] [log.py|__console] [line:45] INFO    : 签署成功
+[2023-01-11 13:40:53,724] [log.py|__console] [line:45] INFO    : ------------------------------------------------
+[2023-01-11 13:40:53,726] [log.py|__console] [line:45] INFO    : 进入买家签署合同并支付
+[2023-01-11 13:40:53,844] [log.py|__console] [line:45] INFO    : 进行买家合同签署
+[2023-01-11 13:40:56,160] [log.py|__console] [line:45] INFO    : 进入合同签署
+[2023-01-11 13:41:09,806] [log.py|__console] [line:45] INFO    : 退出签署中
+[2023-01-11 13:41:10,817] [log.py|__console] [line:45] INFO    : 签署成功
+[2023-01-11 13:41:12,086] [log.py|__console] [line:45] INFO    : 进行买家订单支付
+[2023-01-11 13:41:16,443] [log.py|__console] [line:45] INFO    : 进行自提信息填写
+[2023-01-11 13:41:16,444] [log.py|__console] [line:45] INFO    : 进入一次性提货
+[2023-01-11 13:41:21,329] [log.py|__console] [line:45] INFO    : 合同进入签署
+[2023-01-11 13:41:33,013] [log.py|__console] [line:45] INFO    : 退出签署中
+[2023-01-11 13:41:34,028] [log.py|__console] [line:45] INFO    : 签署成功
+[2023-01-11 13:41:34,232] [log.py|__console] [line:45] INFO    : ------------------------------------------------
+[2023-01-11 13:41:34,232] [log.py|__console] [line:45] INFO    : 进入卖家发货
+[2023-01-11 13:41:34,305] [log.py|__console] [line:45] INFO    : 进行一次性发货
+[2023-01-11 13:41:36,835] [log.py|__console] [line:45] INFO    : 进入合同签署
+[2023-01-11 13:41:50,409] [log.py|__console] [line:45] INFO    : 退出签署中
+[2023-01-11 13:41:51,423] [log.py|__console] [line:45] INFO    : 签署成功
+[2023-01-11 13:41:51,427] [log.py|__console] [line:45] INFO    : 卖家发货成功
+[2023-01-11 13:41:52,644] [log.py|__console] [line:45] INFO    : ------------------------------------------------
+[2023-01-11 13:41:52,645] [log.py|__console] [line:45] INFO    : 进入买家收货
+[2023-01-11 13:41:54,357] [log.py|__console] [line:45] INFO    : 进入合同签署
+[2023-01-11 13:42:07,862] [log.py|__console] [line:45] INFO    : 退出签署中
+[2023-01-11 13:42:08,876] [log.py|__console] [line:45] INFO    : 签署成功
+[2023-01-11 13:42:09,907] [log.py|__console] [line:45] INFO    : 买家原料订单收货成功
+[2023-01-11 13:42:09,908] [log.py|__console] [line:45] INFO    : 当前下单次数 : 2  预计下单次数: 2
+[2023-01-11 13:42:09,908] [log.py|__console] [line:45] INFO    : ------------------------------------------------
+[2023-01-11 13:42:09,909] [log.py|__console] [line:45] INFO    : 开始时间: 2023-01-11 13:38:13
+[2023-01-11 13:42:09,909] [log.py|__console] [line:45] INFO    : 结束时间: 2023-01-11 13:42:09
+[2023-01-11 13:42:09,914] [log.py|__console] [line:45] INFO    : 共计使用时间: 0:03:56

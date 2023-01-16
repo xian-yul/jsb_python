@@ -77,6 +77,7 @@ self_lifting_licenseNumber: "xpath== // input[@id='licenseNumber']"
 self_lifting_time: "xpath== // input[@class='ant-calendar-picker-input ant-input']"
 self_lifting_time_determine: "xpath==//*[contains(text(),'此刻')]"
 self_lifting_entrust: "xpath== // button[@class='ant-btn ant-btn-primary']"
+self_lifting_hide_address: "xpath== // input[@id='receivingAddressHide']"
 
 seller_deposit: "xpath== //input[@id='proportion']"
 deliver_mention: "xpath== // div[@class='ant-col']/button"

@@ -6,25 +6,24 @@ import time
 import pytest
 
 from page_object.JsbOperaInspectPage import JsbOperaInspect
+from page_object.JsbUserAddress import JsbUserAddressPage
 from utils.log import Log
 from utils.tool_util import time_lag
 
 log = Log()
 
 
-class TestOperaInspect:
+class TestUserAddress:
 
-    def test_opera_examine(self, drivers):
-        log.info('当前执行   运营审核    ')
+    def test_addresss_add(self, drivers):
+        log.info('当前执行   买家地址添加   ')
         serve = '24'
-        opera_phone = '13600136001'
-        opera = JsbOperaInspect(drivers)
+        user_phone = '13500135001'
+        address = JsbUserAddressPage(drivers)
         limit = 100
-        code = 0
-        inspect_type = 1  # 1原料 2制成品 3船货
-        choice_type = 1  # 123456
+        default_type = 1
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')
-        opera.opera_inspect(serve, opera_phone, inspect_type, choice_type, limit)
+        address.user_address_add(serve, user_phone,default_type, limit)
         log.info("开始时间: " + current_time)
         now_time = time.strftime('%Y-%m-%d %H:%M:%S')
         log.info("结束时间: " + now_time)
@@ -33,4 +32,4 @@ class TestOperaInspect:
 
 
 if __name__ == '__main__':
-    pytest.main(['TestCase/test_opera_inspect.py'])
+    pytest.main(['TestCase/test_user_address.py'])

@@ -148,7 +148,7 @@ class JsbSellerGoodsAdd(WebPage):
             log.info('--------------------------------------------------------------------------')
             log.info('当前新增牌号为 : ' + str(goodsNumber))
             self.seller_add_goods_type(addGoods)
-            self.seller_goods_grade(goodsNumber,add_type,number)
+            self.seller_goods_grade(goodsNumber, add_type, number)
             self.input_clear_text(goods['原料库存'], stockNum)
             self.input_clear_text(goods['原料最低采购'], minPurchase)
             if goodsDeliver == 1:
@@ -234,3 +234,28 @@ class JsbSellerGoodsAdd(WebPage):
                 log.info('当前新增次数 : ' + str(addNum) + '  预计新增次数  : ' + str(limit))
             except AssertionError:
                 self.fial_info()
+
+    def ceseee(self, serve, seller_phone, limit):
+        log.info(212131313)
+        self.seller_phone_login(serve, seller_phone)
+        self.is_click(goods['产品管理'])
+        self.is_click(goods['产品列表'])
+        num = 0
+        num1 = 1
+        sleep(0.2)
+        while num < limit:
+            self.find_elements(goods['列表_上架按钮'])[num].click()
+            sleep(0.2)
+            self.find_elements(goods['列表_确定'])[2].click()
+            state = self.find_elements(goods['列表状态'])[0].text
+            flag = '审核中' in state
+            if flag:
+                log.info('上架审核成功')
+                sleep(0.5)
+            if num == 9:
+                self.find_elements(goods['卖家原料页码'])[num1].click()
+                num = 0
+                num1 += 1
+            else:
+                num += 1
+            log.info(num)

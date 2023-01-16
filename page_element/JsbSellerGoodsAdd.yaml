@@ -58,3 +58,5 @@ iframe框架: "tag_name==iframe"
 卖家验证码文本框: "xpath== // input[@id='verifyCode']"
 卖家登录按钮: "xpath== // button[@class='login-button ant-btn ant-btn-primary ant-btn-lg']"
 卖家登录信息: "xpath== // div[@class='user_name']"
+
+卖家原料页码: "xpath== // ul[@class='ant-pagination ant-table-pagination']/li"

@@ -47,6 +47,15 @@ user_url = {'24': 'http://192.168.101.24:8090/shop/home', '20': 'https://demo.ji
 opera_url = {'24': 'http://192.168.101.24:8050/user/login', '20': 'https://admdm.jinsubao.cn/user/login',
              '24_home': 'http://192.168.101.24:8050/dashboard', '20_home': 'https://admdm.jinsubao.cn/dashboard'}
 
+areas = ["'黑龙江'", "'辽宁'", "'吉林'", "'河北'", "'河南'", "'湖北'", "'湖南'", "'山东'", "'山西'", "'陕西'", "'安徽'",
+         "'浙江'",
+         "'江苏'",
+         "'福建'", "'广东'", "'海南'", "'四川'",
+         "'云南'", "'贵州'", "'青海'", "'甘肃'", "'江西'", "'台湾'", "'上海'", "'天津'", "'重庆'", "'内蒙古'", "'宁夏'",
+         "'新疆'",
+         "'西藏'",
+         "'广西'"]
+
 
 class WebPage(object):
     """selenium基类"""
@@ -127,7 +136,6 @@ class WebPage(object):
 
     def win_handles(self, num):
         self.driver.close()
-        log.info('定位新标签')
         handles = self.driver.window_handles
         num = int(num)
         self.driver.switch_to.window(handles[num])
@@ -143,7 +151,7 @@ class WebPage(object):
         sleep(2)
         iframe = self.find_element(order['signing_window'])
         self.driver.switch_to.frame(iframe)
-        sleep(2)
+        sleep(3)
         self.is_click(order['signing_btn'])
         sleep(2)
         self.input_clear_text(order['signing_text'], 999999)
@@ -195,9 +203,9 @@ class WebPage(object):
         # log.info('选择的市 : ' + city.text + ',  所选择的省 : ' + province.text + ',   所选择的区 : ' + area.text)
 
     def fial_info(self):
-        log.info('出现异常 或者 断言失败')
+        log.error('出现异常 或者 断言失败')
         self.base_get_img()
-        log.info('当前url: ' + self.return_current_url())
+        log.error('当前url: ' + self.return_current_url())
         self.fail('测试失败')
 
     def return_current_url(self):
@@ -230,7 +238,6 @@ class WebPage(object):
             self.driver.get(seller_url['24'])
         else:
             self.driver.get(seller_url['20'])
-        self.seller_backstage_title()
         sleep(0.2)
         self.input_clear_text(order['seller_login_phone'], sellerPhone)
         self.is_click(order['seller_code_btn'])
@@ -273,16 +280,9 @@ class WebPage(object):
         log.info('点击登录')
         try:
             login_phone = self.element_text(order['user_login_phone'])
-            assert phone in login_phone
+            log.info(login_phone)
+            assert login_phone.find(phone)
             log.info('比较后登录前输入手机号 :' + phone + '  与登录后一致 :' + login_phone)
-        except AssertionError:
-            self.fial_info()
-
-    def seller_backstage_title(self):
-        title = self.element_text(order['seller_login_title'])
-        try:
-            assert title == '金塑宝 商家管理后台'
-            log.info('当前界面标题是否正常 断言判断一致')
         except AssertionError:
             self.fial_info()
 

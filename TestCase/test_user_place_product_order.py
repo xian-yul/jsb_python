@@ -17,10 +17,10 @@ class TestUserPlaceProductOrder:
         log.info('当前执行   买家制成品下单    ')
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')
         user_phone = "13500135003"
-        product_name = "重申"
+        product_name = "QQQQQ" # 重申
         shop_num = 10
         cart_type = 0
-        limit = 1
+        limit = 5
         serve = '24'
         sign_type = 0
         seller_phone = "17346709428"

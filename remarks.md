@@ -8,4 +8,5 @@ TestCase ---- 测试用例执行
 utils ---- 工具类
 
 
-python + selenium + pytest
+python + selenium + pytest + po模式
+
