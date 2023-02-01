@@ -5,7 +5,6 @@ import time
 
 import pytest
 
-from page_object.JsbPackagingMethod import JsbPackagingMethod
 from page_object.JsbSellerGoodsAdd import JsbSellerGoodsAdd
 from utils.log import Log
 from utils.tool_util import time_lag
@@ -42,9 +41,10 @@ class TestSellerProduct:
         img_path = 'D:\\资料\\raw.png'
         video_path = 'D:\\资料\\video.mp4'
         limit = 1
-        seller.seller_product_add(serve, sellerPhone, addGoods, title, subtitle, keywords, code, producingArea, needSign,
-                           material, brand, address, img_path, video_path, sku_name, sku_price, sku_min_purchase,
-                           sku_stock, sku_weight, profiles, detail, limit)
+        seller.seller_product_add(serve, sellerPhone, addGoods, title, subtitle, keywords, code, producingArea,
+                                  needSign,
+                                  material, brand, address, img_path, video_path, sku_name, sku_price, sku_min_purchase,
+                                  sku_stock, sku_weight, profiles, detail, limit)
         log.info("开始时间: " + current_time)
         now_time = time.strftime('%Y-%m-%d %H:%M:%S')
         log.info("结束时间: " + now_time)

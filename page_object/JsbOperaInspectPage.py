@@ -28,6 +28,7 @@ class JsbOperaInspect(WebPage):
                     sleep(0.2)
                     self.find_elements(inspect['opera_list_inspect_btn'])[0].click()
                     sleep(0.2)
+                    log.info('当前审核原料名称为: ' + self.find_elements(inspect['opera_goods_title'])[0].text)
                     self.script('10000')
                     self.is_click(inspect['opera_goods_inspect_btn'])
                     log.info('当前审核次数 : ' + str(inspect_num) + '  预计审核次数  : ' + str(limit))
@@ -59,6 +60,7 @@ class JsbOperaInspect(WebPage):
                     self.find_elements(inspect['opera_demand_inspect_btn'])[1].click()
                     log.info('当前审核次数 : ' + str(inspect_num) + '  预计审核次数  : ' + str(limit))
                     inspect_num += 1
+                    log.info('-------------------------------------------------------------------')
             else:
                 log.info('暂无可审核供需')
             log.info('供需审核完毕')
