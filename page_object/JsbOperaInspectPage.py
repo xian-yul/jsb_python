@@ -33,6 +33,7 @@ class JsbOperaInspect(WebPage):
                     self.is_click(inspect['opera_goods_inspect_btn'])
                     log.info('当前审核次数 : ' + str(inspect_num) + '  预计审核次数  : ' + str(limit))
                     inspect_num += 1
+                    log.info('-------------------------------------------------------------------')
             else:
                 log.info('暂无可审核原料')
             log.info('商品审核完毕')

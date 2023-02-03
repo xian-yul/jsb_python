@@ -19,9 +19,9 @@ class TestSellerRaw:
         seller = JsbSellerGoodsAdd(drivers)
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')
         serve = '24'
-        sellerPhone = '18970712256'
+        sellerPhone = '18929867679'
         addGoods = '原料'
-        goodsNumber = 0
+        goodsNumber = 55
         stockNum = 1000
         minPurchase = 10
         deliveryPrice = 10000
@@ -31,7 +31,7 @@ class TestSellerRaw:
         included = 1
         selfMentionPrice = 20000
         add_type = 1
-        number = '【南通星辰】ER | 0164'
+        number = 'HDPE'
         img_path = 'D:\\资料\\raw.png'
         video_path = 'D:\\资料\\video.mp4'
         profiles = '我是原料商品内容概要'

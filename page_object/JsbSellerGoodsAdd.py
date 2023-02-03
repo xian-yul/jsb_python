@@ -40,7 +40,7 @@ class JsbSellerGoodsAdd(WebPage):
         try:
             sleep(0.5)
             gradeNum = 0
-            while gradeNum < 1:
+            while gradeNum < 5:  # < x 为循环次数 加载原料选择
                 grade = self.find_elements(goods['智能搜索_原料选择'])
                 sleep()
                 self.script_top(grade[-1])
