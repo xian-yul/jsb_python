@@ -107,35 +107,26 @@ class JsbSellerGoodsAdd(WebPage):
             sleep(0.2)
 
     def goods_deliver(self, included, deliveryPrice, deliveryDays):
-        if included == 1:
+        if included == 1:  # 价格含税判断
             self.find_elements(goods['原料_单选按钮'])[1].click()
         self.is_click(goods['配送范围'])
         sleep(0.2)
         self.is_click(goods['配送范围_全部'])
         sleep(0.1)
         self.is_click(goods['配送范围_确定'])
-        self.find_elements(goods['原料_复选框按钮'])[2].click()
-        self.find_elements(goods['原料_复选框按钮'])[3].click()
+        self.find_elements(goods['原料_复选框按钮'])[2].click()  # 配送定金
+        self.find_elements(goods['原料_复选框按钮'])[3].click()  # 配送款到
         self.input_clear_text(goods['配送价格'], deliveryPrice)
         self.input_clear_text(goods['发货时间'], deliveryDays)
 
-    def goods_mention(self, goodsDeliver, included, selfMentionPrice, selfMentionDays):
-        if goodsDeliver != 3:
-            self.find_elements(goods['原料_复选框按钮'])[0].click()
+    def goods_mention(self, included, selfMentionPrice, selfMentionDays):
         sleep(0.2)
         self.find_elements(goods['原料_复选框按钮'])[1].click()
-        a = self.find_elements(goods['原料_单选按钮'])
-        if goodsDeliver == 2:
-            self.find_elements(goods['原料_单选按钮'])[2].click()
-            self.find_elements(goods['原料_复选框按钮'])[4].click()
-            self.find_elements(goods['原料_复选框按钮'])[5].click()
-            if included == 1:
-                self.find_elements(goods['原料_单选按钮'])[1].click()
-        elif goodsDeliver == 3:
-            if included == 1:
-                self.find_elements(goods['原料_单选按钮'])[3].click()
-        self.find_elements(goods['原料_复选框按钮'])[4].click()
-        self.find_elements(goods['原料_复选框按钮'])[5].click()
+        self.find_elements(goods['原料_单选按钮'])[2].click()
+        if included == 1: # 价格含税判断
+            self.find_elements(goods['原料_单选按钮'])[3].click()
+        self.find_elements(goods['原料_复选框按钮'])[4].click()  # 自提款到
+        self.find_elements(goods['原料_复选框按钮'])[5].click()  # 自提定金
         self.input_clear_text(goods['自提价格'], selfMentionPrice)
         self.input_clear_text(goods['提货时间'], selfMentionDays)
 
@@ -154,14 +145,18 @@ class JsbSellerGoodsAdd(WebPage):
             self.seller_goods_grade(goodsNumber, add_type, number)
             self.input_clear_text(goods['原料库存'], stockNum)
             self.input_clear_text(goods['原料最低采购'], minPurchase)
-            if goodsDeliver == 1:
+            if goodsDeliver == 1:  # 单配送
                 self.goods_deliver(included, deliveryPrice, deliveryDays)
-            elif goodsDeliver == 2:
-                self.goods_mention(goodsDeliver, included, selfMentionPrice, selfMentionDays)
-            elif goodsDeliver == 3:
+                log.info('当前原料添加方式为 单配送')
+            elif goodsDeliver == 2:  # 单自提
+                self.goods_mention(included, selfMentionPrice, selfMentionDays)
+                log.info('当前原料添加方式为 单自提')
+            elif goodsDeliver == 3:  # 配送 + 自提
                 self.goods_deliver(included, deliveryPrice, deliveryDays)
-                self.goods_mention(goodsDeliver, included, selfMentionPrice, selfMentionDays)
+                self.goods_mention(included, selfMentionPrice, selfMentionDays)
+                log.info('当前原料添加方式为 配送 + 自提')
             self.goods_upload(img_path, video_path)
+            log.info('进行原料上传图片 / 视频')
             self.input_clear_text(goods['内容简要'], profiles)
             iframe = self.find_element(goods['iframe框架'])
             self.driver.switch_to.frame(iframe)

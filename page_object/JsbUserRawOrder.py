@@ -300,10 +300,13 @@ class JsbUserRawOrder(WebPage):
             log.info('进行自提信息填写')
             if multiple_type == 0:
                 log.info('进入一单多提')
-                self.user_more_mention(serve, multiple_order, hide_type)
+                self.user_more_mention(serve, multiple_order, hide_type, pickup_type)
             else:
                 log.info('进入一次性提货')
-                self.find_elements(user['user_order_list_btn'])[0].click()
+                if pickup_type == 1:
+                    self.find_elements(user['user_order_list_btn'])[0].click()
+                else:
+                    self.find_elements(user['user_order_list_btn'])[1].click()
                 sleep(0.5)
                 self.input_clear_text(user['self_lifting_driverName'], '司机名称123')
                 self.input_clear_text(user['self_lifting_driverIdNumber'], '220422199312260410')
@@ -424,7 +427,7 @@ class JsbUserRawOrder(WebPage):
                     "当前发货单数为:" + str(multiple_num) + "    当前发货数量为:" + str(num) + "  预计发货单数: " + str(
                         multiple_order))
                 multiple_num += 1
-        elif pickup_type == 1:
+        elif pickup_type == 1 or pickup_type == 4:
             while multiple_num <= multiple_order:
                 self.find_elements(user['seller_order_list_btn'])[0].click()
                 sleep(0.2)
@@ -437,7 +440,7 @@ class JsbUserRawOrder(WebPage):
                     break
             log.info('交货完毕  已交货单数:' + str(multiple_num))
 
-    def user_more_mention(self, serve, multiple_order, hide_type):
+    def user_more_mention(self, serve, multiple_order, hide_type, pickup_type):
         log.info('进入买家一单多提')
         more_num = 1
         hide_num = 0
@@ -447,7 +450,10 @@ class JsbUserRawOrder(WebPage):
         else:
             self.driver.get(user_url['20_order_url'])
         while more_num <= multiple_order:
-            self.find_elements(user['user_order_list_btn'])[0].click()
+            if pickup_type == 1:
+                self.find_elements(user['user_order_list_btn'])[0].click()
+            else:
+                self.find_elements(user['user_order_list_btn'])[1].click()
             if more_num == 1:
                 self.is_click(user['more_mention'])
                 pickup_num = self.find_elements(user['self_lifting_num'])[7].text
@@ -525,7 +531,7 @@ class JsbUserRawOrder(WebPage):
             else:
                 log.info('买家多发订单收货完毕  订单已完成')
             log.info('买家多发收货结束')
-        elif pickup_type == 1:
+        elif pickup_type == 1 or pickup_type == 4:
             while charge_num <= multiple_order:
                 if charge_num != 1:
                     self.find_elements(user['multiple_order_single'])[charge_num - 1].click()

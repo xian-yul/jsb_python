@@ -25,14 +25,14 @@ class TestUserPlaceRawOrder:
         address_name = ""
         sign_type = 2
         billing_type = 0
-        limit = 2
+        limit = 1
         serve = '24'
         seller_phone = "18929867679"
         # seller_phone = "18965691361"
         seller_address = '卖家详细地址'
         deposit = 5
-        multiple_type = 1  # 0 多发  1 一次性
-        multiple_order = 5
+        multiple_type = 0  # 0 多发  1 一次性
+        multiple_order = 3
         hide_type = 1
         user = JsbUserRawOrder(drivers)
         user.place_raw_order(serve, user_phone, org_name, pickup_type, shop_num, address_name,

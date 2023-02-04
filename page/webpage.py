@@ -163,7 +163,6 @@ class WebPage(object):
         self.is_click(order['over_signing'])
         log.info("退出签署中")
         sleep(1)
-        log.info('签署成功')
 
     def pickup_signing_contract(self):
         log.info('合同进入签署')
