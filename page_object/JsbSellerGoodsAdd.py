@@ -127,12 +127,15 @@ class JsbSellerGoodsAdd(WebPage):
         a = self.find_elements(goods['原料_单选按钮'])
         if goodsDeliver == 2:
             self.find_elements(goods['原料_单选按钮'])[2].click()
+            self.find_elements(goods['原料_复选框按钮'])[4].click()
+            self.find_elements(goods['原料_复选框按钮'])[5].click()
             if included == 1:
                 self.find_elements(goods['原料_单选按钮'])[1].click()
         elif goodsDeliver == 3:
             if included == 1:
                 self.find_elements(goods['原料_单选按钮'])[3].click()
-            self.find_elements(goods['原料_单选按钮'])[4].click()
+        self.find_elements(goods['原料_复选框按钮'])[4].click()
+        self.find_elements(goods['原料_复选框按钮'])[5].click()
         self.input_clear_text(goods['自提价格'], selfMentionPrice)
         self.input_clear_text(goods['提货时间'], selfMentionDays)
 

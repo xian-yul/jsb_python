@@ -1,0 +1,8 @@
+register_start: "link_text==免费注册"
+register_phone: "id==phone"
+register_code: "xpath== // span[@class='ant-input-group-addon']"
+register_code_text: "id==verifyCode"
+register_name: "id==nickname"
+register_agreement: "xpath== // input[@class='ant-checkbox-input']"
+register_btn: "xpath== // button[@class='ant-btn ant-btn-primary ant-btn-lg ant-btn-block']"
+register_over: "link_text==退出"

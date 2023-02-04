@@ -21,13 +21,13 @@ class TestSellerRaw:
         serve = '24'
         sellerPhone = '18929867679'
         addGoods = '原料'
-        goodsNumber = 55
+        goodsNumber = 100
         stockNum = 1000
         minPurchase = 10
         deliveryPrice = 10000
         deliveryDays = '我是配送时间'
         selfMentionDays = '我是提货时间'
-        goodsDeliver = 1
+        goodsDeliver = 3
         included = 1
         selfMentionPrice = 20000
         add_type = 1
@@ -36,7 +36,7 @@ class TestSellerRaw:
         video_path = 'D:\\资料\\video.mp4'
         profiles = '我是原料商品内容概要'
         detail = '我是原料商品详情'
-        limit = 100
+        limit = 1
         seller.seller_raw_add(serve, sellerPhone, addGoods, goodsDeliver, included, stockNum, minPurchase,
                               deliveryPrice,
                               deliveryDays

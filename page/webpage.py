@@ -206,7 +206,7 @@ class WebPage(object):
         log.error('出现异常 或者 断言失败')
         self.base_get_img()
         log.error('当前url: ' + self.return_current_url())
-        self.fail('测试失败')
+        self.driver.close()
 
     def return_current_url(self):
         return self.driver.current_url
