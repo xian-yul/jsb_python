@@ -20,7 +20,7 @@ class TestUserAddress:
         serve = '24'
         user_phone = '13500135001'
         address = JsbUserAddressPage(drivers)
-        limit = 100
+        limit = 1
         default_type = 1
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')
         address.user_address_add(serve, user_phone,default_type, limit)

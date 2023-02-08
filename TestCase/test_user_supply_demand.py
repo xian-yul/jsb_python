@@ -21,7 +21,7 @@ class TestUserSupplyDemand:
         demand = JsbDemand(drivers)
         serve = '24'
         user_phone = '13500135000'
-        limit = 5
+        limit = 1
         title = '测试买家供需资讯'
         seller_num = 1
         price = 5000

@@ -5,6 +5,7 @@ import time
 import pytest
 
 from page_object.JsbUserRegister import JsbUserRegister
+from utils import send_mail
 from utils.log import Log
 from utils.tool_util import time_lag
 
@@ -16,7 +17,7 @@ class TestUserRegister:
     def test_register(self, drivers):
         log.info('当前执行   买家注册账号    ')
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')
-        limit = 5
+        limit = 1
         serve = '24'
         register = JsbUserRegister(drivers)
         register.user_register(serve, limit)

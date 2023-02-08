@@ -20,7 +20,7 @@ class TestSellerSupplyDemand:
         serve = '24'
         seller_phone = '18929867679'
         release_type = 2  # 1市场信息  0采购需求
-        limit = 10
+        limit = 1
         num = 5
         seller_num = 3
         price = 5033

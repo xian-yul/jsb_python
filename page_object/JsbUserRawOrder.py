@@ -360,8 +360,8 @@ class JsbUserRawOrder(WebPage):
                     log.info('下单完毕')
                     self.buyers_and_sellers_sign(serve, seller_phone, place_order_num, seller_address, pickup_type,
                                                  multiple_type, deposit, multiple_order, hide_type)
-                    place_order_num += 1
                     log.info('当前下单次数 : ' + str(place_order_num) + '  预计下单次数: ' + str(limit))
+                    place_order_num += 1
                     log.info('------------------------------------------------')
                     self.refresh()
                 else:

@@ -228,8 +228,8 @@ class JsbSellerGoodsAdd(WebPage):
                 log.info('制成品新增成功')
                 sleep()
                 self.goods_put_on_shelves()
-                addNum += 1
                 log.info('当前新增次数 : ' + str(addNum) + '  预计新增次数  : ' + str(limit))
+                addNum += 1
             except AssertionError:
                 self.fial_info()
 

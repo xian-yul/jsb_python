@@ -19,7 +19,7 @@ class TestOperaInspect:
         serve = '24'
         opera_phone = '13600136001'
         opera = JsbOperaInspect(drivers)
-        limit = 100
+        limit = 1
         code = 0
         inspect_type = 1  # 1原料 2制成品 3船货
         choice_type = 1  # 123456

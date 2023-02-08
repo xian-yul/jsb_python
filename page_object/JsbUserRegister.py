@@ -46,12 +46,13 @@ class JsbUserRegister(WebPage):
                 sleep(0.2)
                 self.win_handles('-1')
                 self.refresh()
-                Log.info('提示领取新人券弹窗 刷新跳过')
+                log.info('提示领取新人券弹窗 刷新跳过')
+                sleep(0.1)
                 self.is_click(register['register_over'])
                 log.info('退出登录')
-                log.info('当前注册次数 : ' + str(register_num) + "目标注册 :" + str(limit))
+                log.info('当前注册次数 : ' + str(register_num) + "  目标注册 :" + str(limit))
                 register_num += 1
             except AssertionError:
                 log.error('断言判断错误')
                 self.fial_info()
-        log.info('注册完成 已注册次数 :' + str(register_num))
+        log.info('注册完成')

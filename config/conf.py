@@ -32,7 +32,7 @@ class ConfigManager(object):
     EMAIL_INFO = {
         'username': '',  # 切换成你自己的地址
         'password': '',
-        'smtp_host': '',
+        'smtp_host': '测试',
         'smtp_port': 465
     }
 
