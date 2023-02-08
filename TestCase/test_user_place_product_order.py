@@ -20,7 +20,7 @@ class TestUserPlaceProductOrder:
         product_name = "QQQQQ" # 重申
         shop_num = 10
         cart_type = 0
-        limit = 5
+        limit = 1
         serve = '24'
         sign_type = 0
         seller_phone = "17346709428"

@@ -29,6 +29,7 @@ class JsbUserAddressPage(WebPage):
                 self.is_click(address['address_default'])
                 log.info('当前地址设置为默认地址')
             self.is_click(address['address_submit'])
-            address_num += 1
             log.info('当前新增地址次数:' + str(address_num) + ' 预计新增次数: ' + str(limit))
+            address_num += 1
         log.info('-----------------------------------------------------')
+

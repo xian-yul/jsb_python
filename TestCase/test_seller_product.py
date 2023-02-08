@@ -33,7 +33,7 @@ class TestSellerProduct:
         address = '制成品详细地址'
         sku_name = '规格1'
         sku_price = 30
-        sku_min_purchase = 1
+        sku_min_purchase = 10
         sku_stock = 500
         sku_weight = 20
         profiles = '制成品内容概要'

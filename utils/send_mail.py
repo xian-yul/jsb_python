@@ -7,11 +7,11 @@ from config.conf import cm
 
 def send_report():
     """发送报告"""
-    with open(cm.REPORT_FILE, encoding='utf-8') as f:
+    with open(cm.REPORT_FILE, encoding='gbk') as f:
         content_html = f.read()
     try:
         mail = {
-            'from': '2222224647@qq.com',
+            'from': '',
             'subject': '最新的测试报告邮件',
             'content_html': content_html,
             'attachments': [cm.REPORT_FILE, ]

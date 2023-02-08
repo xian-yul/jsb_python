@@ -48,7 +48,7 @@ def pytest_runtest_makereport(item):
 
 def pytest_html_results_table_header(cells):
     cells.insert(1, html.th('用例名称'))
-    cells.insert(2, html.th('Test_nodeid'))
+    cells.insert(2, html.th('Test_node'))
     cells.pop(2)
 
 

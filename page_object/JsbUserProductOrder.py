@@ -93,8 +93,8 @@ class JsbUserProductOrder(WebPage):
                             self.product_order_receipt(serve)
                 except:
                     self.fial_info()
-            place_order_num += 1
             log.info('当前下单次数 : ' + str(place_order_num) + '  预计下单次数  : ' + str(limit))
+            place_order_num += 1
 
     def product_order_pay(self, serve, signature):
         if not signature:
