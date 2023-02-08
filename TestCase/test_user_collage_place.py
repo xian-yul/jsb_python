@@ -10,10 +10,10 @@ from utils.tool_util import time_lag
 log = Log()
 
 
-class TestSellerCollageRelease:
+class TestUserCollagePlace:
 
-    def test_seller_collage_release(self, drivers):
-        log.info('当前执行   卖家发布集采信息    ')
+    def test_user_collage_place(self, drivers):
+        log.info('当前执行   买家购买集采    ')
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')
         log.info("开始时间: " + current_time)
         now_time = time.strftime('%Y-%m-%d %H:%M:%S')
@@ -23,4 +23,4 @@ class TestSellerCollageRelease:
 
 
 if __name__ == '__main__':
-    pytest.main(['TestCase/test_seller_collage_release.py'])
+    pytest.main(['TestCase/test_user_collage_place.py'])
