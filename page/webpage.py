@@ -264,15 +264,15 @@ class WebPage(object):
 
         return element_existance
 
-    def click_user_login(self, serve, phone):
+    def click_user_login(self, serve, user_phone):
         if serve == '24':
             self.driver.get(user_url['24'])
         else:
             self.driver.get(user_url['20'])
         self.is_click(order['user_login'])
         log.info('在买家首页点击登录按钮')
-        self.input_text(order['login_phone'], phone)
-        log.info('输入登录手机号: ' + phone)
+        self.input_text(order['login_phone'], user_phone)
+        log.info('输入登录手机号: ' + user_phone)
         self.is_click(order['code_btn'])
         log.info('点击验证码按钮')
         self.is_click(order['login_btn'])
@@ -280,8 +280,8 @@ class WebPage(object):
         try:
             login_phone = self.element_text(order['user_login_phone'])
             log.info(login_phone)
-            assert login_phone.find(phone)
-            log.info('比较后登录前输入手机号 :' + phone + '  与登录后一致 :' + login_phone)
+            assert login_phone.find(user_phone)
+            log.info('比较后登录前输入手机号 :' + user_phone + '  与登录后一致 :' + login_phone)
         except AssertionError:
             self.fial_info()
 
