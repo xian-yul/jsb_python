@@ -29,29 +29,7 @@ seller_url = {'24': 'http://192.168.101.24:8070/user/login', '20': 'https://slrd
 
 class JsbSellerGoodsAdd(WebPage):
 
-    def seller_goods_grade(self, grade_number, add_type, number):
-        sleep(0.5)
-        self.is_click(goods['智能搜索'])
-        if add_type == 1:
-            self.find_elements(goods['智能搜索_输入框'])[-1].send_keys(number)
-            sleep(0.1)
-            self.is_click(goods['智能搜索_搜索'])
 
-        try:
-            sleep(0.5)
-            gradeNum = 0
-            while gradeNum < 5:  # < x 为循环次数 加载原料选择
-                grade = self.find_elements(goods['智能搜索_原料选择'])
-                sleep()
-                self.script_top(grade[-1])
-                sleep(2)
-                gradeNum += 1
-            sleep(2)
-            log.info('当前获取的牌号数量: ' + str(len(grade)))
-            log.info('选择的牌号为 : ' + grade[grade_number].text)
-            grade[grade_number].click()
-        except:
-            self.fial_info()
 
     def seller_add_goods_type(self, addGoods):
         sleep(0.5)
@@ -82,7 +60,7 @@ class JsbSellerGoodsAdd(WebPage):
         sleep(0.5)
         self.find_elements(goods['上传'])[0].send_keys(video_path)
 
-    def goods_add_submit(self, serve, goodsNumber, img_path, video_path, type, number):
+    def goods_add_submit(self, serve, goodsNumber, img_path, video_path, type, number,circulation):
         sleep(0.5)
         self.find_elements(goods['提交按钮'])[0].click()
         sleep(0.5)
@@ -99,11 +77,11 @@ class JsbSellerGoodsAdd(WebPage):
             log.info('原料添加出错__牌号' + str(goodsNumber) + ' 重复__下次添加牌号为 :  ' + str(goodsNumber + 1))
             goodsNumber += 1
             sleep(0.5)
-            self.seller_goods_grade(goodsNumber, type, number)
+            self.goods_grade(goodsNumber, type, number,circulation)
             sleep(0.2)
             self.goods_upload(img_path, video_path)
             sleep(0.2)
-            self.goods_add_submit(serve, goodsNumber, img_path, video_path, type, number)
+            self.goods_add_submit(serve, goodsNumber, img_path, video_path, type, number,circulation)
             sleep(0.2)
 
     def goods_deliver(self, included, deliveryPrice, deliveryDays):
@@ -133,7 +111,7 @@ class JsbSellerGoodsAdd(WebPage):
     def seller_raw_add(self, serve, sellerPhone, addGoods, goodsDeliver, included, stockNum, minPurchase, deliveryPrice,
                        deliveryDays
                        , selfMentionPrice, selfMentionDays, profiles, detail, goodsNumber, video_path, img_path, limit,
-                       add_type, number):
+                       add_type, number,circulation):
         addNum = 1
         self.seller_phone_login(serve, sellerPhone)
         self.is_click(goods['产品管理'])
@@ -142,7 +120,7 @@ class JsbSellerGoodsAdd(WebPage):
             log.info('--------------------------------------------------------------------------')
             log.info('当前新增牌号为 : ' + str(goodsNumber))
             self.seller_add_goods_type(addGoods)
-            self.seller_goods_grade(goodsNumber, add_type, number)
+            self.goods_grade(goodsNumber, add_type, number,circulation)
             self.input_clear_text(goods['原料库存'], stockNum)
             self.input_clear_text(goods['原料最低采购'], minPurchase)
             if goodsDeliver == 1:  # 单配送
@@ -163,7 +141,7 @@ class JsbSellerGoodsAdd(WebPage):
             sleep(0.5)
             self.input_text(goods['商品详情'], detail)
             self.driver.switch_to.default_content()
-            self.goods_add_submit(serve, goodsNumber, img_path, video_path, add_type, number)
+            self.goods_add_submit(serve, goodsNumber, img_path, video_path, add_type, number,circulation)
             goodsNumber += 1
             log.info('当前新增次数 : ' + str(addNum) + '  预计新增次数  : ' + str(limit))
             addNum += 1

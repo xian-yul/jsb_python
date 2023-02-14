@@ -24,15 +24,16 @@ class JsbUserRegister(WebPage):
         while register_num <= limit:
             try:
                 phone = '135' + random_number(8)
-                name = '测试___' + random_number(4)
+                name = '集采账号56_' + random_number(4)
                 self.is_click(register['register_start'])
-                sleep(0.2)
                 log.info('点击免费注册按钮')
+                sleep(0.3)
                 self.win_handles('-1')
-                sleep(0.2)
+                sleep(0.1)
                 if serve == '24':
                     assert self.return_current_url() == user_register['24_register']
                 else:
+                    sleep(0.2)
                     assert self.return_current_url() == user_register['20_register']
                 log.info('注册断言判断成功,进行注册操作')
                 self.input_clear_text(register['register_phone'], phone)
@@ -43,10 +44,11 @@ class JsbUserRegister(WebPage):
                 self.is_click(register['register_agreement'])
                 self.is_click(register['register_btn'])
                 log.info('提交注册')
-                sleep(0.2)
+                sleep(0.1)
                 self.win_handles('-1')
-                self.refresh()
+                sleep(0.3)
                 log.info('提示领取新人券弹窗 刷新跳过')
+                self.refresh()
                 sleep(0.1)
                 self.is_click(register['register_over'])
                 log.info('退出登录')

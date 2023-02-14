@@ -304,3 +304,27 @@ class WebPage(object):
             log.info('运营端登录成功')
         except:
             self.fial_info()
+
+    def goods_grade(self, grade_number, add_type, number,circulation):
+        sleep(0.5)
+        self.is_click(goods['智能搜索'])
+        if add_type == 1:
+            self.find_elements(goods['智能搜索_输入框'])[-1].send_keys(number)
+            sleep(0.1)
+            self.is_click(goods['智能搜索_搜索'])
+
+        try:
+            sleep(0.5)
+            gradeNum = 0
+            while gradeNum < circulation:  # < x 为循环次数 加载原料选择
+                grade = self.find_elements(goods['智能搜索_原料选择'])
+                sleep()
+                self.script_top(grade[-1])
+                sleep(2)
+                gradeNum += 1
+            sleep(2)
+            log.info('当前获取的牌号数量: ' + str(len(grade)))
+            log.info('选择的牌号为 : ' + grade[grade_number].text)
+            grade[grade_number].click()
+        except:
+            self.fial_info()
