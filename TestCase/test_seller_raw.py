@@ -37,11 +37,12 @@ class TestSellerRaw:
         profiles = '我是原料商品内容概要'
         detail = '我是原料商品详情'
         limit = 1
+        circulation = 3
         seller.seller_raw_add(serve, sellerPhone, addGoods, goodsDeliver, included, stockNum, minPurchase,
                               deliveryPrice,
                               deliveryDays
                               , selfMentionPrice, selfMentionDays, profiles, detail, goodsNumber, video_path, img_path,
-                              limit, add_type, number)
+                              limit, add_type, number,circulation)
         # seller.ceseee(serve,'17767882634',limit)
         log.info("开始时间: " + current_time)
         now_time = time.strftime('%Y-%m-%d %H:%M:%S')

@@ -20,18 +20,23 @@ class TestUserSupplyDemand:
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')
         demand = JsbDemand(drivers)
         serve = '24'
+        # user_phone = '18912340003'
         user_phone = '13500135000'
-        limit = 1
-        title = '测试买家供需资讯'
+        limit = 2
+        title = '出售原料 原厂原包'
         seller_num = 1
-        price = 5000
+        price = 7800
         num = 10
         release_type = 1    # 2市场信息  1采购需求
         video_path = 'D:\\资料\\video.mp4'
-        content = '测试测试测试测试测试测试测试测试'
+        content = '出售原厂原包原料'
         img_path = 'D:\\资料\\raw.png'
+        grade_number = 0
+        add_type = 1
+        number = 'pp'
+        circulation = 1
         demand.user_demand(serve, user_phone, release_type, title, content, img_path, video_path, seller_num, price,
-                           num, limit)
+                           num, limit,grade_number,add_type,number,circulation)
         log.info("开始时间: " + current_time)
         now_time = time.strftime('%Y-%m-%d %H:%M:%S')
         log.info("结束时间: " + now_time)
