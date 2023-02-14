@@ -3,6 +3,7 @@
 
 import time
 
+import allure
 import pytest
 
 from page_object.JsbOperaInspectPage import JsbOperaInspect
@@ -15,7 +16,8 @@ log = Log()
 
 class TestUserAddress:
 
-    def test_addresss_add(self, drivers):
+    @allure.feature('买家添加收货地址')
+    def test_address_add(self, drivers):
         log.info('当前执行   买家地址添加   ')
         serve = '24'
         user_phone = '13500135001'
@@ -23,7 +25,7 @@ class TestUserAddress:
         limit = 1
         default_type = 1
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')
-        address.user_address_add(serve, user_phone,default_type, limit)
+        address.user_address_add(serve, user_phone, default_type, limit)
         log.info("开始时间: " + current_time)
         now_time = time.strftime('%Y-%m-%d %H:%M:%S')
         log.info("结束时间: " + now_time)

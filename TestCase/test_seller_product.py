@@ -3,6 +3,7 @@
 
 import time
 
+import allure
 import pytest
 
 from page_object.JsbSellerGoodsAdd import JsbSellerGoodsAdd
@@ -14,7 +15,7 @@ seller_url = {'24': 'http://192.168.101.24:8070/user/login', '20': 'https://slrd
 
 
 class TestSellerProduct:
-
+    @allure.feature('卖家添加制成品')
     def test_seller_add_product(self, drivers):
         log.info('当前执行   卖家端添加制成品    ')
         seller = JsbSellerGoodsAdd(drivers)

@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 import time
 
+import allure
 import pytest
 
 from page_object.JsbDemandPage import JsbDemand
@@ -13,6 +14,7 @@ log = Log()
 
 class TestSellerSupplyDemand:
 
+    @allure.feature('卖家发布供需资讯')
     def test_seller_supply(self, drivers):
         log.info('当前执行   卖家端发布供需    ')
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')

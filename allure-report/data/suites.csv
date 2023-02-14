@@ -1,4 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"broken","Wed Feb 08 13:46:40 CST 2023","Wed Feb 08 13:47:27 CST 2023","46926","TestCase","test_seller_product","TestSellerProduct","","","test_seller_add_product",""
-"passed","Wed Feb 08 13:48:14 CST 2023","Wed Feb 08 13:48:32 CST 2023","18170","TestCase","test_user_register","TestUserRegister","","","test_register",""
-"broken","Wed Feb 08 13:47:27 CST 2023","Wed Feb 08 13:47:30 CST 2023","3572","TestCase","test_seller_raw","TestSellerRaw","","","test_seller_add_raw",""

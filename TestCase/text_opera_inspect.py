@@ -3,6 +3,7 @@
 
 import time
 
+import allure
 import pytest
 
 from page_object.JsbOperaInspectPage import JsbOperaInspect
@@ -14,6 +15,7 @@ log = Log()
 
 class TestOperaInspect:
 
+    @allure.feature('运营进行审核')
     def test_opera_examine(self, drivers):
         log.info('当前执行   运营审核    ')
         serve = '24'

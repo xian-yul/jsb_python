@@ -3,6 +3,7 @@
 
 import time
 
+import allure
 import pytest
 
 from page_object.JsbSellerGoodsAdd import JsbSellerGoodsAdd
@@ -14,6 +15,7 @@ log = Log()
 
 class TestSellerRaw:
 
+    @allure.feature('卖家添加原料')
     def test_seller_add_raw(self, drivers):
         log.info('当前执行   卖家端添加原料    ')
         seller = JsbSellerGoodsAdd(drivers)

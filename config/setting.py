@@ -11,7 +11,7 @@ CONFIG_DIR = os.path.join(BASE_DIR, "database", "user.ini")
 # 测试用例目录
 TEST_DIR = os.path.join(BASE_DIR, "testcase")
 # 测试报告目录
-TEST_REPORT = os.path.join(BASE_DIR, "report")
+TEST_REPORT = os.path.join(BASE_DIR, "reports")
 # 日志目录
 LOG_DIR = os.path.join(BASE_DIR, "logs")
 # 测试数据文件

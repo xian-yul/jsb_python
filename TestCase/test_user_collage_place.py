@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 import time
 
+import allure
 import pytest
 
 from utils.log import Log
@@ -12,6 +13,7 @@ log = Log()
 
 class TestUserCollagePlace:
 
+    @allure.feature('买家集采下单')
     def test_user_collage_place(self, drivers):
         log.info('当前执行   买家购买集采    ')
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')
