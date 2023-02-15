@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 import time
 
+import allure
 import pytest
 
 from page_object.JsbUserProductOrder import JsbUserProductOrder
@@ -11,8 +12,10 @@ from utils.tool_util import time_lag
 log = Log()
 
 
+@allure.feature('执行买家制成品下单')
 class TestUserPlaceProductOrder:
 
+    @allure.title('买家制成品下单流程')
     def test_place_product_order(self, drivers):
         log.info('当前执行   买家制成品下单    ')
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')

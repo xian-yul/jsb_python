@@ -6,6 +6,7 @@ selenium基类
 """
 import time
 
+import allure
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver import ActionChains
@@ -131,9 +132,11 @@ class WebPage(object):
         self.driver.refresh()
         self.driver.implicitly_wait(30)
 
+    @allure.step('截图')
     def base_get_img(self):
         self.driver.get_screenshot_as_file("./{}.png".format(time.strftime("%Y_%m_%d_%H_%M_%S")))
 
+    @allure.step('切换标签页')
     def win_handles(self, num):
         self.driver.close()
         handles = self.driver.window_handles
@@ -141,11 +144,13 @@ class WebPage(object):
         self.driver.switch_to.window(handles[num])
         sleep(0.2)
 
+    @allure.step('界面滚动条下拉')
     def script(self, js_size):
         # js脚本 滚动条下拉
         js = "var q=document.documentElement.scrollTop=" + js_size
         self.driver.execute_script(js)
 
+    @allure.step('合同签署')
     def signing_contract(self):
         log.info('进入合同签署')
         sleep(2)
@@ -164,6 +169,7 @@ class WebPage(object):
         log.info("退出签署中")
         sleep(1)
 
+    @allure.step('合同签署')
     def pickup_signing_contract(self):
         log.info('合同进入签署')
         sleep(2)
@@ -192,6 +198,7 @@ class WebPage(object):
         # 释放
         ActionChains(self.driver).release(ele).perform()
 
+    @allure.step('地区点击选择')
     def click_area(self):
         self.is_click(seller['点击市'])
         sleep(0.1)
@@ -207,9 +214,11 @@ class WebPage(object):
         log.error('当前url: ' + self.return_current_url())
         self.driver.close()
 
+    @allure.step('返回当前url')
     def return_current_url(self):
         return self.driver.current_url
 
+    @allure.step('单元素文本框输入')
     def input_clear_text(self, loc, text):
         loc_object = self.find_element(loc)
         loc_object.clear()
@@ -218,6 +227,7 @@ class WebPage(object):
             loc_object.send_keys(keys.Keys.BACKSPACE)
         loc_object.send_keys(text)
 
+    @allure.step('多元素文本框输入')
     def inputs_clear_text(self, loc, index, text):
         loc_object = self.find_elements(loc)[index]
         loc_object.clear()
@@ -232,6 +242,7 @@ class WebPage(object):
     def implicitly_wait(self, time):
         self.driver.implicitly_wait(time)
 
+    @allure.step('卖家进行登录')
     def seller_phone_login(self, serve, sellerPhone):
         if serve == '24':
             self.driver.get(seller_url['24'])
@@ -264,6 +275,7 @@ class WebPage(object):
 
         return element_existance
 
+    @allure.step('用户进行登录')
     def click_user_login(self, serve, user_phone):
         if serve == '24':
             self.driver.get(user_url['24'])
@@ -285,6 +297,7 @@ class WebPage(object):
         except AssertionError:
             self.fial_info()
 
+    @allure.step('运营进行登录')
     def opera_login(self, serve, opera_phone):
         if serve == '24':
             self.driver.get(opera_url['24'])
@@ -305,6 +318,7 @@ class WebPage(object):
         except:
             self.fial_info()
 
+    @allure.step('牌号智能搜索功能')
     def goods_grade(self, grade_number, add_type, number,circulation):
         sleep(0.5)
         self.is_click(goods['智能搜索'])

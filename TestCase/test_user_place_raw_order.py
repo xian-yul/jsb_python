@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 import time
 
+import allure
 import pytest
 
 from page_object.JsbUserRawOrder import JsbUserRawOrder
@@ -11,8 +12,10 @@ from utils.tool_util import time_lag
 log = Log()
 
 
+@allure.feature('执行买家原料下单')
 class TestUserPlaceRawOrder:
 
+    @allure.title('买家原料下单流程')
     def test_place_raw_order(self, drivers):
         log.info('当前执行   买家原料下单    ')
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')

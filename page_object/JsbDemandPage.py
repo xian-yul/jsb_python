@@ -1,3 +1,5 @@
+import allure
+
 from common.readelement import Element
 from page.webpage import WebPage
 from utils.log import Log
@@ -66,7 +68,6 @@ class JsbDemand(WebPage):
                     log.info('买家供需资讯______采购需求发布成功')
                 log.info('当前新增次数 : ' + str(demand_num) + '  预计新增次数  : ' + str(limit))
                 demand_num += 1
-                log.info(str(grade_number))
                 grade_number += 1
                 log.info(
                     "----------------------------------------------------------------------------------------------")
