@@ -12,13 +12,14 @@ from utils.tool_util import time_lag
 log = Log()
 
 
+@allure.feature('执行买家注册账号')
 class TestUserRegister:
 
-    @allure.feature('买家注册账号')
+    @allure.title('买家注册账号流程')
     def test_register(self, drivers):
         log.info('当前执行   买家注册账号    ')
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')
-        limit = 5
+        limit = 1
         serve = '24'
         register = JsbUserRegister(drivers)
         register.user_register(serve, limit)

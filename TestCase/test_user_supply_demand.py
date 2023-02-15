@@ -15,7 +15,7 @@ user_url = {'24': 'http://192.168.101.24:8090/shop/home', '20': 'https://demo.ji
 seller_url = {'24': 'http://192.168.101.24:8070/user/login', '20': 'https://slrdm.jinsubao.cn/'}
 
 
-@allure.feature('买家发布供需资讯')
+@allure.feature('执行买家发布供需资讯')
 class TestUserSupplyDemand:
 
     @allure.title('买家发布供需资讯流程')
@@ -51,6 +51,7 @@ class TestUserSupplyDemand:
 
 
 if __name__ == '__main__':
-    pytest.main(["./test_user_supply_demand.py",
-                 "-sv", "--alluredir", "./reports/temp_user_demand"])
-    os.system("allure generate ./report/temp_user_demand -o ./reports/html --clean")
+    pytest.main(['TestCase/test_user_supply_demand.py'])
+    # pytest.main(["D:/资料/text_demo/python_pytest_allure/TestCase/test_user_supply_demand.py",
+    #              "-sv", "--alluredir", "./reports/temp_user_demand"])
+    # os.system("allure generate ./report/temp_user_demand -o ./reports/html --clean")

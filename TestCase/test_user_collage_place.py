@@ -11,9 +11,10 @@ from utils.tool_util import time_lag
 log = Log()
 
 
+@allure.feature('执行买家集采下单')
 class TestUserCollagePlace:
 
-    @allure.feature('买家集采下单')
+    @allure.title('买家集采下单流程')
     def test_user_collage_place(self, drivers):
         log.info('当前执行   买家购买集采    ')
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')

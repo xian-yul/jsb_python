@@ -13,9 +13,10 @@ from utils.tool_util import time_lag
 log = Log()
 
 
+@allure.feature('执行卖家添加原料')
 class TestSellerRaw:
 
-    @allure.feature('卖家添加原料')
+    @allure.title('卖家添加原料流程')
     def test_seller_add_raw(self, drivers):
         log.info('当前执行   卖家端添加原料    ')
         seller = JsbSellerGoodsAdd(drivers)

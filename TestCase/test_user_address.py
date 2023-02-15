@@ -14,9 +14,10 @@ from utils.tool_util import time_lag
 log = Log()
 
 
+@allure.feature('执行买家添加收货地址')
 class TestUserAddress:
 
-    @allure.feature('买家添加收货地址')
+    @allure.title('买家添加收货地址流程')
     def test_address_add(self, drivers):
         log.info('当前执行   买家地址添加   ')
         serve = '24'

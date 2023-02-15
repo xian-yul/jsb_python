@@ -136,6 +136,7 @@ class WebPage(object):
     def base_get_img(self):
         self.driver.get_screenshot_as_file("./{}.png".format(time.strftime("%Y_%m_%d_%H_%M_%S")))
 
+    @allure.step('切换标签页')
     def win_handles(self, num):
         self.driver.close()
         handles = self.driver.window_handles
@@ -143,6 +144,7 @@ class WebPage(object):
         self.driver.switch_to.window(handles[num])
         sleep(0.2)
 
+    @allure.step('界面滚动条下拉')
     def script(self, js_size):
         # js脚本 滚动条下拉
         js = "var q=document.documentElement.scrollTop=" + js_size

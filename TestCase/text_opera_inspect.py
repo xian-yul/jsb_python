@@ -13,9 +13,10 @@ from utils.tool_util import time_lag
 log = Log()
 
 
+@allure.feature('执行运营审核')
 class TestOperaInspect:
 
-    @allure.feature('运营进行审核')
+    @allure.title('运营审核流程')
     def test_opera_examine(self, drivers):
         log.info('当前执行   运营审核    ')
         serve = '24'
