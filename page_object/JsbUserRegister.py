@@ -14,7 +14,7 @@ user_register = {'24_home': 'http://192.168.101.24:8090/shop/home', '20_home': '
 
 class JsbUserRegister(WebPage):
 
-    def user_register(self, serve, limit):
+    def user_register(self, serve, limit,phone,name):
         register_num = 1
         if serve == '24':
             self.driver.get(user_register['24_home'])
@@ -23,8 +23,8 @@ class JsbUserRegister(WebPage):
         sleep(0.2)
         while register_num <= limit:
             try:
-                phone = '135' + random_number(8)
-                name = '集采账号56_' + random_number(4)
+                # phone = '135' + random_number(8)
+                # name = '集采账号56_' + random_number(4)
                 self.is_click(register['register_start'])
                 log.info('点击免费注册按钮')
                 sleep(0.3)

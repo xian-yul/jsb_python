@@ -20,7 +20,7 @@ class TestUserPlaceProductOrder:
         log.info('当前执行   买家制成品下单    ')
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')
         user_phone = "13500135003"
-        product_name = "QQQQQ" # 重申
+        product_name = "QQQQQ"  # 重申
         shop_num = 10
         cart_type = 0
         limit = 1
@@ -36,6 +36,7 @@ class TestUserPlaceProductOrder:
         log.info("结束时间: " + now_time)
         lead_time = time_lag(now_time, current_time)
         log.info("共计使用时间: " + str(lead_time))
+
 
 
 if __name__ == '__main__':

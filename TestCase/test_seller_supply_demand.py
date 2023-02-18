@@ -44,5 +44,6 @@ class TestSellerSupplyDemand:
         log.info("共计使用时间: " + str(lead_time))
 
 
+
 if __name__ == '__main__':
     pytest.main(['TestCase/test_seller_supply_demand.py'])
