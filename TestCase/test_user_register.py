@@ -14,15 +14,30 @@ log = Log()
 
 @allure.feature('执行买家注册账号')
 class TestUserRegister:
+    test_data = [
+        {
+            'phone': '18930403564',
+            'name': '测试122223456'
+        },
+        {
+            'phone': '18944234206',
+            'name': '测试_123456789'
+        },
+    ]
 
+    @pytest.mark.parametrize('param', test_data)
     @allure.title('买家注册账号流程')
-    def test_register(self, drivers):
+    def test_register(self, drivers, param):
         log.info('当前执行   买家注册账号    ')
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')
         limit = 1
         serve = '24'
         register = JsbUserRegister(drivers)
-        register.user_register(serve, limit)
+        phone = param['phone']
+        name = param['name']
+        log.info(phone)
+        log.info(name)
+        register.user_register(serve, limit, phone, name)
         now_time = time.strftime('%Y-%m-%d %H:%M:%S')
         log.info("开始时间: " + current_time)
         log.info("结束时间: " + now_time)

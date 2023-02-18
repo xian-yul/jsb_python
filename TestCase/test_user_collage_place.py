@@ -25,5 +25,6 @@ class TestUserCollagePlace:
         log.info("共计使用时间: " + str(lead_time))
 
 
+
 if __name__ == '__main__':
     pytest.main(['TestCase/test_user_collage_place.py'])

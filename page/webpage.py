@@ -239,8 +239,8 @@ class WebPage(object):
     def script_top(self, element):
         self.driver.execute_script("arguments[0].scrollIntoView();", element)  # 拖动到可见的元素去
 
-    def implicitly_wait(self, time):
-        self.driver.implicitly_wait(time)
+    def implicitly_wait(self, wait_time):
+        self.driver.implicitly_wait(wait_time)
 
     @allure.step('卖家进行登录')
     def seller_phone_login(self, serve, sellerPhone):
@@ -249,20 +249,23 @@ class WebPage(object):
         else:
             self.driver.get(seller_url['20'])
         sleep(0.2)
-        self.input_clear_text(order['seller_login_phone'], sellerPhone)
-        self.is_click(order['seller_code_btn'])
-        self.input_clear_text(order['seller_code_text'], 666666)
-        self.is_click(order['seller_login_btn'])
-        sleep()
-        try:
-            if serve == '24':
-                assert self.return_current_url() == seller_url['24_登录后']
-            else:
-                assert self.return_current_url() == seller_url['20_登录后']
-            log.info("卖家登录信息:   _____" + self.element_text(order['seller_login_info']))
-            sleep(0.5)
-        except AssertionError:
-            self.fial_info()
+        if self.return_current_url == seller_url['24_登录后'] or self.return_current_url == seller_url['20_登录后']:
+            log.info('当前卖家已进行登录直接跳过输入账号密码过程')
+        else:
+            self.input_clear_text(order['seller_login_phone'], sellerPhone)
+            self.is_click(order['seller_code_btn'])
+            self.input_clear_text(order['seller_code_text'], 666666)
+            self.is_click(order['seller_login_btn'])
+            sleep()
+            try:
+                if serve == '24':
+                    assert self.return_current_url() == seller_url['24_登录后']
+                else:
+                    assert self.return_current_url() == seller_url['20_登录后']
+                log.info("卖家登录信息:   _____" + self.element_text(order['seller_login_info']))
+                sleep(0.5)
+            except AssertionError:
+                self.fial_info()
 
     def getElementExistance(self, element_xpath):
         """通过元素xpath判断是否存在该元素,存在返回true，不存在返回false"""
@@ -319,7 +322,7 @@ class WebPage(object):
             self.fial_info()
 
     @allure.step('牌号智能搜索功能')
-    def goods_grade(self, grade_number, add_type, number,circulation):
+    def goods_grade(self, grade_number, add_type, number, circulation):
         sleep(0.5)
         self.is_click(goods['智能搜索'])
         if add_type == 1:

@@ -50,8 +50,9 @@ class TestUserSupplyDemand:
         log.info("共计使用时间: " + str(lead_time))
 
 
+
+
 if __name__ == '__main__':
-    pytest.main(['TestCase/test_user_supply_demand.py'])
-    # pytest.main(["D:/资料/text_demo/python_pytest_allure/TestCase/test_user_supply_demand.py",
-    #              "-sv", "--alluredir", "./reports/temp_user_demand"])
-    # os.system("allure generate ./report/temp_user_demand -o ./reports/html --clean")
+    pytest.main(['-s', 'test_user_supply_demand.py'])
+    # pytest.main(['-s', '-q', 'test_allure02.py', '--clean-alluredir', '--alluredir=allure-results'])
+    # os.system(r"allure generate -c -o allure-report")
