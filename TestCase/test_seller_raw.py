@@ -17,9 +17,9 @@ log = Log()
 class TestSellerRaw:
     test_data = [
         {
-            'serve': '24', # 环境
-            'sellerPhone': '18929867679', # 卖家账号
-            'addGoods': '原料', # 添加类型 默认原料
+            'serve': '24',  # 环境
+            'sellerPhone': '18929867679',  # 卖家账号
+            'addGoods': '原料',  # 添加类型 默认原料
             'goodsNumber': 7,  # 添加牌号下标
             'stockNum': 100,  # 商品库存
             'minPurchase': 1,  # 最低采购
