@@ -13,9 +13,15 @@ log = Log()
 
 @allure.feature('执行卖家发布集采信息')
 class TestSellerCollageRelease:
+    test_data = [
+        {
 
+        }
+    ]
+
+    @pytest.mark.parametrize('param', test_data)
     @allure.title('卖家发布集采信息流程')
-    def test_seller_collage_release(self, drivers):
+    def test_seller_collage_release(self, drivers, param):
         log.info('当前执行   卖家发布集采信息    ')
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')
         log.info("开始时间: " + current_time)

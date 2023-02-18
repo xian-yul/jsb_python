@@ -17,30 +17,26 @@ log = Log()
 class TestSellerRaw:
     test_data = [
         {
-            'serve': '24',
-            'sellerPhone': '18929867679',
-            'addGoods': '原料',
-            'goodsNumber': 7,
-            'stockNum': 100,
-            'minPurchase': 1,
-            'deliveryPrice': 6573,
-            'deliveryDays': '我是配送时间',
-            'selfMentionDays': '我是提货时间',
-            'goodsDeliver': 3,
-            'included': 1,
-            'selfMentionPrice': 7895,
-            'add_type': 1,
-            'number': 'pp',
-            'img_path': 'D:\\资料\\raw.png',
-            'video_path': 'D:\\资料\\video.mp4',
-            'profiles': '原料商品内容概要',
-            'detail': '原料商品详情',
-            'circulation': 1,
+            'serve': '24', # 环境
+            'sellerPhone': '18929867679', # 卖家账号
+            'addGoods': '原料', # 添加类型 默认原料
+            'goodsNumber': 7,  # 添加牌号下标
+            'stockNum': 100,  # 商品库存
+            'minPurchase': 1,  # 最低采购
+            'deliveryPrice': 6573,  # 配送价格
+            'deliveryDays': '我是配送时间',  # 配送时间
+            'selfMentionDays': '我是提货时间',  # 提货时间
+            'goodsDeliver': 3,  # 1单配送 2单自提 3配送+自提
+            'included': 1,  # 是否含税  1含税
+            'selfMentionPrice': 7895,  # 自提价格
+            'add_type': 1,  # 是否启用搜索牌号  1启用
+            'number': 'pp',  # 搜索牌号
+            'img_path': 'D:\\资料\\raw.png',  # 商品图片
+            'video_path': 'D:\\资料\\video.mp4',  # 商品视频
+            'profiles': '原料商品内容概要',  # 商品内容概要
+            'detail': '原料商品详情',  # 商品详情
+            'circulation': 1,  # 智能搜索中 商品加载次数 50个为一次
             'limit': 1,
-        },
-        {
-            'phone': '18944234206',
-            'name': '测试_123456789'
         },
     ]
 
