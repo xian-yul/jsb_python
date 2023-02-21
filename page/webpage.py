@@ -212,7 +212,7 @@ class WebPage(object):
         log.error('出现异常 或者 断言失败')
         self.base_get_img()
         log.error('当前url: ' + self.return_current_url())
-        self.driver.close()
+        self.driver.quit()
 
     @allure.step('返回当前url')
     def return_current_url(self):
@@ -322,11 +322,11 @@ class WebPage(object):
             self.fial_info()
 
     @allure.step('牌号智能搜索功能')
-    def goods_grade(self, grade_number, add_type, number, circulation):
+    def goods_grade(self, grade_number, add_type, brand, circulation):
         sleep(0.5)
         self.is_click(goods['智能搜索'])
         if add_type == 1:
-            self.find_elements(goods['智能搜索_输入框'])[-1].send_keys(number)
+            self.find_elements(goods['智能搜索_输入框'])[-1].send_keys(brand)
             sleep(0.1)
             self.is_click(goods['智能搜索_搜索'])
 
@@ -345,3 +345,7 @@ class WebPage(object):
             grade[grade_number].click()
         except:
             self.fial_info()
+
+    def opera_transverse_scrollto(self):
+        js = 'document.getElementsByClassName("ant-table-body")[0].scrollLeft=20000'
+        self.driver.execute_script(js)
