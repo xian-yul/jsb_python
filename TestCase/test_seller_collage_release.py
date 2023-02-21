@@ -16,21 +16,22 @@ log = Log()
 class TestSellerCollageRelease:
     test_data = [
         {
-            'minimum': 10,
-            'seller_phone': '',
-            'serve': '24',
+            'minimum': 10,  # 最低采购量
+            'seller_phone': '18929867679',  # 卖家账号
+            'serve': '24',  # 环境
             'add_type': 1,  # 是否启用搜索牌号  1启用
             'circulation': 1,  # 智能搜索中 商品加载次数 50个为一次
-            'addGoods': '原料',  # 添加类型 默认原料
             'goodsNumber': 7,  # 添加牌号下标
             'delivery_method': 1,  # 1配送 2自提
             'collage_num': 100,  # 集采量
-            'overflow_num': 20,  # 溢出值
-            'delivery_time': 20,  # 交货时间
+            'overflow_num': 1,  # 溢出值
+            'delivery_day': 20,  # 交货时间
             'delivery_price': 7905,  # 单价
             'deposit': 5,  # 定金
-            'describe': '',  # 交易描述
-            'limit': 1  # 循环次数
+            'describe': '我是交易描述哦我是交易描述哦我是交易描述哦我是交易描述哦',  # 交易描述
+            'brand': 'pp',  # 牌号
+            'limit': 3,  # 循环次数
+            'max_day': 1  # 集采时间限制 1 最小  7 最大
         }
     ]
 
@@ -45,20 +46,21 @@ class TestSellerCollageRelease:
         serve = param['serve']
         add_type = param['add_type']
         circulation = param['circulation']
-        addGoods = param['addGoods']
         goodsNumber = param['goodsNumber']
         delivery_method = param['delivery_method']
         collage_num = param['collage_num']
         overflow_num = param['overflow_num']
-        delivery_time = param['delivery_time']
+        delivery_day = param['delivery_day']
         delivery_price = param['delivery_price']
         deposit = param['deposit']
         describe = param['describe']
         limit = param['limit']
+        brand = param['brand']
+        max_day = param['max_day']
         log.info("开始时间: " + current_time)
-        collage.seller_collage_release(serve, seller_phone, minimum, addGoods, add_type, circulation, goodsNumber,
-                                       delivery_method, collage_num, overflow_num, delivery_time, delivery_price,
-                                       deposit, describe)
+        collage.seller_collage_release(serve, seller_phone, minimum, add_type, circulation, goodsNumber,
+                                       delivery_method, collage_num, overflow_num, delivery_day, delivery_price,
+                                       deposit, describe, limit, brand, max_day)
         now_time = time.strftime('%Y-%m-%d %H:%M:%S')
         log.info("结束时间: " + now_time)
         lead_time = time_lag(now_time, current_time)
