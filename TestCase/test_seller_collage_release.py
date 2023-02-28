@@ -18,6 +18,7 @@ class TestSellerCollageRelease:
         {
             'minimum': 10,  # 最低采购量
             'seller_phone': '18929867679',  # 卖家账号
+            # 'seller_phone': '13000000001',  # 卖家账号
             'serve': '24',  # 环境
             'add_type': 1,  # 是否启用搜索牌号  1启用
             'circulation': 1,  # 智能搜索中 商品加载次数 50个为一次
