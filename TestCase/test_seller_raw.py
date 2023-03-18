@@ -46,26 +46,6 @@ class TestSellerRaw:
         log.info('当前执行   卖家端添加原料    ')
         seller = JsbSellerGoodsAdd(drivers)
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')
-        # serve = '24'
-        # sellerPhone = '18929867679'
-        # addGoods = '原料'
-        # goodsNumber = 7
-        # stockNum = 1000
-        # minPurchase = 10
-        # deliveryPrice = 10000
-        # deliveryDays = '我是配送时间'
-        # selfMentionDays = '我是提货时间'
-        # goodsDeliver = 3  # 1单配送 2单自提 3配送+自提
-        # included = 1
-        # selfMentionPrice = 20000
-        # add_type = 1
-        # number = 'PP'
-        # img_path = 'D:\\资料\\raw.png'
-        # video_path = 'D:\\资料\\video.mp4'
-        # profiles = '我是原料商品内容概要'
-        # detail = '我是原料商品详情'
-        # limit = 1
-        # circulation = 1
         serve = param['serve']
         sellerPhone = param['sellerPhone']
         addGoods = param['addGoods']

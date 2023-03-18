@@ -294,7 +294,8 @@ class WebPage(object):
         log.info('点击登录')
         try:
             login_phone = self.element_text(order['user_login_phone'])
-            log.info(login_phone)
+            login_phone = login_phone[:-2]
+            login_phone = login_phone[7:]
             assert login_phone.find(user_phone)
             log.info('比较后登录前输入手机号 :' + user_phone + '  与登录后一致 :' + login_phone)
         except AssertionError:

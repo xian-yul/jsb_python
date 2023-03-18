@@ -12,8 +12,8 @@ from utils.times import sleep
 user = Element('JsbUserOrder')
 log = Log()
 user_url = {'24_home': 'http://192.168.101.24:8090/shop/home', '20_home': 'https://demo.jinsubao.cn/',
-            '24_order_url': 'http://192.168.101.24:8090/user-center/purchase-order',
-            '20_order_url': 'https://demo.jinsubao.cn/user-center/purchase-order',
+            '24_order_url': 'http://192.168.101.24:8090/user-center/my-order-list',
+            '20_order_url': 'https://demo.jinsubao.cn/user-center/my-order-list',
             '24_order_detail': 'http://192.168.101.24:8090/user-center/purchase-order-detail/',
             '20_order_detail': 'https://demo.jinsubao.cn/user-center/purchase-order-detail/'}
 seller_url = {'24': 'http://192.168.101.24:8070/user/login', '20': 'https://slrdm.jinsubao.cn/',
@@ -253,7 +253,7 @@ class JsbUserRawOrder(WebPage):
         sleep()
         self.find_elements(user['user_order_list_btn'])[0].click()
         sleep(0.2)
-        self.find_elements(user['买家弹窗_确定'])[1].click()
+        self.find_elements(user['买家弹窗_确定'])[-1].click()
         self.signing_contract()
         self.find_elements(user['user_order_list_btn'])[0].click()
         sleep()
@@ -337,7 +337,7 @@ class JsbUserRawOrder(WebPage):
             self.script('3000')
             self.inputs_clear_text(user['market_search_text'], 1, org_name)
             self.is_click(user['market_search_btn'])
-            self.is_click(user['market_goods'])
+            self.find_elements(user['market_goods'])[0].click()
             self.win_handles('-1')
             sleep(0.5)
             raw_price = self.delivery_method(pickup_type, shop_num)

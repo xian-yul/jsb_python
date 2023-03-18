@@ -22,7 +22,7 @@ class TestOperaInspect:
         serve = '24'
         opera_phone = '13600136001'
         opera = JsbCollage(drivers)
-        limit = 10
+        limit = 1
         inspect_type = 1  # 1通过 2 驳回
         reject_reason = ""
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')

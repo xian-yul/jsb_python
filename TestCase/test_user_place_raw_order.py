@@ -32,23 +32,23 @@ class TestUserPlaceRawOrder:
             'multiple_order': 3,  # 多发单数
             'hide_type': 1,  # 是否隐藏收货地址  1隐藏 0不隐藏
         },
-        {
-            'user_phone': '13700000000',
-            'org_name': '兴得铭',
-            'shop_num': 1,
-            'pickup_type': 4,
-            'address_name': '',
-            'sign_type': 2,
-            'billing_type': 0,
-            'limit': 1,
-            'serve': '20',
-            'seller_phone': '18965691361',
-            'seller_address': '卖家详细地址',
-            'deposit': 5,
-            'multiple_type': 0,
-            'multiple_order': 3,
-            'hide_type': 1,
-        }
+        # {
+        #     'user_phone': '13700000000',
+        #     'org_name': '兴得铭',
+        #     'shop_num': 1,
+        #     'pickup_type': 4,
+        #     'address_name': '',
+        #     'sign_type': 2,
+        #     'billing_type': 0,
+        #     'limit': 1,
+        #     'serve': '20',
+        #     'seller_phone': '18965691361',
+        #     'seller_address': '卖家详细地址',
+        #     'deposit': 5,
+        #     'multiple_type': 0,
+        #     'multiple_order': 3,
+        #     'hide_type': 1,
+        # }
     ]
 
     @pytest.mark.parametrize('param', test_data)
@@ -56,21 +56,6 @@ class TestUserPlaceRawOrder:
     def test_place_raw_order(self, drivers, param):
         log.info('当前执行   买家原料下单    ')
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')
-        # user_phone = "13328798899"
-        # org_name = "丹山"
-        # shop_num = 1
-        # pickup_type = 4  # 1自提  2配送款到发货 3配送定金 4自提定金
-        # address_name = ""
-        # sign_type = 2
-        # billing_type = 0
-        # limit = 1
-        # serve = '24'
-        # seller_phone = "18929867679"
-        # seller_address = '卖家详细地址'
-        # deposit = 5
-        # multiple_type = 0  # 0 多发  1 一次性
-        # multiple_order = 3
-        # hide_type = 1
         user_phone = param['user_phone']
         seller_phone = param['seller_phone']
         org_name = param['org_name']
