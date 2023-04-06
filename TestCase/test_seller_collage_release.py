@@ -16,23 +16,24 @@ log = Log()
 class TestSellerCollageRelease:
     test_data = [
         {
-            'minimum': 10,  # 最低采购量
-            'seller_phone': '18929867679',  # 卖家账号
-            # 'seller_phone': '13000000001',  # 卖家账号
-            'serve': '24',  # 环境
+            'minimum': 1,  # 最低采购量
+            # 'seller_phone': '18929867679',  # 卖家账号
+            'seller_phone': '18965691361',  # 卖家账号
+            'serve': '20',  # 环境
             'add_type': 1,  # 是否启用搜索牌号  1启用
             'circulation': 1,  # 智能搜索中 商品加载次数 50个为一次
-            'goodsNumber': 7,  # 添加牌号下标
-            'delivery_method': 1,  # 1配送 2自提
-            'collage_num': 100,  # 集采量
+            'goodsNumber': 0,  # 添加牌号下标
+            'delivery_method': 2,  # 1配送 2自提
+            'collage_num': 10,  # 集采量
             'overflow_num': 1,  # 溢出值
-            'delivery_day': 20,  # 交货时间
-            'delivery_price': 7905,  # 单价
-            'deposit': 5,  # 定金
+            'delivery_day': 5,  # 交货时间
+            'delivery_price': 1000,  # 单价
+            'deposit': 9,  # 定金
             'describe': '我是交易描述哦我是交易描述哦我是交易描述哦我是交易描述哦',  # 交易描述
             'brand': 'pp',  # 牌号
             'limit': 3,  # 循环次数
-            'max_day': 1  # 集采时间限制 1 最小  7 最大
+            'start_time': '2023-03-30 09:25',  # 开始时间
+            'end_time': '2023-04-10 11:00',  # 结束时间
         }
     ]
 
@@ -57,11 +58,12 @@ class TestSellerCollageRelease:
         describe = param['describe']
         limit = param['limit']
         brand = param['brand']
-        max_day = param['max_day']
+        start_time = param['start_time']
+        end_time = param['end_time']
         log.info("开始时间: " + current_time)
         collage.seller_collage_release(serve, seller_phone, minimum, add_type, circulation, goodsNumber,
                                        delivery_method, collage_num, overflow_num, delivery_day, delivery_price,
-                                       deposit, describe, limit, brand, max_day)
+                                       deposit, describe, limit, brand, start_time, end_time)
         now_time = time.strftime('%Y-%m-%d %H:%M:%S')
         log.info("结束时间: " + now_time)
         lead_time = time_lag(now_time, current_time)

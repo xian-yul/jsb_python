@@ -1,19 +1,22 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
+
 import time
 
 import allure
 import pytest
 
+from page_object.JsbUserConsignmentLetter import JsbUserConsignmentLetter
 from page_object.JsbUserRawOrder import JsbUserRawOrder
 from utils.log import Log
+
 from utils.tool_util import time_lag
 
 log = Log()
 
 
-@allure.feature('执行买家原料下单')
-class TestUserPlaceRawOrder:
+@allure.feature('执行买家填写配送委托书')
+class TestUserConsignmentLetter:
     test_data = [
         {
             'user_phone': '13328798899',  # 买家账号
@@ -31,31 +34,14 @@ class TestUserPlaceRawOrder:
             'multiple_type': 1,  # 提货方式 0多发 1一次性
             'multiple_order': 3,  # 多发单数
             'hide_type': 1,  # 是否隐藏收货地址  1隐藏 0不隐藏
-            'send_type': 0,  # 是否签署发货委托书  1是 0不
+            'send_type': 1,  # 是否签署发货委托书  1是 0不
         },
-        # {
-        #     'user_phone': '13700000000',
-        #     'org_name': '兴得铭',
-        #     'shop_num': 1,
-        #     'pickup_type': 4,
-        #     'address_name': '',
-        #     'sign_type': 2,
-        #     'billing_type': 0,
-        #     'limit': 1,
-        #     'serve': '20',
-        #     'seller_phone': '18965691361',
-        #     'seller_address': '卖家详细地址',
-        #     'deposit': 5,
-        #     'multiple_type': 0,
-        #     'multiple_order': 3,
-        #     'hide_type': 1,
-        # }
     ]
 
     @pytest.mark.parametrize('param', test_data)
-    @allure.title('买家原料下单流程')
-    def test_place_raw_order(self, drivers, param):
-        log.info('当前执行   买家原料下单    ')
+    @allure.title('买家配送委托书')
+    def test_user_consignment_letter(self, drivers, param):
+        log.info('当前执行   买家填写配送委托书    ')
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')
         user_phone = param['user_phone']
         seller_phone = param['seller_phone']
@@ -82,7 +68,3 @@ class TestUserPlaceRawOrder:
         log.info("结束时间: " + now_time)
         lead_time = time_lag(now_time, current_time)
         log.info("共计使用时间: " + str(lead_time))
-
-
-if __name__ == '__main__':
-    pytest.main(['TestCase/test_user_place_raw_order.py'])

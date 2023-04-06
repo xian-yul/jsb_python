@@ -150,9 +150,9 @@ class WebPage(object):
         js = "var q=document.documentElement.scrollTop=" + js_size
         self.driver.execute_script(js)
 
-    @allure.step('合同签署')
+    @allure.step('法大大合同签署')
     def signing_contract(self):
-        log.info('进入合同签署')
+        log.info('进入法大大合同签署')
         sleep(2)
         iframe = self.find_element(order['signing_window'])
         self.driver.switch_to.frame(iframe)
@@ -166,6 +166,26 @@ class WebPage(object):
         self.driver.switch_to.default_content()
         sleep()
         self.is_click(order['over_signing'])
+        log.info("退出签署中")
+        sleep(1)
+
+    @allure.step('发货委托合同签署')
+    def signing_consignment_contract(self):
+        log.info('进入发货委托合同签署')
+        sleep(2)
+        iframe = self.find_elements(order['consignment_sign'])
+        self.driver.switch_to.frame(iframe[-1])
+        sleep(3)
+        self.is_click(order['consignment_sign_btn'])
+        sleep(2)
+        self.input_clear_text(order['signing_text'], 999999)
+        sleep(0.5)
+        self.is_click(order['signing_determine'])
+        sleep()
+        self.driver.switch_to.default_content()
+        sleep()
+        over_signing = self.find_elements(order['over_signing'])
+        over_signing[1].click()
         log.info("退出签署中")
         sleep(1)
 
@@ -294,7 +314,8 @@ class WebPage(object):
         log.info('点击登录')
         try:
             login_phone = self.element_text(order['user_login_phone'])
-            log.info(login_phone)
+            login_phone = login_phone[:-2]
+            login_phone = login_phone[7:]
             assert login_phone.find(user_phone)
             log.info('比较后登录前输入手机号 :' + user_phone + '  与登录后一致 :' + login_phone)
         except AssertionError:

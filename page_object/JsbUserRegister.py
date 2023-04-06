@@ -23,8 +23,8 @@ class JsbUserRegister(WebPage):
         sleep(0.2)
         while register_num <= limit:
             try:
-                # phone = '135' + random_number(8)
-                # name = '集采账号56_' + random_number(4)
+                phone = '189' + random_number(8)
+                name = '测试账号' + random_number(4)
                 self.is_click(register['register_start'])
                 log.info('点击免费注册按钮')
                 sleep(0.3)
@@ -46,13 +46,14 @@ class JsbUserRegister(WebPage):
                 log.info('提交注册')
                 sleep(0.1)
                 self.win_handles('-1')
-                sleep(0.3)
+                sleep(0.4)
                 log.info('提示领取新人券弹窗 刷新跳过')
                 self.refresh()
-                sleep(0.1)
                 self.is_click(register['register_over'])
                 log.info('退出登录')
-                log.info('当前注册次数 : ' + str(register_num) + "  目标注册 :" + str(limit))
+                # log.info('当前注册次数 : ' + str(register_num) + "  目标注册 :" + str(limit))
+                log.info('当前注册次数 : {register_num} , 目标注册 : {limit}'.format(register_num=str(register_num),
+                                                                                     limit=str(limit)))
                 register_num += 1
             except AssertionError:
                 log.error('断言判断错误')

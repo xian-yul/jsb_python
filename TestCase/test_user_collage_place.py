@@ -19,7 +19,7 @@ class TestUserCollagePlace:
             'user_phone': '13500135001',  # 买家账号
             'serve': '24',  # 环境
             'purchase_num': 1,  # 购买数量
-            'purchase_goods': '日本住友',  # 购买商品名称
+            'purchase_goods': '美国Toler',  # 购买商品名称
             'limit': 1,  # 循环次数
         }
     ]
@@ -35,8 +35,8 @@ class TestUserCollagePlace:
         purchase_num = param['purchase_num']
         purchase_goods = param['purchase_goods']
         limit = param['limit']
-        log.info("开始时间: " + current_time)
         collage.user_collage_place_order(serve, user_phone, purchase_num, purchase_goods, limit)
+        log.info("开始时间: " + current_time)
         now_time = time.strftime('%Y-%m-%d %H:%M:%S')
         log.info("结束时间: " + now_time)
         lead_time = time_lag(now_time, current_time)

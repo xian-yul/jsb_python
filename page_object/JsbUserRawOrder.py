@@ -12,8 +12,8 @@ from utils.times import sleep
 user = Element('JsbUserOrder')
 log = Log()
 user_url = {'24_home': 'http://192.168.101.24:8090/shop/home', '20_home': 'https://demo.jinsubao.cn/',
-            '24_order_url': 'http://192.168.101.24:8090/user-center/purchase-order',
-            '20_order_url': 'https://demo.jinsubao.cn/user-center/purchase-order',
+            '24_order_url': 'http://192.168.101.24:8090/user-center/my-order-list',
+            '20_order_url': 'https://demo.jinsubao.cn/user-center/my-order-list',
             '24_order_detail': 'http://192.168.101.24:8090/user-center/purchase-order-detail/',
             '20_order_detail': 'https://demo.jinsubao.cn/user-center/purchase-order-detail/'}
 seller_url = {'24': 'http://192.168.101.24:8070/user/login', '20': 'https://slrdm.jinsubao.cn/',
@@ -163,16 +163,16 @@ class JsbUserRawOrder(WebPage):
             log.info('选择订单开票')
 
     def buyers_and_sellers_sign(self, serve, seller_phone, place_order_num, seller_address, pickup_type,
-                                multiple_type, deposit, multiple_order, hide_type):
+                                multiple_type, deposit, multiple_order, hide_type, send_type):
         log.info('进行买卖家签署支付发货收货')
         try:
             self.seller_goods_sign(serve, seller_phone, place_order_num, pickup_type, deposit)
             sleep(0.2)
-            self.user_goods_sign_pay(serve, pickup_type, multiple_type, multiple_order, hide_type)
-            sleep(0.2)
-            self.seller_goods_deliver(serve, seller_address, pickup_type, multiple_type, multiple_order)
-            sleep(0.2)
-            self.user_goods_receipt(serve, pickup_type, multiple_type, multiple_order)
+            self.user_goods_sign_pay(serve, pickup_type, multiple_type, multiple_order, hide_type, send_type)
+            # sleep(0.2)
+            # self.seller_goods_deliver(serve, seller_address, pickup_type, multiple_type, multiple_order)
+            # sleep(0.2)
+            # self.user_goods_receipt(serve, pickup_type, multiple_type, multiple_order)
         except RuntimeError:
             self.fial_info()
 
@@ -242,7 +242,7 @@ class JsbUserRawOrder(WebPage):
                 self.deposit_pay(serve)
             self.user_over_charge(pickup_type, multiple_order)
 
-    def user_goods_sign_pay(self, serve, pickup_type, multiple_type, multiple_order, hide_type):
+    def user_goods_sign_pay(self, serve, pickup_type, multiple_type, multiple_order, hide_type, send_type):
         log.info('------------------------------------------------')
         log.info('进入买家签署合同并支付')
         if serve == '24':
@@ -250,9 +250,10 @@ class JsbUserRawOrder(WebPage):
         else:
             self.driver.get(user_url['20_order_url'])
         log.info('进行买家合同签署')
-        sleep()
+        sleep(0.5)
         self.find_elements(user['user_order_list_btn'])[0].click()
-        sleep(0.2)
+        sleep()
+        str_text = self.find_elements(user['买家弹窗_确定1'])
         self.find_elements(user['买家弹窗_确定'])[1].click()
         self.signing_contract()
         self.find_elements(user['user_order_list_btn'])[0].click()
@@ -321,10 +322,38 @@ class JsbUserRawOrder(WebPage):
                     self.find_elements(user['self_lifting_hide_address'])[0].click()
                     log.info('勾选了买家对商家隐藏收货地址')
                 self.pickup_signing_contract()
+        sleep(0.1)
+        if send_type == 1:
+            try:
+                log.info('进行发货委托书的填写')
+                num = 1
+                num_limit = 999
+                self.find_elements(user['see_look'])[0].click()  # 点击第一个有查看按钮的订单 即 刚刚完成支付的订单
+                while num <= num_limit:
+                    sleep(0.2)
+                    self.script('10000')
+                    self.find_elements(user['user_consignment'])[0].click()  # 点击发货委托书
+                    sleep(0.5)
+                    if num != 1:
+                        self.find_elements(user['user_consignment'])[3].click()  # 点击新增发货委托书
+                        sleep(0.2)
+                    self.input_clear_text(user['consignment_num'], 10)
+                    self.is_click(user['consignment_time'])
+                    sleep(0.1)
+                    self.is_click(user['consignment_now_time'])
+                    sleep(0.2)
+                    self.find_elements(user['user_consignment'])[2].click()  # 点击提交
+                    self.signing_consignment_contract()
+                    log.info(f'当前发货委托书新增次数{num}次,目标新增{num_limit}次'.format(str(num), str(num_limit)))
+                    num += 1
+                    sleep()
+            except:
+                self.fial_info()
+            log.info('已完成发货委托书新增')
 
     def place_raw_order(self, serve, user_phone, org_name, pickup_type, shop_num, address_name,
                         sign_type, billing_type, seller_phone, limit, seller_address, multiple_type, deposit,
-                        multiple_order, hide_type
+                        multiple_order, hide_type, send_type
                         ):
         self.click_user_login(serve, user_phone)
         place_order_num = 0
@@ -337,7 +366,7 @@ class JsbUserRawOrder(WebPage):
             self.script('3000')
             self.inputs_clear_text(user['market_search_text'], 1, org_name)
             self.is_click(user['market_search_btn'])
-            self.is_click(user['market_goods'])
+            self.find_elements(user['market_goods'])[0].click()
             self.win_handles('-1')
             sleep(0.5)
             raw_price = self.delivery_method(pickup_type, shop_num)
@@ -359,7 +388,7 @@ class JsbUserRawOrder(WebPage):
                         assert self.driver.current_url == user_url['20_order_url']
                     log.info('下单完毕')
                     self.buyers_and_sellers_sign(serve, seller_phone, place_order_num, seller_address, pickup_type,
-                                                 multiple_type, deposit, multiple_order, hide_type)
+                                                 multiple_type, deposit, multiple_order, hide_type, send_type)
                     log.info('当前下单次数 : ' + str(place_order_num) + '  预计下单次数: ' + str(limit))
                     place_order_num += 1
                     log.info('------------------------------------------------')
@@ -424,7 +453,8 @@ class JsbUserRawOrder(WebPage):
                 except AssertionError:
                     self.fial_info()
                 log.info(
-                    "当前发货单数为:" + str(multiple_num) + "    当前发货数量为:" + str(num) + "  预计发货单数: " + str(
+                    "当前发货单数为:" + str(multiple_num) + "    当前发货数量为:" + str(
+                        num) + "  预计发货单数: " + str(
                         multiple_order))
                 multiple_num += 1
         elif pickup_type == 1 or pickup_type == 4:
