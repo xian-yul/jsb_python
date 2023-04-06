@@ -38,7 +38,7 @@ class JsbCollage(WebPage):
                                deposit, describe, limit, brand, start_time, end_time):
         add_num = 0
         self.seller_phone_login(serve, seller_phone)
-        self.is_click(collage['collage_li'])
+        self.is_click(collage['collage_seller_li'])
         self.is_click(collage['collage_info_li'])
         try:
             if serve == '24':
@@ -56,9 +56,9 @@ class JsbCollage(WebPage):
                 log.info('集采信息发布界面断言判断成功')
                 self.goods_grade(goodsNumber, add_type, brand, circulation)
                 self.input_clear_text(collage['collage_minPurchase'], minimum)
-                self.find_elements(collage['collage_contract'])[0].click()
-                sleep(0.1)
-                self.find_elements(collage['collage_contract_li'])[-1].click()
+                # self.find_elements(collage['collage_contract'])[0].click()
+                # sleep(0.1)
+                # self.find_elements(collage['collage_contract_li'])[-1].click()
                 self.input_clear_text(collage['collage_purchaseNum'], collage_num)
                 self.input_clear_text(collage['collage_overflow'], overflow_num)
                 self.script('10000')

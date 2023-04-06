@@ -1,4 +1,5 @@
 collage_li: "xpath==//*[contains(text(),'运营审核')]"
+collage_seller_li: "xpath==//*[contains(text(),'集采')]"
 collage_info_li: "link_text==集采信息"
 collage_release_btn: "xpath==// button[@class='a-btn ant-btn']"
 collage_minPurchase: "xpath==// input[@id='minPurchase']"
