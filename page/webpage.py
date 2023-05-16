@@ -343,11 +343,11 @@ class WebPage(object):
             self.fial_info()
 
     @allure.step('牌号智能搜索功能')
-    def goods_grade(self, grade_number, add_type, brand, circulation):
+    def goods_grade(self, grade_number, add_type,number, circulation):
         sleep(0.5)
         self.is_click(goods['智能搜索'])
         if add_type == 1:
-            self.find_elements(goods['智能搜索_输入框'])[-1].send_keys(brand)
+            self.find_elements(goods['智能搜索_输入框'])[-1].send_keys(number)
             sleep(0.1)
             self.is_click(goods['智能搜索_搜索'])
 
