@@ -16,7 +16,7 @@ class TestAuctionApplyFor:
     def test_auction_apply_for(self, drivers):
         log.info('当前执行   申请竞拍资格   ')
         serve = '24'
-        sellerPhone= ''
+        sellerPhone= '13000000005'
         auction = JsbAuction(drivers)
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')
         auction.seller_auction_apply_for(serve, sellerPhone)

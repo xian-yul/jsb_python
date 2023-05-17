@@ -229,7 +229,6 @@ class WebPage(object):
         # log.info('选择的市 : ' + city.text + ',  所选择的省 : ' + province.text + ',   所选择的区 : ' + area.text)
 
     def fial_info(self):
-        log.error('出现异常 或者 断言失败')
         self.base_get_img()
         log.error('当前url: ' + self.return_current_url())
         self.driver.quit()
@@ -320,6 +319,7 @@ class WebPage(object):
             log.info('比较后登录前输入手机号 :' + user_phone + '  与登录后一致 :' + login_phone)
         except AssertionError:
             self.fial_info()
+        sleep(0.2)
 
     @allure.step('运营进行登录')
     def opera_login(self, serve, opera_phone):
@@ -343,7 +343,7 @@ class WebPage(object):
             self.fial_info()
 
     @allure.step('牌号智能搜索功能')
-    def goods_grade(self, grade_number, add_type,number, circulation):
+    def goods_grade(self, grade_number, add_type, number, circulation):
         sleep(0.5)
         self.is_click(goods['智能搜索'])
         if add_type == 1:

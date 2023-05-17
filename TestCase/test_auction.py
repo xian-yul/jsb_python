@@ -20,23 +20,23 @@ class TestAuction:
     def test_auction(self, drivers):
         log.info('当前执行   竞拍填写内容   ')
         serve = '24'
-        grade_number = ''  # 添加牌号下标
-        add_type = ''  # 是否启用搜索牌号  1启用
-        number = ''  # 搜索牌号
-        circulation = ''  # 智能搜索中 商品加载次数 50个为一次
-        sellerPhone = ''
-        grossQuantity = ''  # 标的总量
-        startQuantity = ''  # 起拍量
-        quantityIncrease = ''  # 数量增幅
-        maxQuotationUnit = ''  # 最大报价单位
-        startUnitPrice = ''  # 起拍单价
-        upPrice = ''  # 加价幅度
-        maxUpPrice = ''  # 最高加价幅度
-        start_time: '2023-03-30 09:25'  # 开始时间
-        end_time: '2023-04-10 11:00'  # 结束时间
-        buyerSuretyRatio = ''  # 定金比例
-        deliveryTime = ''  # 提货时间
-        additionalProvisions = ''  # 附加条款
+        grade_number = 0  # 添加牌号下标
+        add_type = 1  # 是否启用搜索牌号  1启用
+        number = 'pp'  # 搜索牌号
+        circulation = 1  # 智能搜索中 商品加载次数 50个为一次
+        sellerPhone = '13000000005'
+        grossQuantity = '100'  # 标的总量
+        startQuantity = '10'  # 起拍量
+        quantityIncrease = '20'  # 数量增幅
+        maxQuotationUnit = '30'  # 最大报价单位
+        startUnitPrice = '5000'  # 起拍单价
+        upPrice = '1000'  # 加价幅度
+        maxUpPrice = '2000'  # 最高加价幅度
+        start_time = '2023-05-18 16:35:14'  # 开始时间
+        end_time = '2023-05-19 16:35:14'  # 结束时间
+        buyerSuretyRatio = '10'  # 定金比例
+        deliveryTime = '我不是提货时间'  # 提货时间
+        additionalProvisions = '我不是附加条款'  # 附加条款
         auction = JsbAuction(drivers)
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')
         auction.seller_auction(serve, grade_number, add_type, number, circulation, sellerPhone, grossQuantity,

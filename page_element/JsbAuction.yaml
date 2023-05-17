@@ -1,6 +1,6 @@
 auction_li: "xpath==//*[contains(text(),'竞拍专区')]"
-auction_apply_for: "xpath==//*[contains(text(),'竞拍申请')]"
-auction_content: "xpath==//*[contains(text(),'竞拍内容')]"
+auction_apply_for: "link_text==竞拍申请"
+auction_content: "link_text==竞拍内容"
 auction_agreement_ipt: "xpath== //input[@class='ant-checkbox-input']"
 auction_submit_btn: "xpath== //button[@class='ant-btn ant-btn-primary']"
 
@@ -19,3 +19,4 @@ auction_time_start: "xpath== // input[@class='ant-calendar-picker-input ant-inpu
 auction_buyerSuretyRatio_ipt: "xpath== // input[@id='buyerSuretyRatio']"
 auction_deliveryTime_ipt: "xpath== // input[@id='deliveryTime']"
 auction_additionalProvisions_textarea: "xpath== // textarea[@id='additionalProvisions']"
+upload: "xpath== // input[@type='file']"

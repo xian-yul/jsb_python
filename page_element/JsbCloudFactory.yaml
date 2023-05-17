@@ -19,7 +19,7 @@ cloud_annualOutputValue_ipt: "xpath==// input[@id='annualOutputValue']"
 cloud_qualityCertification_ipt: "xpath==// input[@id='qualityCertification']"
 cloud_systemCertification_ipt: "xpath==// input[@id='systemCertification']"
 cloud_specialTechnology_ipt: "xpath==// input[@id='specialTechnology']"
-cloud_raw__select_div: "xpath==// input[@class='ant-select-selection__placeholder']"
+cloud_raw__select_div: "xpath==// div[@class='ant-select-selection__placeholder']"
 cloud_raw_li: "xpath==// li[@class='ant-select-dropdown-menu-item']"
 cloud_raw_ul: "xpath==// li[@class='ant-select-dropdown-menu ant-select-dropdown-menu-vertical ant-select-dropdown-menu-root']"
 
