@@ -32,9 +32,9 @@ class JsbCloudFactory(WebPage):
                 assert self.return_current_url() == cloud_url['24_cloud_apply_for_home']
             else:
                 assert self.return_current_url() == cloud_url['20_cloud_apply_for_home']
-            log.info('进入云工厂入驻前置界面')
+            log.info('云工厂入驻 断言成功')
         except AssertionError:
-            log.error('云工厂入驻前置界面断言判断错误')
+            log.error('云工厂入驻 断言失败')
             self.fial_info()
         self.is_click(cloud['cloud_factory_apply_for_bg'])
         sleep(0.1)
@@ -43,9 +43,9 @@ class JsbCloudFactory(WebPage):
                 assert self.return_current_url() == cloud_url['24_cloud_apply_for']
             else:
                 assert self.return_current_url() == cloud_url['20_cloud_apply_for']
-            log.info('进入填写云工厂资料前置界面')
+            log.info('填写云工厂资料 断言成功')
         except AssertionError:
-            log.error('填写云工厂资料前置界面断言判断错误')
+            log.error('填写云工厂资料 断言失败')
             self.fial_info()
         self.script('400')
         self.input_clear_text(cloud['cloud_name_ipt'], name)
@@ -135,8 +135,8 @@ class JsbCloudFactory(WebPage):
                 assert self.return_current_url() == cloud_url['24_cloud_apply_for_submit']
             else:
                 assert self.return_current_url() == cloud_url['20_cloud_apply_for_submit']
-            log.info('工厂入驻提交审核后界面断言判断成功')
+            log.info('工厂入驻提交审核 断言成功')
         except AssertionError:
-            log.error('工厂提交审核后界面断言判断错误')
+            log.error('工厂提交审核 断言失败')
             self.fial_info()
         log.info('云工厂入驻提交成功')

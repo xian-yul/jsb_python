@@ -16,7 +16,18 @@ auction_startUnitPrice_ipt: "xpath== // input[@id='startUnitPrice']"
 auction_upPrice_ipt: "xpath== // input[@id='upPrice']"
 auction_maxUpPrice_ipt: "xpath== // input[@id='maxUpPrice']"
 auction_time_start: "xpath== // input[@class='ant-calendar-picker-input ant-input']"
+auction_time_start_select: "xpath==// td[@class='ant-calendar-cell']"
+auction_time_ok_btn: "xpath== // a[@class='ant-calendar-ok-btn']"
+
+
 auction_buyerSuretyRatio_ipt: "xpath== // input[@id='buyerSuretyRatio']"
 auction_deliveryTime_ipt: "xpath== // input[@id='deliveryTime']"
 auction_additionalProvisions_textarea: "xpath== // textarea[@id='additionalProvisions']"
 upload: "xpath== // input[@type='file']"
+
+auction_switch_vehicle: "xpath== // button[@id='flagFinishedAutomobile']"
+auction_vehicle_stock: "xpath== // input[@id='bicycleTunnage']"
+
+auction_drop_down_select: "xpath== // div[@class='ant-select-selection__rendered']"
+
+auction_delivery_type: "xpath== // li[@class='ant-select-dropdown-menu-item']"

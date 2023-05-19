@@ -37,11 +37,16 @@ class TestAuction:
         buyerSuretyRatio = '10'  # 定金比例
         deliveryTime = '我不是提货时间'  # 提货时间
         additionalProvisions = '我不是附加条款'  # 附加条款
+        is_vehicle = 1  # 是否整车配送  1整车
+        vehicle_stock = 100  # 整车吨数
+        delivery_type = 1  # 1配送 0自提
+        limit = 3
         auction = JsbAuction(drivers)
         current_time = time.strftime('%Y-%m-%d %H:%M:%S')
         auction.seller_auction(serve, grade_number, add_type, number, circulation, sellerPhone, grossQuantity,
                                startQuantity, quantityIncrease, maxQuotationUnit, startUnitPrice, upPrice, maxUpPrice,
-                               start_time, end_time, buyerSuretyRatio, deliveryTime, additionalProvisions)
+                               start_time, end_time, buyerSuretyRatio, deliveryTime, additionalProvisions, is_vehicle,
+                               vehicle_stock, delivery_type,limit)
         log.info("开始时间: " + current_time)
         now_time = time.strftime('%Y-%m-%d %H:%M:%S')
         log.info("结束时间: " + now_time)
