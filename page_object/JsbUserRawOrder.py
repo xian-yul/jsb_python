@@ -97,13 +97,14 @@ class JsbUserRawOrder(WebPage):
             product_actual = product_actual[1:]
             if Decimal(product_actual) == (Decimal(price) * Decimal(product_num)) + Decimal(
                     product_freight):
-                log.info(
-                    "金额判断一致  _________ 实付款  " + product_actual + " == 单价  " + price + " * 数量  " + product_num + " + 运费  " + product_freight)
+                log.info('金额判断一致')
             else:
-                log.info(
-                    "金额判断不一致  _________ 实付款  " + product_actual + " == 单价  " + price + " * 数量  " + product_num + " + 运费  " + product_freight)
+                log.info('金额判断不一致')
                 flag = 'false'
                 self.base_get_img()
+            log.info(
+                f"实付款  {product_actual} == 单价  {price} * 数量  {product_num}  + 运费  {product_freight}".format(
+                    product_actual, price, product_num, product_freight))
         elif code == 2:
             raw_detail = self.find_elements(user['order_info'])
             raw_num = raw_detail[1].text
@@ -114,13 +115,12 @@ class JsbUserRawOrder(WebPage):
             else:
                 price = price[:-2]
             if Decimal(raw_actual) == Decimal(price) * Decimal(raw_num):
-                log.info(
-                    "金额判断一致  _________ 实付款  " + raw_actual + " == 单价  " + price + " * 数量  " + raw_num)
+                log.info("金额判断一致")
             else:
-                log.info(
-                    "金额判断不一致  _________ 实付款  " + raw_actual + " == 单价  " + price + " * 数量  " + raw_num)
+                log.info("金额判断不一致")
                 flag = 'false'
                 self.base_get_img()
+            log.info(f"实付款  {raw_actual} == 单价  {price} * 数量  {raw_num}".format(raw_actual, price, raw_num))
         return flag
 
     def place_order_submit(self, serve):
@@ -132,7 +132,7 @@ class JsbUserRawOrder(WebPage):
                 if self.find_element(user['place_order_btn']).is_enabled():
                     sleep(0.2)
                     self.is_click(user['place_order_btn'])
-                    log.info('订单提交')
+                    log.info('订单提交中')
                     break
         sleep(3)
         try:
@@ -140,8 +140,9 @@ class JsbUserRawOrder(WebPage):
                 assert self.return_current_url() == user_url['24_order_url']
             else:
                 assert self.return_current_url() == user_url['20_order_url']
-            log.info('订单提交成功')
+            log.info('订单提交 断言成功')
         except AssertionError:
+            log.error('订单提交 断言失败')
             self.fial_info()
 
     def shipping_address(self, address_name):
@@ -356,10 +357,10 @@ class JsbUserRawOrder(WebPage):
                         multiple_order, hide_type, send_type
                         ):
         self.click_user_login(serve, user_phone)
-        place_order_num = 0
-        while place_order_num < limit:
+        place_order_num = 1
+        while place_order_num <= limit:
             sleep(0.3)
-            if place_order_num > 0:
+            if place_order_num > 1:
                 self.find_elements(user['navigation_bar'])[1].click()
             else:
                 self.find_elements(user['navigation_bar'])[0].click()
@@ -387,16 +388,17 @@ class JsbUserRawOrder(WebPage):
                     else:
                         assert self.driver.current_url == user_url['20_order_url']
                     log.info('下单完毕')
-                    self.buyers_and_sellers_sign(serve, seller_phone, place_order_num, seller_address, pickup_type,
-                                                 multiple_type, deposit, multiple_order, hide_type, send_type)
-                    log.info('当前下单次数 : ' + str(place_order_num) + '  预计下单次数: ' + str(limit))
+                    # self.buyers_and_sellers_sign(serve, seller_phone, place_order_num, seller_address, pickup_type,
+                    #                              multiple_type, deposit, multiple_order, hide_type, send_type)
+                    log.info(f'当前下单次数 : {place_order_num}  预计下单次数: {limit}'.format(place_order_num, limit))
                     place_order_num += 1
                     log.info('------------------------------------------------')
                     self.refresh()
                 else:
-                    log.error("下单判断出现异常")
+                    log.error("下单金额判断出现异常")
                     self.base_get_img()
             except AssertionError:
+                log.error('异常报错')
                 self.fial_info()
 
     def seller_multiple_order(self, serve, seller_address, pickup_type, multiple_order):
@@ -453,9 +455,8 @@ class JsbUserRawOrder(WebPage):
                 except AssertionError:
                     self.fial_info()
                 log.info(
-                    "当前发货单数为:" + str(multiple_num) + "    当前发货数量为:" + str(
-                        num) + "  预计发货单数: " + str(
-                        multiple_order))
+                    f"当前发货单数为: {multiple_num}   当前发货数量为: {num}  预计发货单数: {multiple_order}".format(
+                        multiple_num, num, multiple_order))
                 multiple_num += 1
         elif pickup_type == 1 or pickup_type == 4:
             while multiple_num <= multiple_order:
@@ -463,12 +464,13 @@ class JsbUserRawOrder(WebPage):
                 sleep(0.2)
                 self.find_elements(user['seller_order_deliver'])[1].click()
                 self.signing_contract()
-                log.info('当前交货单数为:' + str(multiple_num) + ' 预计交货单数为: ' + str(multiple_order))
+                log.info(f'当前交货单数为: {multiple_num} , 预计交货单数为: {multiple_order}'.format(multiple_num,
+                                                                                                     multiple_order))
                 if multiple_num != multiple_order:
                     multiple_num += 1
                 else:
                     break
-            log.info('交货完毕  已交货单数:' + str(multiple_num))
+            log.info(f'交货完毕  已交货单数:{multiple_num}'.format(multiple_num))
 
     def user_more_mention(self, serve, multiple_order, hide_type, pickup_type):
         log.info('进入买家一单多提')
