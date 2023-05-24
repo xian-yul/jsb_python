@@ -32,8 +32,8 @@ class TestSellerCollageRelease:
             'describe': '我是交易描述哦我是交易描述哦我是交易描述哦我是交易描述哦',  # 交易描述
             'brand': 'pp',  # 牌号
             'limit': 3,  # 循环次数
-            'start_time': '2023-03-30 09:25',  # 开始时间
-            'end_time': '2023-04-10 11:00',  # 结束时间
+            'start_time': '2023-05-23 09:25',  # 开始时间
+            'end_time': '2023-05-25 11:00',  # 结束时间
         }
     ]
 

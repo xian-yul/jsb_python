@@ -157,6 +157,8 @@ class JsbUserRawOrder(WebPage):
             self.is_click(user['personal_signing'])
             self.is_click(user['personal_signing_alert'])
             log.info('进行 个人签署')
+        else:
+            log.info('进行 企业签署')
 
     def billing_judgment(self, billing_type):
         if billing_type == 1:
@@ -164,12 +166,12 @@ class JsbUserRawOrder(WebPage):
             log.info('选择订单开票')
 
     def buyers_and_sellers_sign(self, serve, seller_phone, place_order_num, seller_address, pickup_type,
-                                multiple_type, deposit, multiple_order, hide_type, send_type):
+                                multiple_type, deposit, multiple_order, hide_type, send_type, pay_type):
         log.info('进行买卖家签署支付发货收货')
         try:
             self.seller_goods_sign(serve, seller_phone, place_order_num, pickup_type, deposit)
             sleep(0.2)
-            self.user_goods_sign_pay(serve, pickup_type, multiple_type, multiple_order, hide_type, send_type)
+            self.user_goods_sign_pay(serve, pickup_type, multiple_type, multiple_order, hide_type, send_type, pay_type)
             # sleep(0.2)
             # self.seller_goods_deliver(serve, seller_address, pickup_type, multiple_type, multiple_order)
             # sleep(0.2)
@@ -200,7 +202,7 @@ class JsbUserRawOrder(WebPage):
     def seller_goods_sign(self, serve, seller_phone, place_order_num, pickup_type, deposit):
         log.info('------------------------------------------------')
         log.info('进入卖家生成签署合同')
-        if place_order_num == 0:
+        if place_order_num == 1:  # 判断当前是否是首次登录卖家 若是首次 则进行卖家登录操作  若不是首次 则直接跳转订单列表 进行订单操作
             self.seller_phone_login(serve, seller_phone)
             self.seller_skip_goods('order_contract', 'order_list')
         else:
@@ -243,7 +245,7 @@ class JsbUserRawOrder(WebPage):
                 self.deposit_pay(serve)
             self.user_over_charge(pickup_type, multiple_order)
 
-    def user_goods_sign_pay(self, serve, pickup_type, multiple_type, multiple_order, hide_type, send_type):
+    def user_goods_sign_pay(self, serve, pickup_type, multiple_type, multiple_order, hide_type, send_type, pay_type):
         log.info('------------------------------------------------')
         log.info('进入买家签署合同并支付')
         if serve == '24':
@@ -260,39 +262,9 @@ class JsbUserRawOrder(WebPage):
         self.find_elements(user['user_order_list_btn'])[0].click()
         sleep()
         if pickup_type == 3 or pickup_type == 4:
-            log.info('进行买家定金订单支付')
-            self.input_clear_text(user['user_pay_text'], '666666')
-            sleep(0.2)
-            self.find_element(user['user_pay_btn']).click()
-            sleep(3)
-            try:
-                if serve == '24':
-                    assert set(user_url['24_order_detail']).issubset(set(self.return_current_url()))
-                else:
-                    assert set(user_url['20_order_detail']).issubset(set(self.return_current_url()))
-                log.info('定金支付成功')
-                self.refresh()
-            except AssertionError:
-                self.fial_info()
+            self.deposit_payment(serve)
         else:
-            log.info('进行买家订单支付')
-            self.input_clear_text(user['user_pay_text'], '666666')
-            flag = self.getElementExistance(user['user_advance_pay'])
-            if flag:
-                # self.is_click(user['user_advance_pay'])
-                sleep(0.2)
-                self.find_elements(user['user_advance_pay'])[1].click()
-                self.find_elements(user['user_advance_pay'])[2].click()
-            self.find_element(user['user_pay_btn']).click()
-            sleep(3)
-            try:
-                if serve == '24':
-                    assert set(user_url['24_order_detail']).issubset(set(self.return_current_url()))
-                else:
-                    assert set(user_url['20_order_detail']).issubset(set(self.return_current_url()))
-                    log.info('原料订单支付成功')
-            except AssertionError:
-                self.fial_info()
+            self.order_payment(serve, pay_type)
         if pickup_type == 1 or pickup_type == 2 or pickup_type == 4:
             if serve == '24':
                 self.driver.get(user_url['24_order_url'])
@@ -301,60 +273,106 @@ class JsbUserRawOrder(WebPage):
         if pickup_type == 1 or pickup_type == 4:
             log.info('进行自提信息填写')
             if multiple_type == 0:
-                log.info('进入一单多提')
                 self.user_more_mention(serve, multiple_order, hide_type, pickup_type)
             else:
-                log.info('进入一次性提货')
-                if pickup_type == 1:
-                    self.find_elements(user['user_order_list_btn'])[0].click()
-                else:
-                    self.find_elements(user['user_order_list_btn'])[1].click()
-                sleep(0.5)
-                self.input_clear_text(user['self_lifting_driverName'], '司机名称123')
-                self.input_clear_text(user['self_lifting_driverIdNumber'], '220422199312260410')
-                self.input_clear_text(user['self_lifting_phone'], '18965699791')
-                self.input_clear_text(user['self_lifting_licenseNumber'], '闽D16491')
-                self.find_elements(user['self_lifting_time'])[1].click()
-                self.is_click(user['self_lifting_time_determine'])
-                sleep(0.2)
-                self.find_elements(user['self_lifting_entrust'])[1].click()
-                sleep(0.2)
-                if hide_type == 1:
-                    self.find_elements(user['self_lifting_hide_address'])[0].click()
-                    log.info('勾选了买家对商家隐藏收货地址')
-                self.pickup_signing_contract()
+                self.one_time_pickup(pickup_type, hide_type)
         sleep(0.1)
         if send_type == 1:
-            try:
-                log.info('进行发货委托书的填写')
-                num = 1
-                num_limit = 999
-                self.find_elements(user['see_look'])[0].click()  # 点击第一个有查看按钮的订单 即 刚刚完成支付的订单
-                while num <= num_limit:
+            self.shipment_commission()
+
+    def one_time_pickup(self, pickup_type, hide_type):
+        log.info('进入一次性提货')
+        if pickup_type == 1:
+            self.find_elements(user['user_order_list_btn'])[0].click()
+        else:
+            self.find_elements(user['user_order_list_btn'])[1].click()
+        sleep(0.5)
+        self.input_clear_text(user['self_lifting_driverName'], '司机名称123')
+        self.input_clear_text(user['self_lifting_driverIdNumber'], '220422199312260410')
+        self.input_clear_text(user['self_lifting_phone'], '18965699791')
+        self.input_clear_text(user['self_lifting_licenseNumber'], '闽D16491')
+        self.find_elements(user['self_lifting_time'])[1].click()
+        self.is_click(user['self_lifting_time_determine'])
+        sleep(0.2)
+        self.find_elements(user['self_lifting_entrust'])[1].click()
+        sleep(0.2)
+        if hide_type == 1:
+            self.find_elements(user['self_lifting_hide_address'])[0].click()
+            log.info('勾选了买家对商家隐藏收货地址')
+        self.pickup_signing_contract()
+
+    def shipment_commission(self):
+        try:
+            log.info('进行发货委托书的填写')
+            num = 1
+            num_limit = 999
+            self.find_elements(user['see_look'])[0].click()  # 点击第一个有查看按钮的订单 即 刚刚完成支付的订单
+            while num <= num_limit:
+                sleep(0.2)
+                self.script('10000')
+                self.find_elements(user['user_consignment'])[0].click()  # 点击发货委托书
+                sleep(0.5)
+                if num != 1:
+                    self.find_elements(user['user_consignment'])[3].click()  # 点击新增发货委托书
                     sleep(0.2)
-                    self.script('10000')
-                    self.find_elements(user['user_consignment'])[0].click()  # 点击发货委托书
-                    sleep(0.5)
-                    if num != 1:
-                        self.find_elements(user['user_consignment'])[3].click()  # 点击新增发货委托书
-                        sleep(0.2)
-                    self.input_clear_text(user['consignment_num'], 10)
-                    self.is_click(user['consignment_time'])
-                    sleep(0.1)
-                    self.is_click(user['consignment_now_time'])
-                    sleep(0.2)
-                    self.find_elements(user['user_consignment'])[2].click()  # 点击提交
-                    self.signing_consignment_contract()
-                    log.info(f'当前发货委托书新增次数{num}次,目标新增{num_limit}次'.format(str(num), str(num_limit)))
-                    num += 1
-                    sleep()
-            except:
-                self.fial_info()
-            log.info('已完成发货委托书新增')
+                self.input_clear_text(user['consignment_num'], 10)
+                self.is_click(user['consignment_time'])
+                sleep(0.1)
+                self.is_click(user['consignment_now_time'])
+                sleep(0.2)
+                self.find_elements(user['user_consignment'])[2].click()  # 点击提交
+                self.signing_consignment_contract()
+                log.info(f'当前发货委托书新增次数{num}次,目标新增{num_limit}次'.format(str(num), str(num_limit)))
+                num += 1
+                sleep()
+        except:
+            self.fial_info()
+        log.info('已完成发货委托书新增')
+
+    def deposit_payment(self, serve):
+        log.info('进行买家定金订单支付')
+        self.input_clear_text(user['user_pay_text'], '666666')
+        sleep(0.2)
+        self.find_element(user['user_pay_btn']).click()
+        sleep(3)
+        try:
+            if serve == '24':
+                assert set(user_url['24_order_detail']).issubset(set(self.return_current_url()))
+            else:
+                assert set(user_url['20_order_detail']).issubset(set(self.return_current_url()))
+            log.info('定金支付成功')
+            self.refresh()
+        except AssertionError:
+            self.fial_info()
+
+    def order_payment(self, serve, pay_type):
+        log.info('进行买家订单支付')
+        self.input_clear_text(user['user_pay_text'], '666666')
+        flag = self.getElementExistance(user['user_advance_pay'])
+        if flag:
+            # self.is_click(user['user_advance_pay'])
+            sleep(0.2)
+            if pay_type == 1:
+                log.info('进行提前支付')
+                self.find_elements(user['user_advance_pay'])[1].click()
+                self.find_elements(user['user_advance_pay'])[2].click()
+            else:
+                log.info('取消提前支付')
+                self.is_click(user['user_advance_paymentl'])
+            self.find_element(user['user_pay_btn']).click()
+            sleep(3)
+        try:
+            if serve == '24':
+                assert set(user_url['24_order_detail']).issubset(set(self.return_current_url()))
+            else:
+                assert set(user_url['20_order_detail']).issubset(set(self.return_current_url()))
+                log.info('原料订单支付成功')
+        except AssertionError:
+            self.fial_info()
 
     def place_raw_order(self, serve, user_phone, org_name, pickup_type, shop_num, address_name,
                         sign_type, billing_type, seller_phone, limit, seller_address, multiple_type, deposit,
-                        multiple_order, hide_type, send_type
+                        multiple_order, hide_type, send_type, pay_type
                         ):
         self.click_user_login(serve, user_phone)
         place_order_num = 1
@@ -388,8 +406,8 @@ class JsbUserRawOrder(WebPage):
                     else:
                         assert self.driver.current_url == user_url['20_order_url']
                     log.info('下单完毕')
-                    # self.buyers_and_sellers_sign(serve, seller_phone, place_order_num, seller_address, pickup_type,
-                    #                              multiple_type, deposit, multiple_order, hide_type, send_type)
+                    self.buyers_and_sellers_sign(serve, seller_phone, place_order_num, seller_address, pickup_type,
+                                                 multiple_type, deposit, multiple_order, hide_type, send_type, pay_type)
                     log.info(f'当前下单次数 : {place_order_num}  预计下单次数: {limit}'.format(place_order_num, limit))
                     place_order_num += 1
                     log.info('------------------------------------------------')

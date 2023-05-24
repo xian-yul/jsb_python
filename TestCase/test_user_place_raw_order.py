@@ -16,14 +16,14 @@ log = Log()
 class TestUserPlaceRawOrder:
     test_data = [
         {
-            'user_phone': '13500135000',  # 买家账号
+            'user_phone': '13500135001',  # 买家账号
             'org_name': '兴',  # 购买企业
             'shop_num': 1,  # 购买数量
             'pickup_type': 2,  # 下单类型 1自提  2配送款到发货 3配送定金 4自提定金
             'address_name': '',  # 收货地址
-            'sign_type': 2,  # 个人 或 企业签署
+            'sign_type': 0,  # 1 个人 或  0 企业签署
             'billing_type': 0,  # 开票
-            'limit': 3,  # 循环次数
+            'limit': 1,  # 循环次数
             'serve': '24',  # 环境
             'seller_phone': '13000000004',  # 卖家账号
             'seller_address': '卖家详细地址',  # 卖家发货详细地址
@@ -32,6 +32,7 @@ class TestUserPlaceRawOrder:
             'multiple_order': 3,  # 多发单数
             'hide_type': 1,  # 是否隐藏收货地址  1隐藏 0不隐藏
             'send_type': 0,  # 是否签署发货委托书  1是 0不
+            'pay_type': 0,  # 是否提前支付 1是 0不
         },
         # {
         #     'user_phone': '13700000000',
@@ -73,10 +74,11 @@ class TestUserPlaceRawOrder:
         serve = param['serve']
         limit = param['limit']
         send_type = param['send_type']
+        pay_type = param['pay_type']
         user = JsbUserRawOrder(drivers)
         user.place_raw_order(serve, user_phone, org_name, pickup_type, shop_num, address_name,
                              sign_type, billing_type, seller_phone, limit, seller_address, multiple_type, deposit,
-                             multiple_order, hide_type, send_type)
+                             multiple_order, hide_type, send_type, pay_type)
         now_time = time.strftime('%Y-%m-%d %H:%M:%S')
         log.info("开始时间: " + current_time)
         log.info("结束时间: " + now_time)

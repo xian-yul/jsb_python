@@ -35,6 +35,7 @@ class TestUserConsignmentLetter:
             'multiple_order': 3,  # 多发单数
             'hide_type': 1,  # 是否隐藏收货地址  1隐藏 0不隐藏
             'send_type': 1,  # 是否签署发货委托书  1是 0不
+            'pay_type': 1  # 是否提前支付 1是 0不
         },
     ]
 
@@ -59,10 +60,11 @@ class TestUserConsignmentLetter:
         serve = param['serve']
         limit = param['limit']
         send_type = param['send_type']
+        pay_type = param['pay_type']
         user = JsbUserRawOrder(drivers)
         user.place_raw_order(serve, user_phone, org_name, pickup_type, shop_num, address_name,
                              sign_type, billing_type, seller_phone, limit, seller_address, multiple_type, deposit,
-                             multiple_order, hide_type, send_type)
+                             multiple_order, hide_type, send_type, pay_type)
         now_time = time.strftime('%Y-%m-%d %H:%M:%S')
         log.info("开始时间: " + current_time)
         log.info("结束时间: " + now_time)
