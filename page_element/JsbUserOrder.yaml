@@ -43,6 +43,7 @@ user_order_list_btn: "xpath== // button[@class='ant-btn ant-btn-primary ant-btn-
 user_pay_text: "xpath== // input[@id='password']"
 user_pay_btn: "xpath== // button[@class='ant-btn ant-btn-primary ant-btn-lg']"
 user_advance_pay: "xpath== // input[@class='ant-checkbox-input']"
+user_advance_paymentl: "xpath== // span[@class='ant-checkbox ant-checkbox-checked']"
 user_order_list_status: "xpath== // div[@class='text-align-center ant-col ant-col-24']"
 order_invoicing: "xpath== //span[@class='ant-switch-inner']"
 self_lifting_signing: "xpath==/html/body/div[2]/div/div[2]/div/div[2]/div[2]/div/div/iframe"

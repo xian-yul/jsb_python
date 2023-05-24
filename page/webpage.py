@@ -303,7 +303,9 @@ class WebPage(object):
             self.driver.get(user_url['24'])
         else:
             self.driver.get(user_url['20'])
-        self.is_click(order['user_login'])
+        login = self.wait.until(EC.presence_of_element_located((By.LINK_TEXT, '登录')))
+        login.click()
+        # self.is_click(order['user_login'])
         log.info('在买家首页点击登录按钮')
         self.input_text(order['login_phone'], user_phone)
         log.info('输入登录手机号: ' + user_phone)
