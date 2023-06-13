@@ -12,7 +12,9 @@ cloud_url = {'24_cloud_apply_for_home': 'http://192.168.101.24:8090/store/open/h
              '24_cloud_apply_for_submit': 'http://192.168.101.24:8090/store/open/first-settle-in-factory-state',
              '20_cloud_apply_for_home': 'https://demo.jinsubao.cn/store/open/home',
              '20_cloud_apply_for': 'https://demo.jinsubao.cn/store/open/open-factory',
-             '20_cloud_apply_for_submit': ''}
+             '20_cloud_apply_for_submit': '',
+             '24_cloud_release_inquiry_order': 'http://192.168.101.24:8090/products/cloud-factory',
+             '20_cloud_release_inquiry_order': ''}
 
 
 class JsbCloudFactory(WebPage):
@@ -140,3 +142,37 @@ class JsbCloudFactory(WebPage):
             log.error('工厂提交审核 断言失败')
             self.fial_info()
         log.info('云工厂入驻提交成功')
+
+    def user_cloud_release_inquiry_order(self, serve, user_phone, product_name, cloud_duration, cloud_num, way, limit):
+        add_num = 1
+        self.click_user_login(serve, user_phone)
+        self.find_elements(cloud['cloud_order_release'])[1].click()
+        sleep(0.1)
+        try:
+            log.info(self.return_current_url())
+            if serve == '24':
+                assert self.return_current_url() == cloud_url['24_cloud_release_inquiry_order']
+            else:
+                assert self.return_current_url() == cloud_url['20_cloud_release_inquiry_order']
+            log.info('发布询价订单页面 断言成功')
+        except AssertionError:
+            log.info('发布询价订单页面 断言失败')
+            self.fial_info()
+        while add_num <= limit:
+            self.inputs_clear_text(cloud['cloud_product_name'], 0, product_name)
+            self.is_click(cloud['cloud_inquiry'])
+            sleep(0.1)
+            self.is_click(cloud['cloud_time'])
+            sleep(0.1)
+            self.find_elements(cloud['cloud_time_select'])[4].click()
+            self.inputs_clear_text(cloud['cloud_duration'], 3, cloud_duration)
+            self.inputs_clear_text(cloud['cloud_num'], 4, cloud_num)
+            if way == 1:
+                self.is_click(cloud['cloud_release_order_way'])
+            self.is_click(cloud['cloud_order_submit'])
+            self.is_click(cloud['cloud_order_release_return_btn'])
+            sleep(0.1)
+            log.info(
+                f'当前发布询盘次数为为 :{add_num}次, 预计发布 {limit}次'.format(add_num,
+                                                                                limit))
+            add_num += 1

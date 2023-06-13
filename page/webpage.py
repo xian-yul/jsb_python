@@ -281,7 +281,7 @@ class WebPage(object):
                     assert self.return_current_url() == seller_url['24_登录后']
                 else:
                     assert self.return_current_url() == seller_url['20_登录后']
-                log.info("卖家登录信息:   _____" + self.element_text(order['seller_login_info']))
+                log.info("卖家登录信息:   " + self.element_text(order['seller_login_info']))
                 sleep(0.5)
             except AssertionError:
                 self.fial_info()

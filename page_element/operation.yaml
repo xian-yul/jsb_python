@@ -8,3 +8,5 @@
 审核按钮判断存在: "xpath==//*[contains(text(),审核)]"
 制成品审核类型: "xpath==//*[@id='app']/section/section/main/div/div/div[1]/div[2]/div/div/ul/li[4]"
 商品审核按钮: "xpath== // span[@class='w-button-group-item']"
+
+

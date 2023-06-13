@@ -19,11 +19,11 @@ class TestUserPlaceRawOrder:
             'user_phone': '13500135001',  # 买家账号
             'org_name': '兴',  # 购买企业
             'shop_num': 1,  # 购买数量
-            'pickup_type': 2,  # 下单类型 1自提  2配送款到发货 3配送定金 4自提定金
+            'pickup_type': 1,  # 下单类型 1自提  2配送款到发货 3配送定金 4自提定金
             'address_name': '',  # 收货地址
             'sign_type': 0,  # 1 个人 或  0 企业签署
             'billing_type': 0,  # 开票
-            'limit': 1,  # 循环次数
+            'limit': 3,  # 循环次数
             'serve': '24',  # 环境
             'seller_phone': '13000000004',  # 卖家账号
             'seller_address': '卖家详细地址',  # 卖家发货详细地址
@@ -33,24 +33,7 @@ class TestUserPlaceRawOrder:
             'hide_type': 1,  # 是否隐藏收货地址  1隐藏 0不隐藏
             'send_type': 0,  # 是否签署发货委托书  1是 0不
             'pay_type': 0,  # 是否提前支付 1是 0不
-        },
-        # {
-        #     'user_phone': '13700000000',
-        #     'org_name': '兴得铭',
-        #     'shop_num': 1,
-        #     'pickup_type': 4,
-        #     'address_name': '',
-        #     'sign_type': 2,
-        #     'billing_type': 0,
-        #     'limit': 1,
-        #     'serve': '20',
-        #     'seller_phone': '18965691361',
-        #     'seller_address': '卖家详细地址',
-        #     'deposit': 5,
-        #     'multiple_type': 0,
-        #     'multiple_order': 3,
-        #     'hide_type': 1,
-        # }
+        }
     ]
 
     @pytest.mark.parametrize('param', test_data)
