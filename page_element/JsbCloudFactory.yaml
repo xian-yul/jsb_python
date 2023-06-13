@@ -34,3 +34,15 @@ upload: "xpath== // input[@type='file']"
 
 cloud_patent_name_ipt: "xpath==// input[@id='name']"
 cloud_patent_patentNumber_ipt: "xpath==// input[@id='patentNumber']"
+
+
+cloud_order_release: "xpath==// li[@class='to-menu-menu-list-item ant-menu-item']"
+cloud_product_name: "xpath==// input[@class='ant-input']"
+cloud_inquiry: "xpath==// button[@class='ant-btn ant-btn-lg']"
+cloud_duration: "xpath==// input[@class='ant-input-number-input']"
+cloud_num: "xpath== // input[@class='ant-input-number-input']"
+cloud_time: "xpath== // input[@class='ant-calendar-picker-input ant-input']"
+cloud_time_select: "xpath== // td[@class='ant-calendar-cell']"
+cloud_order_submit: "xpath== // button[@class='m-l-21 ant-btn submit']"
+cloud_release_order_way: "xpath==// input[@class='ant-radio-input']"
+cloud_order_release_return_btn: "xpath==// div[@class='succeed-btn-list succeed-btn-back display_flex align-items_center justify-content_center']"
