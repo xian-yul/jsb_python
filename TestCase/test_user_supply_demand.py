@@ -11,8 +11,6 @@ from utils.log import Log
 from utils.tool_util import time_lag
 
 log = Log()
-user_url = {'24': 'http://192.168.101.24:8090/shop/home', '20': 'https://demo.jinsubao.cn/'}
-seller_url = {'24': 'http://192.168.101.24:8070/user/login', '20': 'https://slrdm.jinsubao.cn/'}
 
 
 @allure.feature('执行买家发布供需资讯')
@@ -21,12 +19,12 @@ class TestUserSupplyDemand:
         {
             'serve': '24',  # 环境
             'user_phone': '13500135000',  # 买家账号
-            'limit': '1',  # 循环次数
-            'title': '出售原料 原厂原包',  # 供需标题
+            'limit': '10',  # 循环次数
+            'title': '出售原料 原厂原包_selenium',  # 供需标题
             'seller_num': 8,  # 卖家数量
             'price': 7054,  # 价格
             'num': 10,  # 数量
-            'release_type': 2,  # 发布类型  2市场信息  1采购需求
+            'release_type': 1,  # 发布类型  2市场信息  1采购需求
             'video_path': 'D:\\资料\\video.mp4',  # 供需视频
             'content': '出售原厂原包原料',  # 供需详情
             'img_path': 'D:\\资料\\raw.png',  # 供需图片

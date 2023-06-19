@@ -25,14 +25,13 @@ seller_demand_url = {'24_demand_list': 'http://192.168.101.24:8070/product-manag
 class JsbDemand(WebPage):
 
     def user_demand(self, serve, user_phone, release_type, title, content, img_path, video_path, seller_num, price,
-                    num, limit, grade_number, add_type, number,circulation):
+                    num, limit, grade_number, add_type, number, circulation):
         demand_num = 1
         self.click_user_login(serve, user_phone)
         self.find_elements(demand['user_center'])[1].click()
-        self.find_elements(demand['user_div_demand'])[10].click()
+        self.find_elements(demand['user_div_demand'])[11].click()
         sleep(0.2)
-        self.find_elements(demand['user_demand_home'])[5].click()
-        sleep(0.5)
+        self.find_elements(demand['user_demand_home'])[4].click()
         try:
             self.user_demand_judge(serve, 1)
             while demand_num <= limit:
@@ -45,7 +44,7 @@ class JsbDemand(WebPage):
                     self.is_click(demand['user_demand_release_btn'])
                     sleep(0.2)
                     self.user_demand_judge(serve, 3)
-                    self.goods_grade(grade_number, add_type, number,circulation)
+                    self.goods_grade(grade_number, add_type, number, circulation)
                     self.user_market_information(title + '_______' + str(demand_num), content, img_path, video_path,
                                                  price,
                                                  num)
@@ -57,7 +56,7 @@ class JsbDemand(WebPage):
                     self.is_click(demand['user_demand_release_btn'])
                     sleep(0.2)
                     self.user_demand_judge(serve, 2)
-                    self.goods_grade(grade_number, add_type, number,circulation)
+                    self.goods_grade(grade_number, add_type, number, circulation)
                     self.user_purchase_demand(title, content, img_path, video_path,
                                               seller_num,
                                               price, num)
@@ -108,7 +107,8 @@ class JsbDemand(WebPage):
         self.is_click(demand['user_demand_submit'])
 
     def user_demand_judge(self, serve, number):
-        sleep(0.2)
+        sleep(0.5)
+        log.info(self.return_current_url())
         if number == 1:
             log.info('进入判断是否界面一致____供需列表')
             if serve == '24':
@@ -129,7 +129,7 @@ class JsbDemand(WebPage):
                 assert self.return_current_url() == user_demand_url['20_market_information']
 
     def seller_demand(self, serve, seller_phone, release_type, title, content, img_path, video_path, seller_num, price,
-                      num, limit,grade_number, add_type, number,circulation):
+                      num, limit, grade_number, add_type, number, circulation):
         demand_num = 1
         self.seller_phone_login(serve, seller_phone)
         self.find_elements(demand['seller_demand_home'])[0].click()
@@ -148,7 +148,7 @@ class JsbDemand(WebPage):
                     self.is_click(demand['seller_demand_release_btn'])
                     sleep(0.2)
                     self.seller_demand_judge(serve, 3)
-                    self.goods_grade(grade_number, add_type, number,circulation)
+                    self.goods_grade(grade_number, add_type, number, circulation)
                     self.user_market_information(title + '_______' + str(demand_num), content, img_path, video_path,
                                                  price,
                                                  num)
@@ -160,7 +160,7 @@ class JsbDemand(WebPage):
                     self.is_click(demand['seller_demand_release_btn'])
                     sleep(0.2)
                     self.seller_demand_judge(serve, 2)
-                    self.goods_grade(grade_number, add_type, number,circulation)
+                    self.goods_grade(grade_number, add_type, number, circulation)
                     self.user_purchase_demand(title + '_______' + str(demand_num), content, img_path, video_path,
                                               seller_num,
                                               price, num)
