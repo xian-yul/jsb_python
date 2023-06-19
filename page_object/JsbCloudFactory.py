@@ -147,9 +147,9 @@ class JsbCloudFactory(WebPage):
         add_num = 1
         self.click_user_login(serve, user_phone)
         self.find_elements(cloud['cloud_order_release'])[1].click()
-        sleep(0.1)
+        sleep(0.5)
+        # self.driver.implicitly_wait(30)
         try:
-            log.info(self.return_current_url())
             if serve == '24':
                 assert self.return_current_url() == cloud_url['24_cloud_release_inquiry_order']
             else:
@@ -175,4 +175,6 @@ class JsbCloudFactory(WebPage):
             log.info(
                 f'当前发布询盘次数为为 :{add_num}次, 预计发布 {limit}次'.format(add_num,
                                                                                 limit))
-            add_num += 1
+            if add_num != limit:
+                add_num += 1
+        log.info(f'发布询盘完毕 共发布{add_num}次'.format(add_num))
