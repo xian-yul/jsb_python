@@ -1,3 +1,5 @@
+import time
+
 from common.readelement import Element
 from page.webpage import WebPage
 from utils import tool_util
@@ -159,7 +161,8 @@ class JsbCloudFactory(WebPage):
             log.info('发布询价订单页面 断言失败')
             self.fial_info()
         while add_num <= limit:
-            self.inputs_clear_text(cloud['cloud_product_name'], 0, product_name)
+            self.inputs_clear_text(cloud['cloud_product_name'], 0,
+                                   product_name + "___" + time.strftime('%H:%M:%S', time.localtime(time.time())))
             self.is_click(cloud['cloud_inquiry'])
             sleep(0.1)
             self.is_click(cloud['cloud_time'])
@@ -175,6 +178,5 @@ class JsbCloudFactory(WebPage):
             log.info(
                 f'当前发布询盘次数为为 :{add_num}次, 预计发布 {limit}次'.format(add_num,
                                                                                 limit))
-            if add_num != limit:
-                add_num += 1
+            add_num += 1
         log.info(f'发布询盘完毕 共发布{add_num}次'.format(add_num))

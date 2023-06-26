@@ -11,12 +11,12 @@ log = Log()
 seller_url = {'24': 'http://192.168.101.24:8070/user/login', '20': 'https://slrdm.jinsubao.cn/',
               '24_登录后': 'http://192.168.101.24:8070/dashboard', '20_登录后': 'https://slrdm.jinsubao.cn/dashboard',
               '供需列表': 'http://192.168.101.24:8070/product-manage/purchase-index/purchase-list',
-              '24_raw_list': 'http://192.168.101.24:8070/product-manage/products-list/1',
-              '20_raw_list': 'https://slrdm.jinsubao.cn/product-manage/products-list/1',
+              '24_raw_list': 'http://192.168.101.24:8070/product-manage/products-list/raw',
+              '20_raw_list': 'https://slrdm.jinsubao.cn/product-manage/products-list/raw',
               '24_raw_add': 'http://192.168.101.24:8070/product-manage/raw-provide-form',
               '20_raw_add': 'https://slrdm.jinsubao.cn/product-manage/raw-provide-form',
-              '24_product_list': 'http://192.168.101.24:8070/product-manage/products-list/2',
-              '20_product_list': 'https://slrdm.jinsubao.cn/product-manage/products-list/2',
+              '24_product_list': 'http://192.168.101.24:8070/product-manage/products-list/product',
+              '20_product_list': 'https://slrdm.jinsubao.cn/product-manage/products-list/product',
               '原料': 0, '制成品': 1,
               '船货': 2,
               '24_coupon_list': 'http://192.168.101.24:8070/marketing-manage/coupon-list',
@@ -33,7 +33,7 @@ class JsbSellerGoodsAdd(WebPage):
 
     def seller_add_goods_type(self, addGoods):
         sleep(0.5)
-        self.find_elements(goods['添加商品'])[1].click()
+        self.find_elements(goods['添加商品'])[0].click()
         sleep(0.2)
         self.find_elements(goods['添加商品类型'])[seller_url[addGoods]].click()
         sleep(0.2)
@@ -41,6 +41,7 @@ class JsbSellerGoodsAdd(WebPage):
 
     def goods_put_on_shelves(self):
         sleep(0.2)
+        str_text = self.find_elements(goods['列表_上架按钮'])
         self.find_elements(goods['列表_上架按钮'])[0].click()
         sleep(0.2)
         self.find_elements(goods['列表_确定'])[2].click()
