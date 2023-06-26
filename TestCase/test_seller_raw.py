@@ -30,13 +30,13 @@ class TestSellerRaw:
             'included': 1,  # 是否含税  1含税
             'selfMentionPrice': 7895,  # 自提价格
             'add_type': 1,  # 是否启用搜索牌号  1启用
-            'number': 'pp',  # 搜索牌号
+            'number': 'LDPE',  # 搜索牌号
             'img_path': 'D:\\资料\\raw.png',  # 商品图片
             'video_path': 'D:\\资料\\video.mp4',  # 商品视频
             'profiles': '原料商品内容概要',  # 商品内容概要
             'detail': '原料商品详情',  # 商品详情
             'circulation': 1,  # 智能搜索中 商品加载次数 50个为一次
-            'limit': 1,
+            'limit': 5,
         },
     ]
 
