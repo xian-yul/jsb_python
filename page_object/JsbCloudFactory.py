@@ -118,20 +118,20 @@ class JsbCloudFactory(WebPage):
             log.info(
                 f'当前添加专利资质次数为 :{add_num}次, 预计添加 {patent_addNum}次'.format(add_num,
                                                                                           patent_addNum))
-            add_num += 1
             sleep(0.1)
             if add_num == patent_addNum:
                 continue
+            add_num += 1
             upload_num = 1
         while upload_num <= patent_uploadNum:
             self.find_elements(cloud['upload'])[1].send_keys(patent_imgPath)
             log.info(
                 f'当前添加专利资质图片次数为 :{upload_num}次, 预计添加 {patent_uploadNum}次'.format(upload_num,
                                                                                                     patent_uploadNum))
-            upload_num += 1
             sleep(0.2)
             if upload_num == patent_uploadNum:
                 continue
+            upload_num += 1
         self.is_click(cloud['cloud_next_btn_btn'])
         log.info('云工厂入驻审核提交')
         try:
@@ -160,14 +160,14 @@ class JsbCloudFactory(WebPage):
         except AssertionError:
             log.info('发布询价订单页面 断言失败')
             self.fial_info()
-        while add_num <= limit:
+        while add_num < limit:
             self.inputs_clear_text(cloud['cloud_product_name'], 0,
                                    product_name + "___" + time.strftime('%H:%M:%S', time.localtime(time.time())))
             self.is_click(cloud['cloud_inquiry'])
             sleep(0.1)
             self.is_click(cloud['cloud_time'])
             sleep(0.1)
-            self.find_elements(cloud['cloud_time_select'])[4].click()
+            self.find_elements(cloud['cloud_time_select'])[0].click()
             self.inputs_clear_text(cloud['cloud_duration'], 3, cloud_duration)
             self.inputs_clear_text(cloud['cloud_num'], 4, cloud_num)
             if way == 1:
@@ -178,5 +178,6 @@ class JsbCloudFactory(WebPage):
             log.info(
                 f'当前发布询盘次数为为 :{add_num}次, 预计发布 {limit}次'.format(add_num,
                                                                                 limit))
-            add_num += 1
+            if add_num != limit:
+                add_num += 1
         log.info(f'发布询盘完毕 共发布{add_num}次'.format(add_num))

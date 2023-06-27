@@ -303,6 +303,7 @@ class WebPage(object):
             self.driver.get(user_url['24'])
         else:
             self.driver.get(user_url['20'])
+        str_text = self.find_elements(order['user_login'])
         login = self.wait.until(EC.presence_of_element_located((By.LINK_TEXT, '登录')))
         login.click()
         # self.is_click(order['user_login'])
@@ -349,7 +350,7 @@ class WebPage(object):
         sleep(0.5)
         self.is_click(goods['智能搜索'])
         if add_type == 1:
-            self.inputs_clear_text(goods['智能搜索_输入框'],-1,number)
+            self.inputs_clear_text(goods['智能搜索_输入框'], -1, number)
             sleep(0.1)
             self.is_click(goods['智能搜索_搜索'])
 

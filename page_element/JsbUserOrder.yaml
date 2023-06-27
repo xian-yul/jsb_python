@@ -103,3 +103,7 @@ consignment_time: "xpath== // input[@class='ant-calendar-picker-input ant-input'
 consignment_now_time: "xpath== // span[@class='ant-calendar-footer-btn']"
 consignment_sign: "tag_name==iframe"
 consignment_sign_btn: "xpath== //div[@class='sign-btn-box-con']"
+
+
+user_order_number: "xpath== // span[@class='purchase-order-item-head-title']"
+user_coupon_x: "xpath== // span[@class='ant-modal-close-x']"
