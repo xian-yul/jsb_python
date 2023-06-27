@@ -20,10 +20,10 @@ class TestCloudInquiryOrder:
     def test_user_release_inquiry_order(self, drivers):
         log.info('当前执行   发布询价订单    ')
         serve = '24'
-        user_phone = '13500135001'
+        user_phone = '13500135000'
         opera = JsbCloudFactory(drivers)
         limit = 20
-        product_name = 'selenium'
+        product_name = '询价'
         cloud_num = 10
         cloud_duration = 10
         way = 0  # 1自提 0配送
